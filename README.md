@@ -9,6 +9,8 @@
 
 🧟 Bite the Living!
 
+This game was made for [Pixel Game Jam 2025](https://itch.io/jam/-pixel-game-jam-2025), which the theme was **From the Dead**.
+
 Play the game on:
 
 - [remarkablegames](https://remarkablegames.org/bite-the-living)
