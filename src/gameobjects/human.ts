@@ -1,7 +1,7 @@
-import { Sprite, Tag } from '../constants'
+import { Animation, Sprite, Tag } from '../constants'
 
 export function addHuman(x: number, y: number) {
-  return add([
+  const human = add([
     sprite(Sprite.Human1),
     pos(x, y),
     anchor('center'),
@@ -10,4 +10,8 @@ export function addHuman(x: number, y: number) {
     body(),
     Tag.Human,
   ])
+
+  human.play(Animation.Idle, { loop: true })
+
+  return human
 }
