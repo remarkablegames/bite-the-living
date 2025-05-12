@@ -1,2 +1,2 @@
-export * from './enemy'
+export * from './human'
 export * from './player'

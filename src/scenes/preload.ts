@@ -9,8 +9,20 @@ scene(Scene.Preload, () => {
       [Animation.Run]: { from: 8, to: 15 },
       [Animation.Knocked]: { from: 16, to: 21 },
       [Animation.Hit]: { from: 24, to: 26 },
-      [Animation.Death1]: { from: 32, to: 39 },
+      [Animation.Death]: { from: 32, to: 39 },
       [Animation.Death2]: { from: 40, to: 47 },
+    },
+  })
+
+  loadSprite(Sprite.Human1, 'sprites/humans/human1.png', {
+    sliceX: 8,
+    sliceY: 5,
+    anims: {
+      [Animation.Idle]: { from: 0, to: 5 },
+      [Animation.Run]: { from: 8, to: 15 },
+      [Animation.Knocked]: { from: 16, to: 21 },
+      [Animation.Hit]: { from: 24, to: 26 },
+      [Animation.Death]: { from: 32, to: 39 },
     },
   })
 

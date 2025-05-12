@@ -1,4 +1,4 @@
-import { Sprite, Tag } from '../constants'
+import { Sprite, Tag, ZIndex } from '../constants'
 import { addCursorKeys } from '../events'
 
 export function addPlayer(x = center().x, y = center().y) {
@@ -6,6 +6,10 @@ export function addPlayer(x = center().x, y = center().y) {
     sprite(Sprite.Zombie1),
     pos(x, y),
     anchor('center'),
+    health(10),
+    area({ shape: new Rect(vec2(0, 4), 13, 25) }),
+    body(),
+    z(ZIndex.Player),
     Tag.Player,
   ])
 

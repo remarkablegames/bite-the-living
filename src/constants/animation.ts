@@ -1,5 +1,5 @@
 export enum Animation {
-  Death1 = 'Death1',
+  Death = 'Death',
   Death2 = 'Death2',
   Hit = 'Hit',
   Idle = 'Idle',

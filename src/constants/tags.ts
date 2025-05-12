@@ -1,4 +1,4 @@
 export enum Tag {
-  Enemy = 'Enemy',
+  Human = 'Human',
   Player = 'Player',
 }
