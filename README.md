@@ -13,6 +13,10 @@ Play the game on:
 
 - [remarkablegames](https://remarkablegames.org/bite-the-living)
 
+## Credits
+
+- [Zombie Apocalypse AssetPack](https://pixelrogueknight.itch.io/zombie-apocalypse-assetpack)
+
 ## Prerequisites
 
 - [nvm](https://github.com/nvm-sh/nvm#readme)
