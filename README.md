@@ -1,17 +1,17 @@
 <p align="center">
-  <img src="https://github.com/remarkablegames/kaplay-template/blob/master/public/logo.png" alt="Kaplay Template">
+  <img src="https://github.com/remarkablegames/bite-the-living/blob/master/public/logo.png" alt="Bite the Living">
 </p>
 
-# Kaplay Template
+# Bite the Living
 
-![release](https://img.shields.io/github/v/release/remarkablegames/kaplay-template)
-[![build](https://github.com/remarkablegames/kaplay-template/actions/workflows/build.yml/badge.svg)](https://github.com/remarkablegames/kaplay-template/actions/workflows/build.yml)
+![release](https://img.shields.io/github/v/release/remarkablegames/bite-the-living)
+[![build](https://github.com/remarkablegames/bite-the-living/actions/workflows/build.yml/badge.svg)](https://github.com/remarkablegames/bite-the-living/actions/workflows/build.yml)
 
-<kbd>kaplay-template</kbd> is a template for making [KAPLAY](https://kaplayjs.com/) games.
+<kbd>bite-the-living</kbd> is a template for making [KAPLAY](https://kaplayjs.com/) games.
 
 Play the game on:
 
-- [remarkablegames](https://remarkablegames.org/kaplay-template)
+- [remarkablegames](https://remarkablegames.org/bite-the-living)
 
 ## Prerequisites
 
@@ -22,8 +22,8 @@ Play the game on:
 Clone the repository:
 
 ```sh
-git clone https://github.com/remarkablegames/kaplay-template.git
-cd kaplay-template
+git clone https://github.com/remarkablegames/bite-the-living.git
+cd bite-the-living
 ```
 
 Install the dependencies:
