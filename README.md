@@ -16,6 +16,8 @@ Play the game on:
 ## Credits
 
 - [Zombie Apocalypse AssetPack](https://pixelrogueknight.itch.io/zombie-apocalypse-assetpack)
+- [Rob Cohen](https://github.com/rmacohen)
+- [remarkablemark](https://github.com/remarkablemark)
 
 ## Prerequisites
 
