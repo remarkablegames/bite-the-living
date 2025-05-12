@@ -1,22 +1,58 @@
+import { Animation } from '../constants'
 import type { Player } from '../types'
 
 // pixels per second
-const SPEED = 320
+const SPEED = 100
+
+export enum Key {
+  Left = 'left',
+  A = 'a',
+  Right = 'right',
+  D = 'd',
+  Up = 'up',
+  W = 'w',
+  Down = 'down',
+  S = 's',
+}
 
 export function addCursorKeys(player: Player) {
-  onKeyDown('left', () => {
-    player.move(-SPEED, 0)
+  player.play(Animation.Idle, { loop: true })
+
+  onKeyDown((key) => {
+    switch (key) {
+      case Key.Left:
+      case Key.A:
+        player.flipX = false
+        player.move(-SPEED, 0)
+        break
+
+      case Key.Right:
+      case Key.D:
+        player.flipX = true
+        player.move(SPEED, 0)
+        break
+
+      case Key.Up:
+      case Key.W:
+        player.move(0, -SPEED)
+        break
+
+      case Key.Down:
+      case Key.S:
+        player.move(0, SPEED)
+        break
+    }
   })
 
-  onKeyDown('right', () => {
-    player.move(SPEED, 0)
+  onKeyPress((key) => {
+    if (Object.values(Key).includes(key as Key)) {
+      player.play(Animation.Run, { loop: true })
+    }
   })
 
-  onKeyDown('up', () => {
-    player.move(0, -SPEED)
-  })
-
-  onKeyDown('down', () => {
-    player.move(0, SPEED)
+  onKeyRelease((key) => {
+    if (Object.values(Key).includes(key as Key)) {
+      player.play(Animation.Idle, { loop: true })
+    }
   })
 }

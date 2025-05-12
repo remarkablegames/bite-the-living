@@ -1,4 +1,3 @@
 export enum Sprite {
-  Bean = 'Bean',
-  Ghosty = 'Ghosty',
+  Zombie1 = 'Zombie1',
 }
