@@ -7,7 +7,7 @@
 ![release](https://img.shields.io/github/v/release/remarkablegames/bite-the-living)
 [![build](https://github.com/remarkablegames/bite-the-living/actions/workflows/build.yml/badge.svg)](https://github.com/remarkablegames/bite-the-living/actions/workflows/build.yml)
 
-<kbd>bite-the-living</kbd> is a template for making [KAPLAY](https://kaplayjs.com/) games.
+🧟 Bite the Living!
 
 Play the game on:
 
