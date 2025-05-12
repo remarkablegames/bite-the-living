@@ -17,3 +17,7 @@ export function addPlayer(x = center().x, y = center().y) {
 
   return player
 }
+
+export function getPlayer() {
+  return get(Tag.Player)[0] as ReturnType<typeof addPlayer>
+}
