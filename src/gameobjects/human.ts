@@ -1,5 +1,5 @@
 import { Animation, Sprite, State, Tag } from '../constants'
-import { getPlayer } from './player'
+import { addHealth, getPlayer } from '.'
 
 export function addHuman(x: number, y: number) {
   const player = getPlayer()
@@ -9,12 +9,14 @@ export function addHuman(x: number, y: number) {
     sprite(Sprite.Human1),
     pos(x, y),
     anchor('center'),
-    health(10),
+    health(10, 10),
     area({ shape: new Rect(vec2(0, 3), 13, 24) }),
     body(),
     state(State.Idle, Object.values(State)),
     Tag.Human,
   ])
+
+  addHealth(human)
 
   human.onStateEnter(State.Attack, () => {
     human.play(Animation.Hit, {

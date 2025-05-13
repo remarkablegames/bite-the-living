@@ -1,18 +1,20 @@
 import { Sprite, Tag, ZIndex } from '../constants'
 import { addCursorKeys } from '../events'
+import { addHealth } from '.'
 
 export function addPlayer(x = center().x, y = center().y) {
   const player = add([
     sprite(Sprite.Zombie1),
     pos(x, y),
     anchor('center'),
-    health(10),
+    health(10, 10),
     area({ shape: new Rect(vec2(0, 4), 13, 25) }),
     body(),
     z(ZIndex.Player),
     Tag.Player,
   ])
 
+  addHealth(player)
   addCursorKeys(player)
 
   return player
