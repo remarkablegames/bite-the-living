@@ -6,11 +6,10 @@ const HEIGHT = 3
 export function addHealth(
   gameObject: GameObj<HealthComp | PosComp | SpriteComp>,
 ) {
-  const background = add([
+  const background = gameObject.add([
     rect(WIDTH, HEIGHT),
-    pos(gameObject.pos.x, gameObject.pos.y),
+    pos(-10, -14),
     color(0, 0, 0),
-    follow(gameObject, vec2(-10, -14)),
   ])
 
   const health = background.add([

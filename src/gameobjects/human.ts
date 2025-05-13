@@ -57,14 +57,28 @@ export function addHuman(x: number, y: number) {
     })
   })
 
+  human.onStateEnter(State.Death, () => {
+    human.play(Animation.Death, {
+      onEnd: () => human.destroy(),
+    })
+  })
+
   human.onCollide(Tag.Zombie, () => {
-    human.enterState(State.Hit)
-    human.hurt(1)
+    if (human.hp()) {
+      human.enterState(State.Hit)
+      human.hurt(1)
+    }
   })
 
   // @ts-expect-error This expression is not callable. Type 'Collision' has no call signatures.
   human.onCollideUpdate(Tag.Zombie, () => {
-    human.hurt(0)
+    if (human.hp()) {
+      human.hurt(0)
+    }
+  })
+
+  human.onDeath(() => {
+    human.enterState(State.Death)
   })
 
   return human
