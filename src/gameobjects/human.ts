@@ -18,29 +18,39 @@ export function addHuman(x: number, y: number) {
 
   addHealth(human)
 
-  human.onStateEnter(State.Attack, () => {
-    human.play(Animation.Hit, {
-      onEnd: () => human.enterState(State.Idle),
-    })
-  })
+  function shouldMove() {
+    return human.pos.dist(player.pos) < 100
+  }
 
   human.onStateEnter(State.Idle, () => {
     human.play(Animation.Idle, { loop: true })
-    const seconds = rand(0, 2)
+  })
 
-    wait(seconds, () => {
+  human.onStateUpdate(State.Idle, () => {
+    if (shouldMove()) {
       human.enterState(State.Move)
-      human.play(Animation.Run, { loop: true })
-    })
+    }
+  })
+
+  human.onStateEnter(State.Move, () => {
+    human.play(Animation.Run, { loop: true })
   })
 
   human.onStateUpdate(State.Move, () => {
-    if (human.pos.dist(player.pos) > 100) {
+    if (!shouldMove()) {
       human.enterState(State.Idle)
-    } else {
-      const direction = player.pos.sub(human.pos).unit()
-      human.move(direction.scale(-speed))
     }
+    const direction = player.pos.sub(human.pos).unit()
+    human.move(direction.scale(-speed))
+  })
+
+  human.onCollide(Tag.Zombie, () => {
+    human.hurt(1)
+  })
+
+  // @ts-expect-error This expression is not callable. Type 'Collision' has no call signatures.
+  human.onCollideUpdate(Tag.Zombie, () => {
+    human.hurt(0.1)
   })
 
   return human

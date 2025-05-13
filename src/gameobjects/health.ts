@@ -1,21 +1,21 @@
-import type { GameObj, HealthComp, PosComp } from 'kaplay'
+import type { GameObj, HealthComp, PosComp, SpriteComp } from 'kaplay'
 
-const WIDTH = 20
+const WIDTH = 19
 const HEIGHT = 3
 
-export function addHealth(gameObject: GameObj<PosComp | HealthComp>) {
+export function addHealth(
+  gameObject: GameObj<HealthComp | PosComp | SpriteComp>,
+) {
   const background = add([
     rect(WIDTH, HEIGHT),
     pos(gameObject.pos.x, gameObject.pos.y),
-    anchor('center'),
     color(0, 0, 0),
-    follow(gameObject, vec2(0, -14)),
+    follow(gameObject, vec2(-10, -14)),
   ])
 
   const health = background.add([
     rect(WIDTH, HEIGHT),
     pos(0, 0),
-    anchor('center'),
     color(255, 0, 0),
   ])
 
