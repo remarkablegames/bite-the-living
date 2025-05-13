@@ -3,7 +3,7 @@ import { addHealth, getPlayer } from '.'
 
 export function addHuman(x: number, y: number) {
   const player = getPlayer()
-  const speed = randi(20, 60)
+  const speed = randi(20, 50)
 
   const human = add([
     sprite(Sprite.Human1),
@@ -20,13 +20,14 @@ export function addHuman(x: number, y: number) {
 
   human.onStateEnter(State.Attack, () => {
     human.play(Animation.Hit, {
-      onEnd: () => human.enterState(State.Idle, rand(1, 3)),
+      onEnd: () => human.enterState(State.Idle),
     })
   })
 
-  human.onStateEnter(State.Idle, (time) => {
+  human.onStateEnter(State.Idle, () => {
     human.play(Animation.Idle, { loop: true })
-    const seconds = time || rand(2, 5)
+    const seconds = rand(0, 2)
+
     wait(seconds, () => {
       human.enterState(State.Move)
       human.play(Animation.Run, { loop: true })
@@ -34,11 +35,11 @@ export function addHuman(x: number, y: number) {
   })
 
   human.onStateUpdate(State.Move, () => {
-    const direction = player.pos.sub(human.pos).unit()
-    human.move(direction.scale(-speed))
-
-    if (human.pos.dist(player.pos) < 16) {
-      human.enterState(State.Idle, rand(1, 3))
+    if (human.pos.dist(player.pos) > 100) {
+      human.enterState(State.Idle)
+    } else {
+      const direction = player.pos.sub(human.pos).unit()
+      human.move(direction.scale(-speed))
     }
   })
 

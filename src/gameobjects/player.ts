@@ -12,6 +12,7 @@ export function addPlayer(x = center().x, y = center().y) {
     body(),
     z(ZIndex.Player),
     Tag.Player,
+    Tag.Zombie,
   ])
 
   addHealth(player)
