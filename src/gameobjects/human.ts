@@ -45,6 +45,7 @@ export function addHuman(x: number, y: number) {
   human.onStateUpdate(State.Move, () => {
     if (shouldMove()) {
       const direction = player.pos.sub(human.pos).unit()
+      human.flipX = direction.x < 0
       human.move(direction.scale(-speed))
     } else {
       human.enterState(State.Idle)
