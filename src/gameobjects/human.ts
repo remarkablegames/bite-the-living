@@ -73,7 +73,7 @@ export function addHuman(x: number, y: number) {
 
   // @ts-expect-error This expression is not callable. Type 'Collision' has no call signatures.
   human.onCollideUpdate(Tag.Zombie, () => {
-    if (human.hp()) {
+    if (human.hp() > 0) {
       human.hurt(0.01)
     }
   })
