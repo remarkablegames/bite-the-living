@@ -1,4 +1,5 @@
-import { Animation, LocalStorage, Scene, Sprite } from '../constants'
+import { Animation, Scene, Sprite } from '../constants'
+import { startLevel } from '../levels'
 
 scene(Scene.Preload, async () => {
   loadSprite(Sprite.Zombie1, 'sprites/zombies/zombie1.png', {
@@ -35,5 +36,5 @@ scene(Scene.Preload, async () => {
     },
   })
 
-  go(Scene.Game, getData(LocalStorage.Level, 0))
+  startLevel()
 })

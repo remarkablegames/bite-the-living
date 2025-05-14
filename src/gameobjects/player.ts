@@ -1,5 +1,6 @@
-import { LocalStorage, Scene, Sprite, Tag, ZIndex } from '../constants'
+import { Animation, Sprite, Tag, ZIndex } from '../constants'
 import { addCursorKeys } from '../events'
+import { nextLevel, startLevel } from '../levels'
 import { addHealth } from '.'
 
 export function addPlayer(x = center().x, y = center().y) {
@@ -22,8 +23,21 @@ export function addPlayer(x = center().x, y = center().y) {
     setCamPos(player.pos)
 
     if (!get(Tag.Human).length) {
-      go(Scene.Game, getData(LocalStorage.Level, 0)! + 1)
+      nextLevel()
     }
+
+    if (player.hp() > 0) {
+      player.hurt(0.01)
+    }
+  })
+
+  player.onDeath(() => {
+    player.play(Animation.Death, {
+      onEnd: () => {
+        player.destroy()
+        startLevel()
+      },
+    })
   })
 
   return player
