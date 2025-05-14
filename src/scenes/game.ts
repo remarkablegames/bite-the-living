@@ -1,5 +1,5 @@
 import { Scene, Size, Sprite } from '../constants'
-import { addHuman, addPlayer } from '../gameobjects'
+import { addHuman, addPlayer, addTable } from '../gameobjects'
 import { getLevel } from '../levels'
 
 scene(Scene.Game, () => {
@@ -11,8 +11,10 @@ scene(Scene.Game, () => {
     tileWidth: Size.Tile,
     tileHeight: Size.Tile,
     tiles: {
+      // floor
       ' ': () => [sprite(Sprite.Floor)],
 
+      // tile
       '.': () => [
         rect(Size.Tile, Size.Tile),
         area(),
@@ -20,13 +22,21 @@ scene(Scene.Game, () => {
         opacity(0),
       ],
 
-      P: (pos) => {
-        addPlayer(pos.x * Size.Tile, pos.y * Size.Tile)
+      // table
+      T: (pos) => {
+        addTable(pos)
         return [sprite(Sprite.Floor)]
       },
 
+      // human
       H: (pos) => {
-        addHuman(pos.x * Size.Tile, pos.y * Size.Tile)
+        addHuman(pos)
+        return [sprite(Sprite.Floor)]
+      },
+
+      // player
+      P: (pos) => {
+        addPlayer(pos)
         return [sprite(Sprite.Floor)]
       },
     },

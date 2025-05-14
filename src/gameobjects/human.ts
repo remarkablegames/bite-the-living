@@ -1,13 +1,15 @@
+import type { Vec2 } from 'kaplay'
+
 import { Animation, Sprite, State, Tag } from '../constants'
-import { isAlive } from '../helpers'
+import { getTilePos, isAlive } from '../helpers'
 import { addHealth, getPlayer } from '.'
 
-export function addHuman(x: number, y: number) {
+export function addHuman(tilePos: Vec2) {
   const speed = randi(20, 50)
 
   const human = add([
     sprite(Sprite.Human1),
-    pos(x, y),
+    getTilePos(tilePos),
     anchor('center'),
     health(10, 10),
     area({ shape: new Rect(vec2(0, 3), 13, 24) }),

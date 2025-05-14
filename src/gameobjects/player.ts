@@ -1,13 +1,15 @@
+import type { Vec2 } from 'kaplay'
+
 import { Animation, Sprite, Tag, ZIndex } from '../constants'
 import { addCursorKeys } from '../events'
-import { isAlive } from '../helpers'
+import { getTilePos, isAlive } from '../helpers'
 import { nextLevel, startLevel } from '../levels'
 import { addHealth } from '.'
 
-export function addPlayer(x: number, y: number) {
+export function addPlayer(tilePos: Vec2) {
   const player = add([
     sprite(Sprite.Zombie1),
-    pos(x, y),
+    getTilePos(tilePos),
     anchor('center'),
     health(10, 10),
     area({ shape: new Rect(vec2(0, 4), 13, 25) }),

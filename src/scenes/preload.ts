@@ -49,6 +49,13 @@ scene(Scene.Preload, async () => {
       width: 32,
       height: 32,
     },
+
+    [Sprite.Table]: {
+      x: 256,
+      y: 32,
+      width: 32,
+      height: 32,
+    },
   })
 
   startLevel()
