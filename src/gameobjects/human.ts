@@ -13,7 +13,7 @@ export function addHuman(tilePos: Vec2) {
     anchor('center'),
     health(10, 10),
     area({ shape: new Rect(vec2(0, 3), 13, 24) }),
-    body(),
+    body({ mass: 5 }),
     state(State.Idle, Object.values(State)),
     Tag.Human,
   ])

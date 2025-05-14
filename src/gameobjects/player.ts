@@ -13,7 +13,7 @@ export function addPlayer(tilePos: Vec2) {
     anchor('center'),
     health(10, 10),
     area({ shape: new Rect(vec2(0, 4), 13, 25) }),
-    body(),
+    body({ mass: 5 }),
     z(ZIndex.Player),
     Tag.Player,
     Tag.Zombie,
