@@ -2,29 +2,6 @@ import { Scene, Size, Sprite } from '../constants'
 import { addHuman, addPlayer } from '../gameobjects'
 
 scene(Scene.Game, () => {
-  setCamScale(1)
-
-  addLevel(
-    [
-      '          ',
-      '          ',
-      '          ',
-      '          ',
-      '          ',
-      '          ',
-      '          ',
-      '          ',
-      '          ',
-    ],
-    {
-      tileWidth: Size.Tile,
-      tileHeight: Size.Tile,
-      tiles: {
-        ' ': () => [sprite(Sprite.Floor)],
-      },
-    },
-  )
-
   addLevel(
     [
       '        H ',
@@ -41,13 +18,14 @@ scene(Scene.Game, () => {
       tileWidth: Size.Tile,
       tileHeight: Size.Tile,
       tiles: {
+        ' ': () => [sprite(Sprite.Floor)],
         P: (pos) => {
           addPlayer(pos.x * Size.Tile, pos.y * Size.Tile)
-          return []
+          return [sprite(Sprite.Floor)]
         },
         H: (pos) => {
           addHuman(pos.x * Size.Tile, pos.y * Size.Tile)
-          return []
+          return [sprite(Sprite.Floor)]
         },
       },
     },
