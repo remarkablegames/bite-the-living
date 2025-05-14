@@ -1,4 +1,5 @@
 import { Animation, Sprite, State, Tag } from '../constants'
+import { isAlive } from '../helpers'
 import { addHealth, getPlayer } from '.'
 
 export function addHuman(x: number, y: number) {
@@ -65,7 +66,7 @@ export function addHuman(x: number, y: number) {
   })
 
   human.onCollide(Tag.Zombie, () => {
-    if (human.hp()) {
+    if (isAlive(human)) {
       human.enterState(State.Hit)
       human.hurt(1)
     }
@@ -73,7 +74,7 @@ export function addHuman(x: number, y: number) {
 
   // @ts-expect-error This expression is not callable. Type 'Collision' has no call signatures.
   human.onCollideUpdate(Tag.Zombie, () => {
-    if (human.hp() > 0) {
+    if (isAlive(human)) {
       human.hurt(0.01)
     }
   })

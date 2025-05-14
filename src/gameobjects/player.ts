@@ -1,9 +1,10 @@
 import { Animation, Sprite, Tag, ZIndex } from '../constants'
 import { addCursorKeys } from '../events'
+import { isAlive } from '../helpers'
 import { nextLevel, startLevel } from '../levels'
 import { addHealth } from '.'
 
-export function addPlayer(x = center().x, y = center().y) {
+export function addPlayer(x: number, y: number) {
   const player = add([
     sprite(Sprite.Zombie1),
     pos(x, y),
@@ -26,7 +27,7 @@ export function addPlayer(x = center().x, y = center().y) {
       nextLevel()
     }
 
-    if (player.hp() > 0) {
+    if (isAlive(player)) {
       player.hurt(0.01)
     }
   })
