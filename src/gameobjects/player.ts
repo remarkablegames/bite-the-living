@@ -22,7 +22,7 @@ export function addPlayer(x = center().x, y = center().y) {
     setCamPos(player.pos)
 
     if (!get(Tag.Human).length) {
-      go(Scene.Game, getData<number>(LocalStorage.Level)! + 1)
+      go(Scene.Game, getData(LocalStorage.Level, 0)! + 1)
     }
   })
 
