@@ -2,7 +2,6 @@ import { Animation, Sprite, State, Tag } from '../constants'
 import { addHealth, getPlayer } from '.'
 
 export function addHuman(x: number, y: number) {
-  const player = getPlayer()
   const speed = randi(20, 50)
 
   const human = add([
@@ -19,6 +18,7 @@ export function addHuman(x: number, y: number) {
   addHealth(human)
 
   function shouldMove(): boolean {
+    const player = getPlayer()
     return Boolean(player && human.pos.dist(player.pos) < 100)
   }
 
@@ -44,7 +44,7 @@ export function addHuman(x: number, y: number) {
 
   human.onStateUpdate(State.Move, () => {
     if (shouldMove()) {
-      const direction = player!.pos.sub(human.pos).unit()
+      const direction = getPlayer()!.pos.sub(human.pos).unit()
       human.flipX = direction.x < 0
       human.move(direction.scale(-speed))
     } else {
@@ -74,7 +74,7 @@ export function addHuman(x: number, y: number) {
   // @ts-expect-error This expression is not callable. Type 'Collision' has no call signatures.
   human.onCollideUpdate(Tag.Zombie, () => {
     if (human.hp()) {
-      human.hurt(0)
+      human.hurt(0.01)
     }
   })
 
