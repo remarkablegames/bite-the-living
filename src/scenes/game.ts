@@ -1,11 +1,11 @@
 import { Scene, Size, Sprite } from '../constants'
 import { addHuman, addPlayer } from '../gameobjects'
-import { levels } from '../levels'
+import { getLevel } from '../levels'
 
-scene(Scene.Game, (level = 0) => {
-  const { instructions, map } = levels[level]
+scene(Scene.Game, () => {
+  const { map, title } = getLevel()
 
-  add([text(instructions, { size: 14, font: 'Monospace' }), pos(32, 8)])
+  add([text(title.text, { size: 14, font: 'Monospace' }), title.pos])
 
   addLevel(map, {
     tileWidth: Size.Tile,

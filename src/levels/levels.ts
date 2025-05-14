@@ -1,9 +1,12 @@
 import { LocalStorage, Scene } from '../constants'
 
-export const levels = [
+const levels = [
   // 0
   {
-    instructions: 'WASD or arrow keys to move',
+    title: {
+      text: 'WASD or arrow keys to move',
+      pos: pos(32, 8),
+    },
     map: [
       '................',
       '.              .',
@@ -16,7 +19,10 @@ export const levels = [
 
   // 1
   {
-    instructions: 'Eat the humans',
+    title: {
+      text: 'Eat the humans',
+      pos: pos(32, 8),
+    },
     map: [
       '............',
       '.          .',
@@ -33,7 +39,10 @@ export const levels = [
 
   // 2
   {
-    instructions: 'Time is running out',
+    title: {
+      text: 'Time is running out',
+      pos: pos(32, 8),
+    },
     map: [
       '............',
       '.          .',
@@ -52,17 +61,25 @@ export const levels = [
   },
 ]
 
+function getLevelNumber(): number {
+  return getData(LocalStorage.Level, 0) || 0
+}
+
+export function getLevel() {
+  return levels[getLevelNumber()]
+}
+
 export function startLevel() {
-  go(Scene.Game, getData(LocalStorage.Level) || 0)
+  go(Scene.Game)
 }
 
 export function nextLevel() {
-  let level = getData(LocalStorage.Level, 0)! + 1
+  let level = getLevelNumber() + 1
 
   if (level < 0 || level >= levels.length) {
     level = 0
   }
 
   setData(LocalStorage.Level, level)
-  go(Scene.Game, level)
+  startLevel()
 }
