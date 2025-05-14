@@ -18,8 +18,8 @@ export function addHuman(x: number, y: number) {
 
   addHealth(human)
 
-  function shouldMove() {
-    return human.pos.dist(player.pos) < 100
+  function shouldMove(): boolean {
+    return Boolean(player && human.pos.dist(player.pos) < 100)
   }
 
   human.onStateEnter(State.Idle, () => {
@@ -44,7 +44,7 @@ export function addHuman(x: number, y: number) {
 
   human.onStateUpdate(State.Move, () => {
     if (shouldMove()) {
-      const direction = player.pos.sub(human.pos).unit()
+      const direction = player!.pos.sub(human.pos).unit()
       human.flipX = direction.x < 0
       human.move(direction.scale(-speed))
     } else {

@@ -1,6 +1,6 @@
 import { Animation, Scene, Sprite } from '../constants'
 
-scene(Scene.Preload, () => {
+scene(Scene.Preload, async () => {
   loadSprite(Sprite.Zombie1, 'sprites/zombies/zombie1.png', {
     sliceX: 8,
     sliceY: 6,
@@ -23,6 +23,15 @@ scene(Scene.Preload, () => {
       [Animation.Knocked]: { from: 16, to: 21 },
       [Animation.Hit]: { from: 24, to: 26 },
       [Animation.Death]: { from: 32, to: 39 },
+    },
+  })
+
+  await loadSpriteAtlas('tilesets/interior.png', {
+    [Sprite.Floor]: {
+      x: 224,
+      y: 32,
+      width: 32,
+      height: 32,
     },
   })
 

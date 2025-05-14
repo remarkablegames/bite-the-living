@@ -1,5 +1,6 @@
 export * from './animation'
 export * from './scene'
+export * from './size'
 export * from './sprite'
 export * from './state'
 export * from './tag'

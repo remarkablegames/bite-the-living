@@ -1,12 +1,55 @@
-import { Scene } from '../constants'
+import { Scene, Size, Sprite } from '../constants'
 import { addHuman, addPlayer } from '../gameobjects'
 
 scene(Scene.Game, () => {
-  addPlayer()
+  setCamScale(1)
 
-  for (let i = 0; i < 3; i++) {
-    const x = rand(0, width())
-    const y = rand(0, height())
-    addHuman(x, y)
-  }
+  addLevel(
+    [
+      '          ',
+      '          ',
+      '          ',
+      '          ',
+      '          ',
+      '          ',
+      '          ',
+      '          ',
+      '          ',
+    ],
+    {
+      tileWidth: Size.Tile,
+      tileHeight: Size.Tile,
+      tiles: {
+        ' ': () => [sprite(Sprite.Floor)],
+      },
+    },
+  )
+
+  addLevel(
+    [
+      '        H ',
+      '          ',
+      '  P       ',
+      '    H     ',
+      '          ',
+      '          ',
+      '          ',
+      '     H    ',
+      '          ',
+    ],
+    {
+      tileWidth: Size.Tile,
+      tileHeight: Size.Tile,
+      tiles: {
+        P: (pos) => {
+          addPlayer(pos.x * Size.Tile, pos.y * Size.Tile)
+          return []
+        },
+        H: (pos) => {
+          addHuman(pos.x * Size.Tile, pos.y * Size.Tile)
+          return []
+        },
+      },
+    },
+  )
 })

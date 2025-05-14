@@ -18,9 +18,13 @@ export function addPlayer(x = center().x, y = center().y) {
   addHealth(player)
   addCursorKeys(player)
 
+  player.onUpdate(() => {
+    setCamPos(player.pos)
+  })
+
   return player
 }
 
 export function getPlayer() {
-  return get(Tag.Player)[0] as ReturnType<typeof addPlayer>
+  return get(Tag.Player)[0] as ReturnType<typeof addPlayer> | undefined
 }
