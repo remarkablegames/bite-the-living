@@ -1,8 +1,14 @@
-import { Scene, Size, Sprite } from '../constants'
+import { LocalStorage, Scene, Size, Sprite } from '../constants'
 import { addHuman, addPlayer } from '../gameobjects'
 import { levels } from '../levels'
 
 scene(Scene.Game, (level = 0) => {
+  setData(LocalStorage.Level, level)
+
+  if (level < 0 || level >= levels.length) {
+    level = 0
+  }
+
   const { map } = levels[level]
 
   addLevel(map, {

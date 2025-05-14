@@ -1,4 +1,5 @@
 export * from './animation'
+export * from './localStorage'
 export * from './scene'
 export * from './size'
 export * from './sprite'

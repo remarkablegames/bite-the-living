@@ -1,4 +1,4 @@
-import { Sprite, Tag, ZIndex } from '../constants'
+import { LocalStorage, Scene, Sprite, Tag, ZIndex } from '../constants'
 import { addCursorKeys } from '../events'
 import { addHealth } from '.'
 
@@ -20,6 +20,10 @@ export function addPlayer(x = center().x, y = center().y) {
 
   player.onUpdate(() => {
     setCamPos(player.pos)
+
+    if (!get(Tag.Human).length) {
+      go(Scene.Game, getData<number>(LocalStorage.Level)! + 1)
+    }
   })
 
   return player
