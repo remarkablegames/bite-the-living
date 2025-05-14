@@ -32,11 +32,11 @@ export function addPlayer(x = center().x, y = center().y) {
   })
 
   player.onDeath(() => {
-    player.play(Animation.Death, {
-      onEnd: () => {
-        player.destroy()
-        startLevel()
-      },
+    player.play(Animation.Death)
+
+    wait(1, () => {
+      player.destroy()
+      startLevel()
     })
   })
 

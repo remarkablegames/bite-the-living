@@ -3,7 +3,9 @@ import { addHuman, addPlayer } from '../gameobjects'
 import { levels } from '../levels'
 
 scene(Scene.Game, (level = 0) => {
-  const { map } = levels[level]
+  const { instructions, map } = levels[level]
+
+  add([text(instructions, { size: 14, font: 'Monospace' }), pos(32, 8)])
 
   addLevel(map, {
     tileWidth: Size.Tile,

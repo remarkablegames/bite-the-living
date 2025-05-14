@@ -1,7 +1,9 @@
 import { LocalStorage, Scene } from '../constants'
 
 export const levels = [
+  // 0
   {
+    instructions: 'WASD or arrow keys to move',
     map: [
       '................',
       '.              .',
@@ -12,22 +14,38 @@ export const levels = [
     ],
   },
 
+  // 1
   {
+    instructions: 'Eat the humans',
     map: [
       '............',
       '.          .',
       '.          .',
       '.          .',
-      '.          .',
-      '.          .',
       '.     H    .',
-      '.          .',
       '.     P    .',
-      '.          .',
       '.     H    .',
       '.          .',
       '.          .',
+      '............',
+    ],
+  },
+
+  // 2
+  {
+    instructions: 'Time is running out',
+    map: [
+      '............',
       '.          .',
+      '. P        .',
+      '.          .',
+      '.........  .',
+      '.          .',
+      '.     H    .',
+      '.          .',
+      '.  .........',
+      '.          .',
+      '.     H    .',
       '.          .',
       '............',
     ],
