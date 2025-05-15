@@ -1,5 +1,5 @@
-import { Scene, Size, Sprite } from '../constants'
-import { addHuman, addPlayer, addTable } from '../gameobjects'
+import { Scene, Size } from '../constants'
+import { addFloor, addHuman, addPlayer, addTable } from '../gameobjects'
 import { getLevel } from '../levels'
 
 scene(Scene.Game, () => {
@@ -12,7 +12,7 @@ scene(Scene.Game, () => {
     tileHeight: Size.Tile,
     tiles: {
       // floor
-      ' ': () => [sprite(Sprite.Floor)],
+      ' ': addFloor,
 
       // tile
       '.': () => [
@@ -25,19 +25,19 @@ scene(Scene.Game, () => {
       // table
       T: (pos) => {
         addTable(pos)
-        return [sprite(Sprite.Floor)]
+        return addFloor()
       },
 
       // human
       H: (pos) => {
         addHuman(pos)
-        return [sprite(Sprite.Floor)]
+        return addFloor()
       },
 
       // player
       P: (pos) => {
         addPlayer(pos)
-        return [sprite(Sprite.Floor)]
+        return addFloor()
       },
     },
   })
