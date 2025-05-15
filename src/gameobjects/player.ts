@@ -5,6 +5,7 @@ import { addCursorKeys } from '../events'
 import { getTilePos, isAlive } from '../helpers'
 import { nextLevel, startLevel } from '../levels'
 import { showModal } from '../modals'
+import { playerState } from '../states'
 import { addHealth } from '.'
 
 export function addPlayer(tilePos: Vec2) {
@@ -12,9 +13,9 @@ export function addPlayer(tilePos: Vec2) {
     sprite(Sprite.Zombie1),
     getTilePos(tilePos),
     anchor('center'),
-    health(10, 10),
+    health(playerState.health, playerState.maxHealth),
     area({ shape: new Rect(vec2(0, 4), 13, 25) }),
-    body({ mass: 5 }),
+    body({ mass: playerState.mass }),
     z(ZIndex.Player),
     Tag.Player,
     Tag.Zombie,
@@ -37,7 +38,7 @@ export function addPlayer(tilePos: Vec2) {
     }
 
     if (isAlive(player)) {
-      player.hurt(0.01)
+      player.hurt(playerState.selfDamage)
     }
   })
 

@@ -2,6 +2,7 @@ import type { Vec2 } from 'kaplay'
 
 import { Animation, Sprite, State, Tag } from '../constants'
 import { getTilePos, isAlive } from '../helpers'
+import { playerState } from '../states'
 import { addHealth, getPlayer } from '.'
 
 export function addHuman(tilePos: Vec2) {
@@ -70,24 +71,24 @@ export function addHuman(tilePos: Vec2) {
     })
   })
 
-  human.onCollide(Tag.Zombie, () => {
+  human.onCollide(Tag.Player, () => {
     if (!isAlive(human)) {
       return
     }
     human.enterState(State.Hit)
-    human.hurt(1)
+    human.hurt(playerState.hitDamage)
   })
 
   // @ts-expect-error This expression is not callable. Type 'Collision' has no call signatures.
-  human.onCollideUpdate(Tag.Zombie, () => {
+  human.onCollideUpdate(Tag.Player, () => {
     if (!isAlive(human)) {
       return
     }
-    human.hurt(0.01)
+    human.hurt(playerState.areaDamage)
   })
 
   human.onDeath(() => {
-    getPlayer()?.heal(2)
+    getPlayer()?.heal(playerState.heal)
     human.enterState(State.Death)
   })
 

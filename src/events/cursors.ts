@@ -1,9 +1,7 @@
 import { Animation } from '../constants'
 import { isAlive } from '../helpers'
+import { playerState } from '../states'
 import type { Player } from '../types'
-
-// pixels per second
-const SPEED = 100
 
 export enum Key {
   Left = 'left',
@@ -28,23 +26,23 @@ export function addCursorKeys(player: Player) {
       case Key.Left:
       case Key.A:
         player.flipX = false
-        player.move(-SPEED, 0)
+        player.move(-playerState.speed, 0)
         break
 
       case Key.Right:
       case Key.D:
         player.flipX = true
-        player.move(SPEED, 0)
+        player.move(playerState.speed, 0)
         break
 
       case Key.Up:
       case Key.W:
-        player.move(0, -SPEED)
+        player.move(0, -playerState.speed)
         break
 
       case Key.Down:
       case Key.S:
-        player.move(0, SPEED)
+        player.move(0, playerState.speed)
         break
     }
   })
