@@ -104,4 +104,5 @@ export function nextLevel() {
   }
 
   setData(LocalStorage.Level, level)
+  startLevel()
 }

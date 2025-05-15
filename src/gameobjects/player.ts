@@ -4,6 +4,7 @@ import { Animation, Sprite, Tag, ZIndex } from '../constants'
 import { addCursorKeys } from '../events'
 import { getTilePos, isAlive } from '../helpers'
 import { nextLevel, startLevel } from '../levels'
+import { showModal } from '../modals'
 import { addHealth } from '.'
 
 export function addPlayer(tilePos: Vec2) {
@@ -22,15 +23,20 @@ export function addPlayer(tilePos: Vec2) {
   addHealth(player)
   addCursorKeys(player)
 
-  player.onUpdate(() => {
+  const updateEvent = player.onUpdate(() => {
     setCamPos(player.pos)
 
     if (!get(Tag.Human).length) {
-      nextLevel()
+      updateEvent.cancel()
+
+      showModal({
+        message: 'Humans Defeated!',
+        onContinue: nextLevel,
+      })
     }
 
     if (isAlive(player)) {
-      player.hurt(0.005)
+      player.hurt(0.01)
     }
   })
 
