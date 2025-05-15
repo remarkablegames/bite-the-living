@@ -13,6 +13,7 @@ export function addZombie(position: Vec2) {
     health(zombieState.health, zombieState.maxHealth),
     area({ shape: new Rect(vec2(0, 4), 13, 25) }),
     body({ mass: zombieState.mass }),
+    opacity(1),
     Tag.Zombie,
     {
       hitDamage: zombieState.hitDamage,
@@ -21,6 +22,8 @@ export function addZombie(position: Vec2) {
   ])
 
   addHealth(zombie)
+
+  zombie.fadeIn(0.2)
   zombie.flipX = trueOrFalse()
   zombie.play(Animation.Idle, { loop: true })
 
