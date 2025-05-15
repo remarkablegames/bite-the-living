@@ -74,20 +74,20 @@ export function addHuman(tilePos: Vec2) {
     })
   })
 
-  human.onCollide(Tag.Player, () => {
+  human.onCollide(Tag.Zombie, (zombie) => {
     if (!isAlive(human)) {
       return
     }
     human.enterState(State.Hit)
-    human.hurt(playerState.hitDamage)
+    human.hurt(zombie.hitDamage)
   })
 
   // @ts-expect-error This expression is not callable. Type 'Collision' has no call signatures.
-  human.onCollideUpdate(Tag.Player, () => {
+  human.onCollideUpdate(Tag.Zombie, (zombie) => {
     if (!isAlive(human)) {
       return
     }
-    human.hurt(playerState.areaDamage)
+    human.hurt(zombie.areaDamage)
   })
 
   human.onDeath(() => {

@@ -14,6 +14,7 @@ export function addZombie(position: Vec2) {
     area({ shape: new Rect(vec2(0, 4), 13, 25) }),
     body({ mass: zombieState.mass }),
     Tag.Zombie,
+    { hitDamage: zombieState.hitDamage, areaDamage: zombieState.areaDamage },
   ])
 
   addHealth(zombie)
@@ -23,6 +24,7 @@ export function addZombie(position: Vec2) {
     if (!hasHumans()) {
       updateEvent.cancel()
       deathEvent.cancel()
+      return
     }
 
     if (isAlive(zombie)) {

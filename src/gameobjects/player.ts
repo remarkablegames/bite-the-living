@@ -19,14 +19,13 @@ export function addPlayer(tilePos: Vec2) {
     z(ZIndex.Player),
     Tag.Player,
     Tag.Zombie,
+    { hitDamage: playerState.hitDamage, areaDamage: playerState.areaDamage },
   ])
 
   addHealth(player)
   addCursorKeys(player)
 
   const updateEvent = player.onUpdate(() => {
-    setCamPos(player.pos)
-
     if (!hasHumans()) {
       updateEvent.cancel()
       deathEvent.cancel()
@@ -35,7 +34,11 @@ export function addPlayer(tilePos: Vec2) {
         message: 'Humans Defeated!',
         onContinue: nextLevel,
       })
+
+      return
     }
+
+    setCamPos(player.pos)
 
     if (isAlive(player)) {
       player.hurt(playerState.selfDamage)
