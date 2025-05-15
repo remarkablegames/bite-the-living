@@ -2,7 +2,7 @@ import type { Vec2 } from 'kaplay'
 
 import { Animation, Sprite, Tag, ZIndex } from '../constants'
 import { addCursorKeys } from '../events'
-import { getTilePos, isAlive } from '../helpers'
+import { getTilePos, hasHumans, isAlive } from '../helpers'
 import { nextLevel, startLevel } from '../levels'
 import { showModal } from '../modals'
 import { playerState } from '../states'
@@ -27,7 +27,7 @@ export function addPlayer(tilePos: Vec2) {
   const updateEvent = player.onUpdate(() => {
     setCamPos(player.pos)
 
-    if (!get(Tag.Human).length) {
+    if (!hasHumans()) {
       updateEvent.cancel()
       deathEvent.cancel()
 

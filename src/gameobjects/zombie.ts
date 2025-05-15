@@ -1,7 +1,7 @@
 import type { Vec2 } from 'kaplay'
 
 import { Animation, Sprite, Tag } from '../constants'
-import { isAlive } from '../helpers'
+import { hasHumans, isAlive } from '../helpers'
 import { zombieState } from '../states'
 import { addHealth } from '.'
 
@@ -20,13 +20,14 @@ export function addZombie(position: Vec2) {
   zombie.play(Animation.Idle, { loop: true })
 
   const updateEvent = zombie.onUpdate(() => {
-    if (!get(Tag.Human).length) {
+    if (!hasHumans()) {
       updateEvent.cancel()
       deathEvent.cancel()
     }
 
     if (isAlive(zombie)) {
       zombie.hurt(zombieState.selfDamage)
+      zombie.moveTo(get(Tag.Human)[0].pos, zombieState.speed)
     }
   })
 
