@@ -30,7 +30,7 @@ export function addPlayer(tilePos: Vec2) {
     }
 
     if (isAlive(player)) {
-      player.hurt(0.01)
+      player.hurt(0.005)
     }
   })
 

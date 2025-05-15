@@ -87,6 +87,7 @@ export function addHuman(tilePos: Vec2) {
   })
 
   human.onDeath(() => {
+    getPlayer()?.heal(2)
     human.enterState(State.Death)
   })
 

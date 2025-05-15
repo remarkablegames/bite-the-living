@@ -1,5 +1,4 @@
 import { LocalStorage, Scene } from '../constants'
-import { showModal } from '../helpers/modal'
 
 const levels = [
   // 0
@@ -31,7 +30,7 @@ const levels = [
       '.          .',
       '.     H    .',
       '.     P    .',
-      '.          .',
+      '.     H    .',
       '.          .',
       '.          .',
       '............',
@@ -60,6 +59,29 @@ const levels = [
       '............',
     ],
   },
+
+  // 3
+  {
+    title: {
+      text: 'You are being watched!',
+      pos: pos(32, 8),
+    },
+    map: [
+      '............',
+      '.          .',
+      '. H     T  .',
+      '.          .',
+      '.....  .....',
+      '.          .',
+      '.     P    .',
+      '.          .',
+      '.....  .....',
+      '.          .',
+      '.  W  H    .',
+      '.          .',
+      '............',
+    ],
+  },
 ]
 
 function getLevelNumber(): number {
@@ -82,8 +104,4 @@ export function nextLevel() {
   }
 
   setData(LocalStorage.Level, level)
-  showModal({
-    message: 'Humans Defeated!',
-    onContinue: () => startLevel(),
-  })
 }
