@@ -1,7 +1,7 @@
 import type { Shape, Vec2 } from 'kaplay'
 
 import { Sprite } from '../constants'
-import { getTilePos } from '../helpers'
+import { getTileVec2 } from '../helpers'
 
 export function addStatic(options: {
   sprite: Sprite
@@ -10,7 +10,7 @@ export function addStatic(options: {
 }) {
   add([
     sprite(options.sprite),
-    getTilePos(options.pos),
+    pos(getTileVec2(options.pos)),
     area({ shape: options.shape }),
     body({ isStatic: true }),
   ])

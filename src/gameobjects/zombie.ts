@@ -1,7 +1,7 @@
 import type { Vec2 } from 'kaplay'
 
 import { Animation, Sprite, Tag } from '../constants'
-import { hasHumans, isAlive } from '../helpers'
+import { hasHumans, isAlive, trueOrFalse } from '../helpers'
 import { zombieState } from '../states'
 import { addHealth } from '.'
 
@@ -14,10 +14,14 @@ export function addZombie(position: Vec2) {
     area({ shape: new Rect(vec2(0, 4), 13, 25) }),
     body({ mass: zombieState.mass }),
     Tag.Zombie,
-    { hitDamage: zombieState.hitDamage, areaDamage: zombieState.areaDamage },
+    {
+      hitDamage: zombieState.hitDamage,
+      areaDamage: zombieState.areaDamage,
+    },
   ])
 
   addHealth(zombie)
+  zombie.flipX = trueOrFalse()
   zombie.play(Animation.Idle, { loop: true })
 
   const updateEvent = zombie.onUpdate(() => {

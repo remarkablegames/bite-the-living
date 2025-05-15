@@ -1,16 +1,16 @@
 import type { Vec2 } from 'kaplay'
 
 import { Animation, Sprite, State, Tag } from '../constants'
-import { getTilePos, isAlive } from '../helpers'
-import { playerState } from '../states'
-import { addHealth, addZombie, getPlayer } from '.'
+import { getZombies } from '../helpers'
+import { isAlive, trueOrFalse } from '../helpers'
+import { addHealth, addZombie } from '.'
 
-export function addHuman(tilePos: Vec2) {
+export function addHuman(position: Vec2) {
   const speed = randi(20, 50)
 
   const human = add([
     sprite(Sprite.Human1),
-    getTilePos(tilePos),
+    pos(position),
     anchor('center'),
     health(10, 10),
     area({ shape: new Rect(vec2(0, 3), 13, 24) }),
@@ -20,10 +20,11 @@ export function addHuman(tilePos: Vec2) {
   ])
 
   addHealth(human)
+  human.flipX = trueOrFalse()
 
   function shouldMove(): boolean {
-    const player = getPlayer()
-    return Boolean(player && human.pos.dist(player.pos) < 100)
+    const zombie = getZombies()[0]
+    return Boolean(zombie && human.pos.dist(zombie.pos) < 100)
   }
 
   human.onStateEnter(State.Idle, () => {
@@ -48,7 +49,8 @@ export function addHuman(tilePos: Vec2) {
 
   human.onStateUpdate(State.Move, () => {
     if (shouldMove()) {
-      const direction = getPlayer()!.pos.sub(human.pos).unit()
+      const zombie = getZombies()[0]
+      const direction = zombie.pos.sub(human.pos).unit()
       human.flipX = direction.x < 0
       human.move(direction.scale(-speed))
     } else {
@@ -91,7 +93,6 @@ export function addHuman(tilePos: Vec2) {
   })
 
   human.onDeath(() => {
-    getPlayer()?.heal(playerState.heal)
     human.enterState(State.Death)
   })
 

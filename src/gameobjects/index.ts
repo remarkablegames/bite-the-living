@@ -1,6 +1,5 @@
 export * from './floor'
 export * from './health'
 export * from './human'
-export * from './player'
 export * from './static'
 export * from './zombie'

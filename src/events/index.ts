@@ -1,1 +1,1 @@
-export * from './cursors'
+export * from './controls'

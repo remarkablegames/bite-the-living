@@ -1,6 +1,8 @@
 import { Scene, Size, Sprite } from '../constants'
-import { addFloor, addHuman, addPlayer, addStatic } from '../gameobjects'
-import { getLevel } from '../levels'
+import { addFloor, addHuman, addStatic, addZombie } from '../gameobjects'
+import { getTileVec2, hasHumans, hasZombies } from '../helpers'
+import { getLevel, nextLevel, startLevel } from '../levels'
+import { showModal } from '../modals'
 
 scene(Scene.Game, () => {
   const { map, title } = getLevel()
@@ -44,15 +46,32 @@ scene(Scene.Game, () => {
 
       // human
       H: (pos) => {
-        addHuman(pos)
+        addHuman(getTileVec2(pos))
         return addFloor()
       },
 
-      // player
-      P: (pos) => {
-        addPlayer(pos)
+      // zombie
+      Z: (pos) => {
+        addZombie(getTileVec2(pos))
         return addFloor()
       },
     },
+  })
+
+  onUpdate(() => {
+    if (!hasHumans()) {
+      showModal({
+        message: 'Humans Defeated!',
+        onContinue: nextLevel,
+      })
+      return
+    }
+
+    if (!hasZombies()) {
+      startLevel()
+      return
+    }
+
+    // setCamPos(player.pos)
   })
 })

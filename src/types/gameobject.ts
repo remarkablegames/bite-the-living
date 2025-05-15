@@ -1,3 +1,4 @@
-import { addPlayer } from '../gameobjects'
+import { addHuman, addZombie } from '../gameobjects'
 
-export type Player = ReturnType<typeof addPlayer>
+export type Human = ReturnType<typeof addHuman>
+export type Zombie = ReturnType<typeof addZombie>

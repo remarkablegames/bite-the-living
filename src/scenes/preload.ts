@@ -16,8 +16,8 @@ scene(Scene.Preload, async () => {
         [Animation.Run]: { from: 8, to: 15 },
         [Animation.Knocked]: { from: 16, to: 21 },
         [Animation.Hit]: { from: 24, to: 26 },
-        [Animation.Death]: { from: 32, to: 39 },
-        [Animation.Death2]: { from: 40, to: 47 },
+        [Animation.Death]: { from: 40, to: 47 },
+        [Animation.Death2]: { from: 32, to: 39 },
       },
     })
   })

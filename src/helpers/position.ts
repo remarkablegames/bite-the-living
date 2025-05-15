@@ -1,7 +1,7 @@
-import type { Vec2 } from 'kaplay'
+import { Vec2 } from 'kaplay'
 
 import { Size } from '../constants'
 
-export function getTilePos(tilePos: Vec2) {
-  return pos(tilePos.x * Size.Tile, tilePos.y * Size.Tile)
+export function getTileVec2({ x, y }: Vec2) {
+  return vec2(x * Size.Tile, y * Size.Tile)
 }
