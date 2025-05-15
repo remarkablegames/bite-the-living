@@ -1,6 +1,6 @@
 import { Animation, Sprite, Tag, ZIndex } from '../constants'
 import { addCursorKeys } from '../events'
-import { nextLevel, startLevel } from '../levels'
+import { startLevel } from '../levels'
 import { addHealth } from '.'
 
 export function addPlayer(x = center().x, y = center().y) {
@@ -21,10 +21,6 @@ export function addPlayer(x = center().x, y = center().y) {
 
   player.onUpdate(() => {
     setCamPos(player.pos)
-
-    if (!get(Tag.Human).length) {
-      nextLevel()
-    }
 
     if (player.hp() > 0) {
       player.hurt(0.01)

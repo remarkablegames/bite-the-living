@@ -1,9 +1,26 @@
-import { Scene, Size, Sprite } from '../constants'
+import { Scene, Size, Sprite, Tag } from '../constants'
 import { addHuman, addPlayer } from '../gameobjects'
-import { levels } from '../levels'
+import { showModal } from '../helpers/modal'
+import { levels, nextLevel } from '../levels'
 
 scene(Scene.Game, (level = 0) => {
   const { map } = levels[level]
+
+  let levelComplete = false
+
+  onUpdate(() => {
+    if (!levelComplete && get(Tag.Human).length === 0) {
+      levelComplete = true
+      showLevelCompleteModal()
+    }
+  })
+
+  function showLevelCompleteModal() {
+    showModal({
+      message: 'Humans Defeated!',
+      onContinue: () => nextLevel(),
+    })
+  }
 
   addLevel(map, {
     tileWidth: Size.Tile,
