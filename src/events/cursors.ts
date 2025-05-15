@@ -1,4 +1,5 @@
 import { Animation } from '../constants'
+import { isAlive } from '../helpers'
 import type { Player } from '../types'
 
 // pixels per second
@@ -18,7 +19,11 @@ export enum Key {
 export function addCursorKeys(player: Player) {
   player.play(Animation.Idle, { loop: true })
 
-  onKeyDown((key) => {
+  player.onKeyDown((key) => {
+    if (!isAlive(player)) {
+      return
+    }
+
     switch (key) {
       case Key.Left:
       case Key.A:
@@ -44,14 +49,14 @@ export function addCursorKeys(player: Player) {
     }
   })
 
-  onKeyPress((key) => {
-    if (Object.values(Key).includes(key as Key)) {
+  player.onKeyPress((key) => {
+    if (isAlive(player) && Object.values(Key).includes(key as Key)) {
       player.play(Animation.Run, { loop: true })
     }
   })
 
-  onKeyRelease((key) => {
-    if (Object.values(Key).includes(key as Key)) {
+  player.onKeyRelease((key) => {
+    if (isAlive(player) && Object.values(Key).includes(key as Key)) {
       player.play(Animation.Idle, { loop: true })
     }
   })

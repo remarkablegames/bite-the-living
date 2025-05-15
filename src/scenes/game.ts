@@ -1,33 +1,20 @@
-import { Scene, Size, Sprite, Tag } from '../constants'
-import { addHuman, addPlayer } from '../gameobjects'
-import { showModal } from '../helpers/modal'
-import { levels, nextLevel } from '../levels'
+import { Scene, Size, Sprite } from '../constants'
+import { addFloor, addHuman, addPlayer, addStatic } from '../gameobjects'
+import { getLevel } from '../levels'
 
-scene(Scene.Game, (level = 0) => {
-  const { map } = levels[level]
+scene(Scene.Game, () => {
+  const { map, title } = getLevel()
 
-  let levelComplete = false
-
-  onUpdate(() => {
-    if (!levelComplete && get(Tag.Human).length === 0) {
-      levelComplete = true
-      showLevelCompleteModal()
-    }
-  })
-
-  function showLevelCompleteModal() {
-    showModal({
-      message: 'Humans Defeated!',
-      onContinue: () => nextLevel(),
-    })
-  }
+  add([text(title.text, { size: 14, font: 'Monospace' }), title.pos])
 
   addLevel(map, {
     tileWidth: Size.Tile,
     tileHeight: Size.Tile,
     tiles: {
-      ' ': () => [sprite(Sprite.Floor)],
+      // floor
+      ' ': addFloor,
 
+      // tile
       '.': () => [
         rect(Size.Tile, Size.Tile),
         area(),
@@ -35,14 +22,36 @@ scene(Scene.Game, (level = 0) => {
         opacity(0),
       ],
 
-      P: (pos) => {
-        addPlayer(pos.x * Size.Tile, pos.y * Size.Tile)
-        return [sprite(Sprite.Floor)]
+      // table
+      T: (pos) => {
+        addStatic({
+          sprite: Sprite.Table,
+          pos,
+          shape: new Rect(vec2(2, 2), 30, 30),
+        })
+        return addFloor()
       },
 
+      // watercooler
+      W: (pos) => {
+        addStatic({
+          sprite: Sprite.Watercooler,
+          pos,
+          shape: new Rect(vec2(9, 1), 15, 30),
+        })
+        return addFloor()
+      },
+
+      // human
       H: (pos) => {
-        addHuman(pos.x * Size.Tile, pos.y * Size.Tile)
-        return [sprite(Sprite.Floor)]
+        addHuman(pos)
+        return addFloor()
+      },
+
+      // player
+      P: (pos) => {
+        addPlayer(pos)
+        return addFloor()
       },
     },
   })
