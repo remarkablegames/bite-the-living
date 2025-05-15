@@ -3,7 +3,7 @@ import type { Vec2 } from 'kaplay'
 import { Animation, Sprite, State, Tag } from '../constants'
 import { getTilePos, isAlive } from '../helpers'
 import { playerState } from '../states'
-import { addHealth, getPlayer } from '.'
+import { addHealth, addZombie, getPlayer } from '.'
 
 export function addHuman(tilePos: Vec2) {
   const speed = randi(20, 50)
@@ -67,7 +67,10 @@ export function addHuman(tilePos: Vec2) {
 
   human.onStateEnter(State.Death, () => {
     human.play(Animation.Death, {
-      onEnd: () => human.destroy(),
+      onEnd: () => {
+        addZombie(human.pos)
+        human.destroy()
+      },
     })
   })
 

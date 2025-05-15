@@ -44,7 +44,7 @@ export function addPlayer(tilePos: Vec2) {
 
   const deathEvent = player.onDeath(() => {
     updateEvent.cancel()
-    player.play(Animation.Death)
+    player.play(Animation.Death2)
 
     wait(1, () => {
       player.destroy()
