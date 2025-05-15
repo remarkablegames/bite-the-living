@@ -1,8 +1,8 @@
 import type { Vec2 } from 'kaplay'
 
 import { Animation, Sprite, State, Tag } from '../constants'
-import { getZombies } from '../helpers'
-import { isAlive, trueOrFalse } from '../helpers'
+import { getZombies, isAlive, trueOrFalse } from '../helpers'
+import type { Zombie } from '../types'
 import { addHealth, addZombie } from '.'
 
 export function addHuman(position: Vec2) {
@@ -37,12 +37,6 @@ export function addHuman(position: Vec2) {
     }
   })
 
-  human.onStateUpdate(State.Idle, () => {
-    if (shouldMove()) {
-      human.enterState(State.Move)
-    }
-  })
-
   human.onStateEnter(State.Move, () => {
     human.play(Animation.Run, { loop: true })
   })
@@ -58,42 +52,36 @@ export function addHuman(position: Vec2) {
     }
   })
 
-  human.onStateEnter(State.Hit, () => {
-    if (!isAlive(human)) {
-      return
-    }
+  const hitEvent = human.onStateEnter(State.Hit, () => {
     human.play(Animation.Hit, {
       onEnd: () => human.enterState(State.Idle),
     })
   })
 
-  human.onStateEnter(State.Death, () => {
+  const collideEvent = human.onCollide(Tag.Zombie, () => {
+    if (isAlive(human)) {
+      human.enterState(State.Hit)
+    }
+  })
+
+  const collideUpdateEvent = human.onCollideUpdate(
+    Tag.Zombie,
+    // @ts-expect-error This expression is not callable. Type 'Collision' has no call signatures.
+    (zombie: Zombie) => {
+      human.hurt(zombie.damage)
+    },
+  )
+
+  human.onDeath(() => {
+    ;[hitEvent, collideEvent, collideUpdateEvent].forEach((event) =>
+      event.cancel(),
+    )
     human.play(Animation.Death, {
       onEnd: () => {
         addZombie(human.pos)
         human.destroy()
       },
     })
-  })
-
-  human.onCollide(Tag.Zombie, (zombie) => {
-    if (!isAlive(human)) {
-      return
-    }
-    human.enterState(State.Hit)
-    human.hurt(zombie.hitDamage)
-  })
-
-  // @ts-expect-error This expression is not callable. Type 'Collision' has no call signatures.
-  human.onCollideUpdate(Tag.Zombie, (zombie) => {
-    if (!isAlive(human)) {
-      return
-    }
-    human.hurt(zombie.areaDamage)
-  })
-
-  human.onDeath(() => {
-    human.enterState(State.Death)
   })
 
   return human

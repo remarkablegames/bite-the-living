@@ -4,8 +4,7 @@ class Zombie {
   mass = 5
   speed = 100
   selfDamage = 0.01
-  hitDamage = 1
-  areaDamage = 0.01
+  attackDamage = 0.03
   heal = 2
 }
 

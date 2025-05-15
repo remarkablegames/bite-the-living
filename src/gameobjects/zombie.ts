@@ -1,9 +1,11 @@
 import type { Vec2 } from 'kaplay'
 
-import { Animation, Sprite, Tag } from '../constants'
+import { Animation, Sprite, State, Tag } from '../constants'
 import { hasHumans, isAlive, trueOrFalse } from '../helpers'
 import { zombieState } from '../states'
 import { addHealth } from '.'
+
+const OUT_OF_BOUNDS = -999999999
 
 export function addZombie(position: Vec2) {
   const zombie = add([
@@ -11,13 +13,20 @@ export function addZombie(position: Vec2) {
     pos(position),
     anchor('center'),
     health(zombieState.health, zombieState.maxHealth),
-    area({ shape: new Rect(vec2(0, 4), 13, 25) }),
+    area({
+      cursor: 'pointer',
+      shape: new Rect(vec2(0, 4), 13, 25),
+    }),
     body({ mass: zombieState.mass }),
     opacity(1),
+    state(State.Idle, Object.values(State)),
     Tag.Zombie,
     {
-      hitDamage: zombieState.hitDamage,
-      areaDamage: zombieState.areaDamage,
+      damage: zombieState.attackDamage,
+      moveToPosition: {
+        x: OUT_OF_BOUNDS,
+        y: OUT_OF_BOUNDS,
+      },
     },
   ])
 
@@ -27,26 +36,69 @@ export function addZombie(position: Vec2) {
   zombie.flipX = trueOrFalse()
   zombie.play(Animation.Idle, { loop: true })
 
-  const updateEvent = zombie.onUpdate(() => {
-    if (!hasHumans()) {
-      updateEvent.cancel()
-      deathEvent.cancel()
-      return
-    }
-
-    if (isAlive(zombie)) {
-      zombie.hurt(zombieState.selfDamage)
-      zombie.moveTo(get(Tag.Human)[0].pos, zombieState.speed)
+  zombie.onClick(() => {
+    if (zombie.is(Tag.Selected)) {
+      zombie.untag(Tag.Selected)
+    } else {
+      zombie.tag(Tag.Selected)
     }
   })
 
-  const deathEvent = zombie.onDeath(() => {
-    updateEvent.cancel()
-    zombie.play(Animation.Death)
+  zombie.onHoverEnd(() => {
+    setCursor('default')
+  })
 
-    wait(1, () => {
-      zombie.destroy()
+  const updateEvent = zombie.onUpdate(() => {
+    if (!hasHumans() || !isAlive(zombie)) {
+      return updateEvent.cancel()
+    }
+    zombie.opacity = zombie.is(Tag.Selected) ? 0.5 : 1
+    zombie.hurt(zombieState.selfDamage)
+  })
+
+  zombie.onDeath(() => {
+    ;[updateEvent, moveEvent].forEach((event) => event.cancel())
+    zombie.play(Animation.Death, {
+      onEnd: () => {
+        zombie.destroy()
+      },
     })
+  })
+
+  zombie.onStateEnter(State.Idle, () => {
+    zombie.play(Animation.Idle, { loop: true })
+  })
+
+  zombie.onStateEnter(State.Move, () => {
+    zombie.play(Animation.Run, { loop: true })
+  })
+
+  const moveEvent = zombie.onStateUpdate(State.Move, () => {
+    if (Object.values(zombie.moveToPosition).includes(OUT_OF_BOUNDS)) {
+      return
+    }
+
+    if (
+      zombie.moveToPosition.x === zombie.pos.x &&
+      zombie.moveToPosition.y === zombie.pos.y
+    ) {
+      zombie.moveToPosition = {
+        x: OUT_OF_BOUNDS,
+        y: OUT_OF_BOUNDS,
+      }
+      return zombie.enterState(State.Idle)
+    }
+
+    const direction = zombie.pos
+      .sub(zombie.moveToPosition.x, zombie.moveToPosition.y)
+      .unit()
+    zombie.flipX = direction.x < 0
+
+    zombie.moveTo(
+      zombie.moveToPosition.x,
+      zombie.moveToPosition.y,
+      zombieState.speed,
+    )
   })
 
   return zombie
