@@ -28,6 +28,7 @@ export function addPlayer(tilePos: Vec2) {
 
     if (!get(Tag.Human).length) {
       updateEvent.cancel()
+      deathEvent.cancel()
 
       showModal({
         message: 'Humans Defeated!',
@@ -40,7 +41,8 @@ export function addPlayer(tilePos: Vec2) {
     }
   })
 
-  player.onDeath(() => {
+  const deathEvent = player.onDeath(() => {
+    updateEvent.cancel()
     player.play(Animation.Death)
 
     wait(1, () => {
