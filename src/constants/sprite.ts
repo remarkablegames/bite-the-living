@@ -1,6 +1,7 @@
 export enum Sprite {
   Floor = 'Floor',
   Table = 'Table',
+  Watercooler = 'Watercooler',
 
   Human1 = 'Human1',
   Zombie1 = 'Zombie1',

@@ -56,6 +56,13 @@ scene(Scene.Preload, async () => {
       width: 32,
       height: 32,
     },
+
+    [Sprite.Watercooler]: {
+      x: 256,
+      y: 424,
+      width: 32,
+      height: 32,
+    },
   })
 
   startLevel()

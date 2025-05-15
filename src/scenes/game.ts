@@ -1,5 +1,5 @@
-import { Scene, Size } from '../constants'
-import { addFloor, addHuman, addPlayer, addTable } from '../gameobjects'
+import { Scene, Size, Sprite } from '../constants'
+import { addFloor, addHuman, addPlayer, addStatic } from '../gameobjects'
 import { getLevel } from '../levels'
 
 scene(Scene.Game, () => {
@@ -24,7 +24,13 @@ scene(Scene.Game, () => {
 
       // table
       T: (pos) => {
-        addTable(pos)
+        addStatic(Sprite.Table, pos)
+        return addFloor()
+      },
+
+      // watercooler
+      W: (pos) => {
+        addStatic(Sprite.Watercooler, pos, new Rect(vec2(9, 1), 15, 30))
         return addFloor()
       },
 
