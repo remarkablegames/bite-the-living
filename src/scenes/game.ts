@@ -24,13 +24,21 @@ scene(Scene.Game, () => {
 
       // table
       T: (pos) => {
-        addStatic(Sprite.Table, pos)
+        addStatic({
+          sprite: Sprite.Table,
+          pos,
+          shape: new Rect(vec2(2, 2), 30, 30),
+        })
         return addFloor()
       },
 
       // watercooler
       W: (pos) => {
-        addStatic(Sprite.Watercooler, pos, new Rect(vec2(9, 1), 15, 30))
+        addStatic({
+          sprite: Sprite.Watercooler,
+          pos,
+          shape: new Rect(vec2(9, 1), 15, 30),
+        })
         return addFloor()
       },
 
