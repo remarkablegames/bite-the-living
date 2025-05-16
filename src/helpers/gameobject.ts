@@ -30,3 +30,17 @@ export function hasSelected(): boolean {
 export function hasZombies(): boolean {
   return getZombies().length > 0
 }
+
+export function getClosestZombie(human: Human): Zombie {
+  const zombies = getZombies()
+  const distances = zombies.reduce((dist: number[], zombie) => {
+    dist.push(human.pos.dist(zombie.pos))
+    return dist
+  }, [])
+  return zombies[distances.indexOf(Math.min(...distances))]
+}
+
+export function shouldHumanMove(human: Human): boolean {
+  const zombie = getClosestZombie(human)
+  return Boolean(zombie && human.pos.dist(zombie.pos) < 100)
+}

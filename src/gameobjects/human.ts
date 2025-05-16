@@ -1,7 +1,7 @@
 import type { Vec2 } from 'kaplay'
 
 import { Animation, Sprite, State, Tag } from '../constants'
-import { getZombies, trueOrFalse } from '../helpers'
+import { getClosestZombie, shouldHumanMove, trueOrFalse } from '../helpers'
 import { addHealth, addZombie } from '.'
 
 export function addHuman(position: Vec2) {
@@ -21,17 +21,12 @@ export function addHuman(position: Vec2) {
   addHealth(human)
   human.flipX = trueOrFalse()
 
-  function shouldMove(): boolean {
-    const zombie = getZombies()[0]
-    return Boolean(zombie && human.pos.dist(zombie.pos) < 100)
-  }
-
   human.onStateEnter(State.Idle, () => {
     human.play(Animation.Idle, { loop: true })
   })
 
   const idleEvent = human.onStateUpdate(State.Idle, () => {
-    if (shouldMove()) {
+    if (shouldHumanMove(human)) {
       human.enterState(State.Move)
     }
   })
@@ -40,12 +35,22 @@ export function addHuman(position: Vec2) {
     human.play(Animation.Run, { loop: true })
   })
 
+  const lastZombie = {
+    direction: vec2(),
+    time: 0,
+  }
+
   const moveEvent = human.onStateUpdate(State.Move, () => {
-    if (shouldMove()) {
-      const zombie = getZombies()[0]
-      const direction = zombie.pos.sub(human.pos).unit()
-      human.flipX = direction.x < 0
-      human.move(direction.scale(-speed))
+    if (shouldHumanMove(human)) {
+      // prevent human left/right glitch
+      if (time() - lastZombie.time > 1) {
+        const zombie = getClosestZombie(human)
+        const direction = zombie.pos.sub(human.pos).unit()
+        human.flipX = direction.x < 0
+        lastZombie.direction = direction
+        lastZombie.time = time()
+      }
+      human.move(lastZombie.direction.scale(-speed))
     } else {
       human.enterState(State.Idle)
     }
