@@ -4,7 +4,7 @@ const levels = [
   // 0
   {
     title: {
-      text: 'WASD or arrow keys to move',
+      text: 'Left-click zombie, right-click human',
       pos: pos(32, 8),
     },
     map: [

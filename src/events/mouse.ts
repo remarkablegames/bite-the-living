@@ -1,9 +1,16 @@
-import { State } from '../constants'
+import { State, Tag } from '../constants'
 import { getSelected, hasSelected, isAlive } from '../helpers'
+import { mouseState } from '../states'
 
 export function addMouse() {
-  onMousePress((mouseButton) => {
-    if (mouseButton !== 'right' || !hasSelected()) {
+  onMousePress('left', () => {
+    if (!mouseState.isHoveringZombie) {
+      getSelected().forEach((zombie) => zombie.untag(Tag.Selected))
+    }
+  })
+
+  onMousePress('right', () => {
+    if (!hasSelected()) {
       return
     }
 

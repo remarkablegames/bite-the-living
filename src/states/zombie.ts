@@ -1,4 +1,4 @@
-class Zombie {
+class ZombieState {
   health = 10
   maxHealth = 10
   mass = 5
@@ -8,8 +8,8 @@ class Zombie {
   heal = 2
 }
 
-export let zombieState = new Zombie()
+export let zombieState = new ZombieState()
 
 export function resetZombieState() {
-  zombieState = new Zombie()
+  zombieState = new ZombieState()
 }

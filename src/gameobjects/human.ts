@@ -78,8 +78,8 @@ export function addHuman(position: Vec2) {
     )
     human.play(Animation.Death, {
       onEnd: () => {
-        addZombie(human.pos)
         human.destroy()
+        addZombie(human.pos)
       },
     })
   })

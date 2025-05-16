@@ -2,7 +2,7 @@ import type { Vec2 } from 'kaplay'
 
 import { Animation, Sprite, State, Tag } from '../constants'
 import { hasHumans, isAlive, trueOrFalse } from '../helpers'
-import { zombieState } from '../states'
+import { mouseState, zombieState } from '../states'
 import { addHealth } from '.'
 
 const OUT_OF_BOUNDS = -999999999
@@ -13,10 +13,7 @@ export function addZombie(position: Vec2) {
     pos(position),
     anchor('center'),
     health(zombieState.health, zombieState.maxHealth),
-    area({
-      cursor: 'pointer',
-      shape: new Rect(vec2(0, 4), 13, 25),
-    }),
+    area({ shape: new Rect(vec2(0, 4), 13, 25) }),
     body({ mass: zombieState.mass }),
     opacity(1),
     state(State.Idle, Object.values(State)),
@@ -44,7 +41,13 @@ export function addZombie(position: Vec2) {
     }
   })
 
+  zombie.onHoverUpdate(() => {
+    mouseState.isHoveringZombie = true
+    setCursor('pointer')
+  })
+
   zombie.onHoverEnd(() => {
+    mouseState.isHoveringZombie = false
     setCursor('default')
   })
 
