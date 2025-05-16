@@ -97,8 +97,8 @@ export function showModal({
     onContinue()
   })
 
-  onKeyPress('space', () => {
-    if (get('modal').length > 0) {
+  button.onKeyPress((key) => {
+    if (['enter', 'space'].includes(key) && get('modal').length > 0) {
       destroyAll('modal')
       onContinue()
     }

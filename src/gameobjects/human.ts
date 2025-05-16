@@ -30,7 +30,7 @@ export function addHuman(position: Vec2) {
     human.play(Animation.Idle, { loop: true })
   })
 
-  human.onStateUpdate(State.Idle, () => {
+  const idleEvent = human.onStateUpdate(State.Idle, () => {
     if (shouldMove()) {
       human.enterState(State.Move)
     }
@@ -40,7 +40,7 @@ export function addHuman(position: Vec2) {
     human.play(Animation.Run, { loop: true })
   })
 
-  human.onStateUpdate(State.Move, () => {
+  const moveEvent = human.onStateUpdate(State.Move, () => {
     if (shouldMove()) {
       const zombie = getZombies()[0]
       const direction = zombie.pos.sub(human.pos).unit()
@@ -58,7 +58,8 @@ export function addHuman(position: Vec2) {
   })
 
   human.onDeath(() => {
-    hitEvent.cancel()
+    ;[idleEvent, moveEvent, hitEvent].forEach((event) => event.cancel())
+
     human.play(Animation.Death, {
       onEnd: () => {
         human.destroy()
