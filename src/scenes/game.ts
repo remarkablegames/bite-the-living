@@ -1,9 +1,8 @@
 import { Scene, Size, Sprite } from '../constants'
-import { addMouse } from '../events'
+import { addCollision, addMouse, addWinLose } from '../events'
 import { addFloor, addHuman, addStatic, addZombie } from '../gameobjects'
-import { getTileVec2, hasHumans, hasZombies } from '../helpers'
-import { getLevel, nextLevel, startLevel } from '../levels'
-import { showModal } from '../modals'
+import { getTileVec2 } from '../helpers'
+import { getLevel } from '../levels'
 
 scene(Scene.Game, () => {
   const { map, title } = getLevel()
@@ -66,22 +65,6 @@ scene(Scene.Game, () => {
   })
 
   addMouse()
-
-  onUpdate(() => {
-    if (!hasHumans()) {
-      showModal({
-        image: 'humansDefeated',
-        buttonSprite: 'continueButton',
-        onContinue: nextLevel,
-      })
-      return
-    }
-
-    if (!hasZombies()) {
-      startLevel()
-      return
-    }
-
-    // setCamPos(player.pos)
-  })
+  addCollision()
+  addWinLose()
 })
