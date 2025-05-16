@@ -35,10 +35,21 @@ export function addMouse() {
 
     selection.width = mouseX - startX
     selection.height = mouseY - startY
+
+    if (selection.width < 0) {
+      selection.pos.x = mouseX
+      selection.width = Math.abs(selection.width)
+    }
+
+    if (selection.height < 0) {
+      selection.pos.y = mouseY
+      selection.height = Math.abs(selection.height)
+    }
   })
 
   onMouseRelease('left', () => {
     selection.hidden = true
+
     selection.getCollisions().forEach((collision) => {
       collision.target.tag(Tag.Selected)
     })

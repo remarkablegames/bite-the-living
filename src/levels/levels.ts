@@ -20,18 +20,18 @@ const levels = [
   // 1
   {
     title: {
-      text: 'Eat the humans',
+      text: 'Left-click and drag',
       pos: pos(32, 8),
     },
     map: [
       '............',
       '.          .',
       '.          .',
-      '.          .',
       '.     H    .',
+      '.          .',
       '.    Z Z   .',
-      '.     H    .',
       '.          .',
+      '.     H    .',
       '.          .',
       '............',
     ],
