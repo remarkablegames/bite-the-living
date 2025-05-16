@@ -14,6 +14,12 @@ scene(Scene.Game, () => {
     tileWidth: Size.Tile,
     tileHeight: Size.Tile,
     tiles: {
+      // camera
+      C: ({ x, y }) => {
+        setCamPos(x * Size.Tile, y * Size.Tile)
+        return addFloor()
+      },
+
       // floor
       ' ': addFloor,
 
