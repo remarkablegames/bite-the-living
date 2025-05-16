@@ -1,7 +1,7 @@
 import type { Vec2 } from 'kaplay'
 
 import { Animation, Sprite, State, Tag } from '../constants'
-import { hasHumans, isAlive, trueOrFalse } from '../helpers'
+import { isAlive, isWin, trueOrFalse } from '../helpers'
 import { mouseState, zombieState } from '../states'
 import { addHealth } from '.'
 
@@ -52,7 +52,7 @@ export function addZombie(position: Vec2) {
   })
 
   const updateEvent = zombie.onUpdate(() => {
-    if (!hasHumans() || !isAlive(zombie)) {
+    if (isWin() || !isAlive(zombie)) {
       return updateEvent.cancel()
     }
     zombie.opacity = zombie.is(Tag.Selected) ? 0.5 : 1

@@ -1,5 +1,5 @@
 import { State, Tag } from '../constants'
-import { getSelected, hasSelected, isAlive } from '../helpers'
+import { getSelected, hasSelected, isAlive, isWin } from '../helpers'
 import { mouseState } from '../states'
 
 const CAMERA_SCROLL = 1.5
@@ -8,6 +8,10 @@ const RATIO_HIGH = 0.95
 
 export function addMouse() {
   onUpdate(() => {
+    if (isWin()) {
+      return
+    }
+
     const { x, y } = mousePos()
     const camPos = getCamPos()
     const xRatio = x / width()
@@ -31,6 +35,10 @@ export function addMouse() {
   })
 
   onMousePress('left', () => {
+    if (isWin()) {
+      return
+    }
+
     mouseState.pressStartPosition = toWorld(mousePos())
 
     if (!mouseState.isHoveringZombie) {
@@ -50,6 +58,10 @@ export function addMouse() {
   selection.hidden = true
 
   onMouseDown('left', () => {
+    if (isWin()) {
+      return
+    }
+
     selection.hidden = false
 
     const {
@@ -77,13 +89,17 @@ export function addMouse() {
   onMouseRelease('left', () => {
     selection.hidden = true
 
+    if (isWin()) {
+      return
+    }
+
     selection.getCollisions().forEach((collision) => {
       collision.target.tag(Tag.Selected)
     })
   })
 
   onMousePress('right', () => {
-    if (!hasSelected()) {
+    if (!hasSelected() || isWin()) {
       return
     }
 

@@ -1,11 +1,10 @@
-import { hasHumans, hasZombies } from '../helpers'
+import { isLose, isWin } from '../helpers'
 import { nextLevel, startLevel } from '../levels'
 import { showModal } from '../modals'
 
 export function addWinLose() {
   onUpdate(() => {
-    // win
-    if (!hasHumans()) {
+    if (isWin()) {
       return showModal({
         image: 'humansDefeated',
         buttonSprite: 'continueButton',
@@ -13,8 +12,7 @@ export function addWinLose() {
       })
     }
 
-    // lose
-    if (!hasZombies()) {
+    if (isLose()) {
       return startLevel()
     }
   })
