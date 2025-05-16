@@ -64,7 +64,8 @@ scene(Scene.Game, () => {
   onUpdate(() => {
     if (!hasHumans()) {
       showModal({
-        message: 'Humans Defeated!',
+        image: 'humansDefeated',
+        buttonSprite: 'continueButton',
         onContinue: nextLevel,
       })
       return

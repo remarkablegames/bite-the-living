@@ -42,6 +42,9 @@ scene(Scene.Preload, async () => {
     })
   })
 
+  await loadSprite('humansDefeated', 'assets/humans_defeated.png')
+  await loadSprite('continueButton', 'assets/continue.png')
+
   await loadSpriteAtlas('tilesets/interior.png', {
     [Sprite.Floor]: {
       x: 224,
