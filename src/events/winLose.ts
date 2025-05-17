@@ -1,10 +1,14 @@
+import { Sound } from '../constants'
 import { isLose, isWin } from '../helpers'
 import { nextLevel, startLevel } from '../levels'
 import { showModal } from '../modals'
 
 export function addWinLose() {
-  onUpdate(() => {
+  const updateEvent = onUpdate(() => {
     if (isWin()) {
+      updateEvent.cancel()
+      play(Sound.Score)
+
       return showModal({
         image: 'humansDefeated',
         buttonSprite: 'continueButton',

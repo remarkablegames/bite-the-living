@@ -96,7 +96,7 @@ export function addMouse() {
     const collisions = selection.getCollisions()
 
     if (collisions.length) {
-      play(Sound.Snarl)
+      play(Sound.Grunt)
 
       collisions.forEach((collision) => {
         collision.target.tag(Tag.Selected)
@@ -114,7 +114,7 @@ export function addMouse() {
     const zombies = getSelected().filter((zombie) => isAlive(zombie))
 
     if (zombies.length) {
-      play(Sound.Select)
+      play(Sound.Rasp)
 
       zombies.forEach((zombie) => {
         zombie.moveToPosition = { x, y }

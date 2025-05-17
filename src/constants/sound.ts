@@ -1,6 +1,8 @@
 export enum Sound {
+  Grunt = 'Grunt',
   Hit = 'Hit',
   Music = 'Music',
-  Select = 'Select',
+  Rasp = 'Rasp',
+  Score = 'Score',
   Snarl = 'Snarl',
 }
