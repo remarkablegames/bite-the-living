@@ -2,27 +2,18 @@ import type { AreaComp, GameObj, ScaleComp } from 'kaplay'
 
 import { Cursor, Tag } from '../constants'
 
-export interface ModalOptions {
-  message?: string
-  image?: string
-  buttonText?: string
-  buttonSprite?: string
-  onContinue: () => void
-  modalWidth?: number
-  modalHeight?: number
-}
-
 export function addModal({
-  message,
-  image,
+  buttonSprite = '',
   buttonText = 'Continue',
-  buttonSprite,
-  onContinue,
-  modalWidth = 300,
+  image = '',
+  message = '',
   modalHeight = 160,
-}: ModalOptions) {
+  modalWidth = 300,
+  onContinue = () => {},
+}) {
   const centerX = width() / 2
   const centerY = height() / 2
+  const margin = 40
 
   add([
     rect(modalWidth, modalHeight, { radius: 2 }),
@@ -32,7 +23,6 @@ export function addModal({
     color(5, 5, 5),
     outline(4, rgb(180, 30, 30)),
     opacity(0.95),
-    z(100),
     Tag.Modal,
   ])
 
@@ -43,7 +33,6 @@ export function addModal({
       pos(centerX, centerY - 30),
       anchor('center'),
       fixed(),
-      z(101),
       Tag.Modal,
     ])
   } else if (message) {
@@ -53,11 +42,10 @@ export function addModal({
         // @ts-expect-error: outline is runtime-supported
         outline: { color: rgb(80, 0, 0), width: 2 },
       }),
-      pos(centerX, centerY - 40),
+      pos(centerX, centerY - margin),
       anchor('center'),
       fixed(),
       color(230, 230, 230),
-      z(101),
       Tag.Modal,
     ])
   }
@@ -69,10 +57,9 @@ export function addModal({
       sprite(buttonSprite),
       area({ cursor: Cursor.Pointer }),
       scale(0.07),
-      pos(centerX, centerY + 40),
+      pos(centerX, centerY + margin),
       anchor('center'),
       fixed(),
-      z(101),
       Tag.Modal,
     ])
   } else {
@@ -83,12 +70,11 @@ export function addModal({
         outline: { color: rgb(60, 0, 0), width: 2 },
       }),
       area({ scale: vec2(1.3), cursor: Cursor.Pointer }),
-      pos(centerX, centerY + 40),
+      pos(centerX, centerY + margin),
       anchor('center'),
       fixed(),
       color(200, 0, 0),
       scale(1),
-      z(101),
       outline(2, rgb(255, 60, 60)),
       Tag.Modal,
     ])
