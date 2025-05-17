@@ -47,6 +47,7 @@ scene(Scene.Preload, async () => {
 
   loadSound(Sound.Hit, 'sounds/hit.mp3')
   loadSound(Sound.Select, 'sounds/score.mp3')
+  loadSound(Sound.Snarl, 'sounds/snarl.ogg')
 
   await loadSpriteAtlas('tilesets/interior.png', {
     [Sprite.Floor]: {

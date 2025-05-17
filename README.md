@@ -21,6 +21,10 @@ Play the game on:
 
 - [Zombie Apocalypse AssetPack](https://pixelrogueknight.itch.io/zombie-apocalypse-assetpack)
 
+### Sound
+
+- [Zombie sound](https://pixabay.com/sound-effects/zombie-sound-224167/)
+
 ### Music
 
 - [Free Horror Music Pack](https://void1gaming.itch.io/free-horror-music-pack)
