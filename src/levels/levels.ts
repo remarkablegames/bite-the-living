@@ -20,27 +20,30 @@ const levels = [
   // 1
   {
     title: {
-      text: 'Left-click and drag',
-      pos: pos(32, 8),
+      text: 'Move up',
+      pos: pos(32, 392),
     },
     map: [
-      '............',
-      '.          .',
-      '.          .',
-      '.     H    .',
-      '.          .',
-      '.    ZCZ   .',
-      '.          .',
-      '.     H    .',
-      '.          .',
-      '............',
+      '........',
+      '.  H   .',
+      '.      .',
+      '.      .',
+      '.      .',
+      '.      .',
+      '.      .',
+      '.      .',
+      '.      .',
+      '.      .',
+      '.  C   .',
+      '.  Z   .',
+      '........',
     ],
   },
 
   // 2
   {
     title: {
-      text: 'Time is running out',
+      text: 'Avoid the obstacles',
       pos: pos(32, 8),
     },
     map: [
@@ -63,21 +66,45 @@ const levels = [
   // 3
   {
     title: {
-      text: 'You are being watched!',
+      text: 'Click and drag to select zombies',
       pos: pos(32, 8),
     },
     map: [
       '............',
       '.          .',
-      '. H     T  .',
+      '.          .',
+      '.     H    .',
+      '.          .',
+      '.    ZCZ   .',
+      '.          .',
+      '.     H    .',
+      '.          .',
+      '............',
+    ],
+  },
+
+  // 4
+  {
+    title: {
+      text: 'Multitask',
+      pos: pos(32, 8),
+    },
+    map: [
+      '............',
+      '.          .',
+      '. H     W  .',
+      '.          .',
       '.          .',
       '.....  .....',
       '.          .',
-      '.     Z    .',
       '.     C    .',
+      '.  Z     Z .',
+      '.          .',
+      '.          .',
       '.....  .....',
       '.          .',
-      '.  W  H    .',
+      '.          .',
+      '. W      H .',
       '.          .',
       '............',
     ],
