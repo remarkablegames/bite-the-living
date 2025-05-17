@@ -1,10 +1,12 @@
 import { Scene, Size, Sprite } from '../constants'
 import { addCollision, addMouse, addWinLose } from '../events'
 import { addFloor, addHuman, addStatic, addZombie } from '../gameobjects'
-import { getTileVec2 } from '../helpers'
+import { getTileVec2, music } from '../helpers'
 import { getLevel } from '../levels'
 
 scene(Scene.Game, () => {
+  music.stop()
+  music.play()
   const { map, title } = getLevel()
 
   add([text(title.text, { size: 14, font: 'Monospace' }), title.pos])

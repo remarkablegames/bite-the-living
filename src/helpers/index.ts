@@ -1,4 +1,5 @@
 export * from './gameobject'
+export * from './music'
 export * from './position'
 export * from './random'
 export * from './winLose'
