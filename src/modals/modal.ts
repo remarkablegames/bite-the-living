@@ -1,92 +1,102 @@
-import type { AreaComp, GameObj, ScaleComp } from 'kaplay'
+import type { GameObj, OpacityComp } from 'kaplay'
 
-import { Cursor } from '../constants'
+import { Cursor, Sound, Sprite, Tag } from '../constants'
+import { playSound } from '../helpers'
+import { zombieState } from '../states'
 
-export function addModal({
-  buttonSprite = '',
-  buttonText = 'Continue',
-  imageSprite = '',
-  message = '',
-  modalHeight = 160,
-  modalWidth = 300,
-  onClick = () => {},
-}) {
-  const { x, y } = center()
-  const margin = 40
+const WIDTH = 300
+const HEIGHT = 250
+const MARGIN = 20
+const PADDING = 10
 
+export function addModal({ onClick = () => {} }) {
   const modal = add([
-    rect(modalWidth, modalHeight, { radius: 2 }),
-    pos(x, y),
+    rect(WIDTH, HEIGHT, { radius: 2 }),
+    pos(center()),
     anchor('center'),
-    fixed(),
     color(5, 5, 5),
     outline(4, rgb(180, 30, 30)),
-    opacity(0.95),
+    fixed(),
   ])
 
-  if (imageSprite) {
-    add([
-      sprite(imageSprite),
-      scale(0.2),
-      pos(x, y - 30),
-      anchor('center'),
-      fixed(),
-    ])
-  } else if (message) {
-    add([
-      text(message, {
-        size: 22,
-        // @ts-expect-error: outline is runtime-supported
-        outline: { color: rgb(80, 0, 0), width: 2 },
-      }),
-      pos(x, y - margin),
-      anchor('center'),
-      fixed(),
-      color(230, 230, 230),
-    ])
-  }
+  modal.add([
+    sprite(Sprite.Win, { width: 175 }),
+    pos(0, -MARGIN * 2.5),
+    anchor('center'),
+  ])
 
-  let button: GameObj<AreaComp | ScaleComp>
+  const rewards = [
+    { label: '+5 speed', callback: () => (zombieState.speed += 5) },
+    {
+      label: '+5 health',
+      callback: () => {
+        zombieState.health += 5
+        zombieState.maxHealth += 5
+      },
+    },
+  ]
 
-  if (buttonSprite) {
-    button = add([
-      sprite(buttonSprite),
-      area({ cursor: Cursor.Pointer }),
-      scale(0.07),
-      pos(x, y + margin),
+  rewards.forEach(({ label, callback }, index) => {
+    const reward = modal.add([
+      text(`☐ ${label}`, { font: 'Monospace', size: 14 }),
+      pos(0, MARGIN * index + PADDING),
+      color(200, 200, 200),
       anchor('center'),
-      fixed(),
+      area(),
+      opacity(0.5),
+      Tag.Reward,
+      { callback },
     ])
-  } else {
-    button = add([
-      text(`[ ${buttonText} ]`, {
-        size: 20,
-        // @ts-expect-error: outline is runtime-supported
-        outline: { color: rgb(60, 0, 0), width: 2 },
-      }),
-      area({ scale: vec2(1.3), cursor: Cursor.Pointer }),
-      pos(x, y + margin),
-      anchor('center'),
-      fixed(),
-      color(200, 0, 0),
-      scale(1),
-      outline(2, rgb(255, 60, 60)),
-    ])
-  }
+
+    reward.onClick(() => {
+      playSound(Sound.Score)
+      modal.get(Tag.Reward).forEach((reward) => {
+        reward.text = reward.text.replace('☑', '☐')
+        reward.untag(Tag.Selected)
+      })
+
+      reward.text = reward.text.replace('☐', '☑')
+      reward.tag(Tag.Selected)
+    })
+  })
+
+  onHover(
+    Tag.Reward,
+    // @ts-expect-error Types of parameters are incompatible.
+    (reward: GameObj<OpacityComp>) => {
+      reward.opacity = 1
+      setCursor(Cursor.Pointer)
+    },
+  )
+
+  onHoverEnd(Tag.Reward, (reward) => {
+    reward.opacity = 0.5
+    setCursor(Cursor.Default)
+  })
+
+  const button = modal.add([
+    sprite(Sprite.Continue, { width: 100 }),
+    area(),
+    scale(),
+    pos(0, MARGIN * 3 + PADDING * 1.5),
+    anchor('center'),
+  ])
 
   button.onClick(() => {
-    modal.destroy()
+    const reward = modal.get(Tag.Selected)[0]
+    if (typeof reward?.callback === 'function') {
+      reward.callback()
+    }
     onClick()
   })
 
-  const buttonScale = button.scale
-
   button.onHover(() => {
-    button.scaleBy(1.2)
+    button.scaleTo(1.2)
+    setCursor(Cursor.Pointer)
   })
 
   button.onHoverEnd(() => {
-    button.scaleTo(buttonScale)
+    button.scaleTo(1)
     setCursor(Cursor.Default)
   })
 

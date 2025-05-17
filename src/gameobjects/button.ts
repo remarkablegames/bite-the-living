@@ -20,7 +20,7 @@ export function addButton(
   ])
 
   button.add([
-    text(buttonText, { size, font: 'Monospace' }),
+    text(buttonText, { font: 'Monospace', size }),
     anchor('center'),
     color(textColor),
   ])
