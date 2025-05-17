@@ -6,5 +6,4 @@ export enum Sound {
   Music = 'Music',
   Rasp = 'Rasp',
   Score = 'Score',
-  Snarl = 'Snarl',
 }
