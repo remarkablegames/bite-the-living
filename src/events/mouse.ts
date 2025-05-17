@@ -1,4 +1,5 @@
 import { Position, Sound, State, Tag } from '../constants'
+import { addTarget } from '../gameobjects'
 import { getSelected, hasSelected, isAlive, isWin, playSound } from '../helpers'
 import { mouseState } from '../states'
 
@@ -115,15 +116,16 @@ export function addMouse() {
       return
     }
 
-    const { x, y } = toWorld(mousePos())
+    const position = toWorld(mousePos())
 
     const zombies = getSelected().filter((zombie) => isAlive(zombie))
 
     if (zombies.length) {
+      addTarget(position)
       play(Sound.Rasp)
 
       zombies.forEach((zombie) => {
-        zombie.moveToPosition = { x, y }
+        zombie.moveToPosition = { x: position.x, y: position.y }
         zombie.enterState(State.Move)
       })
     }
