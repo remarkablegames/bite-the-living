@@ -7,6 +7,7 @@ import { getLevel } from '../levels'
 scene(Scene.Game, () => {
   music.stop()
   music.play()
+
   const { map, title } = getLevel()
 
   add([text(title.text, { size: 14, font: 'Monospace' }), title.pos])

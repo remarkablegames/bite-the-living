@@ -1,4 +1,4 @@
-import { Sound, State, Tag } from '../constants'
+import { Position, Sound, State, Tag } from '../constants'
 import { getSelected, hasSelected, isAlive, isWin } from '../helpers'
 import { mouseState } from '../states'
 
@@ -62,12 +62,14 @@ export function addMouse() {
       return
     }
 
-    selection.hidden = false
-
     const {
       pressStartPosition: { x: startX, y: startY },
     } = mouseState
     const { x: mouseX, y: mouseY } = toWorld(mousePos())
+
+    if (startX === Position.OutOfBounds && startY === Position.OutOfBounds) {
+      return
+    }
 
     selection.pos.x = startX
     selection.pos.y = startY
@@ -84,6 +86,8 @@ export function addMouse() {
       selection.pos.y = mouseY
       selection.height = Math.abs(selection.height)
     }
+
+    selection.hidden = false
   })
 
   onMouseRelease('left', () => {

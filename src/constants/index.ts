@@ -1,5 +1,6 @@
 export * from './animation'
 export * from './localStorage'
+export * from './position'
 export * from './scene'
 export * from './size'
 export * from './sound'

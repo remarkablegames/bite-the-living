@@ -1,11 +1,9 @@
 import type { Vec2 } from 'kaplay'
 
-import { Animation, Sound, Sprite, State, Tag } from '../constants'
+import { Animation, Position, Sound, Sprite, State, Tag } from '../constants'
 import { isAlive, isWin, playSound, trueOrFalse } from '../helpers'
 import { mouseState, zombieState } from '../states'
 import { addHealth } from '.'
-
-const OUT_OF_BOUNDS = -999999999
 
 export function addZombie(position: Vec2) {
   const zombie = add([
@@ -21,8 +19,8 @@ export function addZombie(position: Vec2) {
     {
       damage: zombieState.attackDamage,
       moveToPosition: {
-        x: OUT_OF_BOUNDS,
-        y: OUT_OF_BOUNDS,
+        x: Position.OutOfBounds,
+        y: Position.OutOfBounds,
       },
     },
   ])
@@ -71,7 +69,7 @@ export function addZombie(position: Vec2) {
   })
 
   const moveEvent = zombie.onStateUpdate(State.Move, () => {
-    if (Object.values(zombie.moveToPosition).includes(OUT_OF_BOUNDS)) {
+    if (Object.values(zombie.moveToPosition).includes(Position.OutOfBounds)) {
       return
     }
 
@@ -80,8 +78,8 @@ export function addZombie(position: Vec2) {
       zombie.moveToPosition.y === zombie.pos.y
     ) {
       zombie.moveToPosition = {
-        x: OUT_OF_BOUNDS,
-        y: OUT_OF_BOUNDS,
+        x: Position.OutOfBounds,
+        y: Position.OutOfBounds,
       }
       return zombie.enterState(State.Idle)
     }
