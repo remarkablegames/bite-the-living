@@ -1,6 +1,6 @@
 import type { Vec2 } from 'kaplay'
 
-import { Animation, Sprite, State, Tag } from '../constants'
+import { Animation, Sound, Sprite, State, Tag } from '../constants'
 import { getClosestZombie, shouldHumanMove, trueOrFalse } from '../helpers'
 import { addHealth, addZombie } from '.'
 
@@ -68,6 +68,7 @@ export function addHuman(position: Vec2) {
     human.play(Animation.Death, {
       onEnd: () => {
         human.destroy()
+        play(Sound.Exhale, { volume: 0.7 })
         addZombie(human.pos)
       },
     })

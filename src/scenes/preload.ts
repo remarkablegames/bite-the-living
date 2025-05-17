@@ -45,10 +45,10 @@ scene(Scene.Preload, async () => {
   loadSprite('humansDefeated', 'assets/humans_defeated.png')
   loadSprite('continueButton', 'assets/continue.png')
 
+  loadSound(Sound.Exhale, 'sounds/exhale.ogg')
   loadSound(Sound.Grunt, 'sounds/grunt.ogg')
   loadSound(Sound.Hit, 'sounds/hit.mp3')
   loadSound(Sound.Rasp, 'sounds/rasp.ogg')
-  loadSound(Sound.Score, 'sounds/score.mp3')
   loadSound(Sound.Snarl, 'sounds/snarl.ogg')
 
   await loadSpriteAtlas('tilesets/interior.png', {
