@@ -1,4 +1,4 @@
-import { Animation, Scene, Sprite } from '../constants'
+import { Animation, Scene, Sound, Sprite } from '../constants'
 import { startLevel } from '../levels'
 
 scene(Scene.Preload, async () => {
@@ -42,8 +42,10 @@ scene(Scene.Preload, async () => {
     })
   })
 
-  await loadSprite('humansDefeated', 'assets/humans_defeated.png')
-  await loadSprite('continueButton', 'assets/continue.png')
+  loadSound(Sound.Hit, 'sounds/hit.mp3')
+
+  loadSprite('humansDefeated', 'assets/humans_defeated.png')
+  loadSprite('continueButton', 'assets/continue.png')
 
   await loadSpriteAtlas('tilesets/interior.png', {
     [Sprite.Floor]: {
