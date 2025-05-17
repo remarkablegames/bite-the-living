@@ -74,7 +74,7 @@ export function addHuman(position: Vec2) {
     human.play(Animation.Death, {
       onEnd: () => {
         human.destroy()
-        play(Sound.Exhale, { volume: 0.7 })
+        playSound(Sound.Exhale, { volume: 0.7 })
         addZombie(human.pos)
       },
     })

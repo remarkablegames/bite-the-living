@@ -1,5 +1,5 @@
 import { Position, Sound, State, Tag } from '../constants'
-import { getSelected, hasSelected, isAlive, isWin } from '../helpers'
+import { getSelected, hasSelected, isAlive, isWin, playSound } from '../helpers'
 import { mouseState } from '../states'
 
 const CAMERA_SCROLL = 1.5
@@ -100,7 +100,7 @@ export function addMouse() {
     const collisions = selection.getCollisions()
 
     if (collisions.length) {
-      play(Sound.Grunt)
+      playSound(Sound.Grunt)
 
       collisions.forEach((collision) => {
         collision.target.tag(Tag.Selected)
