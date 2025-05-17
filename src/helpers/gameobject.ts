@@ -1,10 +1,14 @@
-import type { GameObj, HealthComp } from 'kaplay'
+import type { AreaComp, GameObj, HealthComp } from 'kaplay'
 
 import { Tag } from '../constants'
 import type { Human, Zombie } from '../types'
 
 export function isAlive(gameObject: GameObj<HealthComp>): boolean {
   return Boolean(typeof gameObject?.hp === 'function' && gameObject.hp() > 0)
+}
+
+export function disableCollision(gameObject: GameObj<AreaComp>) {
+  gameObject.area.scale = vec2(0)
 }
 
 export function getHumans() {

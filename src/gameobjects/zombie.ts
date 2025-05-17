@@ -9,7 +9,13 @@ import {
   State,
   Tag,
 } from '../constants'
-import { isAlive, isWin, playSound, trueOrFalse } from '../helpers'
+import {
+  disableCollision,
+  isAlive,
+  isWin,
+  playSound,
+  trueOrFalse,
+} from '../helpers'
 import { mouseState, zombieState } from '../states'
 import { addHealth } from '.'
 
@@ -59,10 +65,8 @@ export function addZombie(position: Vec2) {
 
   zombie.onDeath(() => {
     ;[hoverEvent, updateEvent, moveEvent].forEach((event) => event.cancel())
+    disableCollision(zombie)
     playSound(Sound.Explode)
-
-    // allow other game objects to pass through
-    zombie.area.scale = vec2(0)
 
     zombie.play(Animation.Death, {
       onEnd: () => {

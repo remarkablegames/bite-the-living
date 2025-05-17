@@ -2,6 +2,7 @@ import type { Vec2 } from 'kaplay'
 
 import { Animation, Sound, Sprite, State, Tag } from '../constants'
 import {
+  disableCollision,
   getClosestZombie,
   playSound,
   shouldHumanMove,
@@ -69,6 +70,7 @@ export function addHuman(position: Vec2) {
 
   human.onDeath(() => {
     ;[idleEvent, moveEvent, hitEvent].forEach((event) => event.cancel())
+    disableCollision(human)
     playSound(Sound.Explode)
 
     human.play(Animation.Death, {
