@@ -1,7 +1,7 @@
 import { Cursor } from '../constants'
 import { isLose, isWin } from '../helpers'
 import { nextLevel, startLevel } from '../levels'
-import { showModal } from '../modals'
+import { addModal } from '../modals'
 import { resetMouseState } from '../states'
 
 export function addWinLose() {
@@ -11,7 +11,7 @@ export function addWinLose() {
       setCursor(Cursor.Default)
       resetMouseState()
 
-      return showModal({
+      return addModal({
         image: 'humansDefeated',
         buttonSprite: 'continueButton',
         onContinue: nextLevel,

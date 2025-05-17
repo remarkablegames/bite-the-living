@@ -12,7 +12,7 @@ export interface ModalOptions {
   modalHeight?: number
 }
 
-export function showModal({
+export function addModal({
   message,
   image,
   buttonText = 'Continue',
