@@ -1,4 +1,4 @@
-import { State, Tag } from '../constants'
+import { Sound, State, Tag } from '../constants'
 import { getSelected, hasSelected, isAlive, isWin } from '../helpers'
 import { mouseState } from '../states'
 
@@ -93,9 +93,15 @@ export function addMouse() {
       return
     }
 
-    selection.getCollisions().forEach((collision) => {
-      collision.target.tag(Tag.Selected)
-    })
+    const collisions = selection.getCollisions()
+
+    if (collisions.length) {
+      play(Sound.Select)
+
+      collisions.forEach((collision) => {
+        collision.target.tag(Tag.Selected)
+      })
+    }
   })
 
   onMousePress('right', () => {

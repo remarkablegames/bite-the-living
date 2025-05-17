@@ -33,14 +33,6 @@ export function addZombie(position: Vec2) {
   zombie.flipX = trueOrFalse()
   zombie.play(Animation.Idle, { loop: true })
 
-  const clickEvent = zombie.onClick(() => {
-    if (zombie.is(Tag.Selected)) {
-      zombie.untag(Tag.Selected)
-    } else {
-      zombie.tag(Tag.Selected)
-    }
-  })
-
   const hoverEvent = zombie.onHoverUpdate(() => {
     mouseState.isHoveringZombie = true
     setCursor('pointer')
@@ -60,9 +52,7 @@ export function addZombie(position: Vec2) {
   })
 
   zombie.onDeath(() => {
-    ;[clickEvent, hoverEvent, updateEvent, moveEvent].forEach((event) =>
-      event.cancel(),
-    )
+    ;[hoverEvent, updateEvent, moveEvent].forEach((event) => event.cancel())
 
     zombie.play(Animation.Death, {
       onEnd: () => {

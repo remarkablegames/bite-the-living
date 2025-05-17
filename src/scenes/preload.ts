@@ -43,6 +43,7 @@ scene(Scene.Preload, async () => {
   })
 
   loadSound(Sound.Hit, 'sounds/hit.mp3')
+  loadSound(Sound.Select, 'sounds/score.mp3')
 
   loadSprite('humansDefeated', 'assets/humans_defeated.png')
   loadSprite('continueButton', 'assets/continue.png')
