@@ -24,6 +24,7 @@ Play the game on:
 ### Sound
 
 - [Zombie sound](https://pixabay.com/sound-effects/zombie-sound-224167/)
+- [platzender Kopf](https://pixabay.com/sound-effects/platzender-kopf-107522/)
 
 ### Music
 

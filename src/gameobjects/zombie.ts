@@ -1,7 +1,7 @@
 import type { Vec2 } from 'kaplay'
 
-import { Animation, Sprite, State, Tag } from '../constants'
-import { isAlive, isWin, trueOrFalse } from '../helpers'
+import { Animation, Sound, Sprite, State, Tag } from '../constants'
+import { isAlive, isWin, playSound, trueOrFalse } from '../helpers'
 import { mouseState, zombieState } from '../states'
 import { addHealth } from '.'
 
@@ -53,6 +53,7 @@ export function addZombie(position: Vec2) {
 
   zombie.onDeath(() => {
     ;[hoverEvent, updateEvent, moveEvent].forEach((event) => event.cancel())
+    playSound(Sound.Explode)
 
     zombie.play(Animation.Death, {
       onEnd: () => {
@@ -88,6 +89,7 @@ export function addZombie(position: Vec2) {
     const direction = zombie.pos
       .sub(zombie.moveToPosition.x, zombie.moveToPosition.y)
       .unit()
+
     zombie.flipX = direction.x < 0
 
     zombie.moveTo(

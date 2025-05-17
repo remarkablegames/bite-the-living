@@ -46,6 +46,7 @@ scene(Scene.Preload, async () => {
   loadSprite('continueButton', 'assets/continue.png')
 
   loadSound(Sound.Exhale, 'sounds/exhale.ogg')
+  loadSound(Sound.Explode, 'sounds/explode.ogg')
   loadSound(Sound.Grunt, 'sounds/grunt.ogg')
   loadSound(Sound.Hit, 'sounds/hit.mp3')
   loadSound(Sound.Rasp, 'sounds/rasp.ogg')
