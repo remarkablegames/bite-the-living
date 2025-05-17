@@ -17,7 +17,16 @@ Play the game on:
 
 ## Credits
 
+### Art
+
 - [Zombie Apocalypse AssetPack](https://pixelrogueknight.itch.io/zombie-apocalypse-assetpack)
+
+### Music
+
+- [Free Horror Music Pack](https://void1gaming.itch.io/free-horror-music-pack)
+
+### Development
+
 - [Rob Cohen](https://github.com/rmacohen)
 - [remarkablemark](https://github.com/remarkablemark)
 
