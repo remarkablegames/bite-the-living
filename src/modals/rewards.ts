@@ -1,3 +1,5 @@
+import { Tag } from '../constants'
+
 /*
 -Revitalize (Player Health Boost) //ANCHOR
 -Speedster (Player Speed Boost) //RANDOM
@@ -36,7 +38,7 @@ export function showRewards({
     outline(5, rgb(0, 255, 180)),
     opacity(0.95),
     z(100),
-    'modal',
+    Tag.Modal,
   ])
 
   add([
@@ -50,7 +52,7 @@ export function showRewards({
     fixed(),
     color(200, 255, 255),
     z(101),
-    'modal',
+    Tag.Modal,
   ])
 
   const button = add([
@@ -66,7 +68,7 @@ export function showRewards({
     color(255, 0, 255),
     scale(1),
     z(101),
-    'modal',
+    Tag.Modal,
   ])
 
   button.onHover(() => {
@@ -80,13 +82,13 @@ export function showRewards({
   })
 
   button.onClick(() => {
-    destroyAll('modal')
+    destroyAll(Tag.Modal)
     onContinue()
   })
 
   onKeyPress('space', () => {
-    if (get('modal').length > 0) {
-      destroyAll('modal')
+    if (get(Tag.Modal).length > 0) {
+      destroyAll(Tag.Modal)
       onContinue()
     }
   })

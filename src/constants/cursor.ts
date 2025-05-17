@@ -1,4 +1,5 @@
 export enum Cursor {
-  Default = 'crosshair',
-  Hover = 'pointer',
+  Default = 'default',
+  Crosshair = 'crosshair',
+  Pointer = 'pointer',
 }

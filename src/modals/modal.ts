@@ -1,4 +1,6 @@
-import { GameObj } from 'kaplay'
+import type { AreaComp, GameObj, ScaleComp } from 'kaplay'
+
+import { Cursor, Tag } from '../constants'
 
 export interface ModalOptions {
   message?: string
@@ -31,7 +33,7 @@ export function showModal({
     outline(4, rgb(180, 30, 30)),
     opacity(0.95),
     z(100),
-    'modal',
+    Tag.Modal,
   ])
 
   if (image) {
@@ -42,7 +44,7 @@ export function showModal({
       anchor('center'),
       fixed(),
       z(101),
-      'modal',
+      Tag.Modal,
     ])
   } else if (message) {
     add([
@@ -56,22 +58,22 @@ export function showModal({
       fixed(),
       color(230, 230, 230),
       z(101),
-      'modal',
+      Tag.Modal,
     ])
   }
 
-  let button: GameObj
+  let button: GameObj<AreaComp | ScaleComp>
 
   if (buttonSprite) {
     button = add([
       sprite(buttonSprite),
-      area(),
+      area({ cursor: Cursor.Pointer }),
       scale(0.07),
       pos(centerX, centerY + 40),
       anchor('center'),
       fixed(),
       z(101),
-      'modal',
+      Tag.Modal,
     ])
   } else {
     button = add([
@@ -80,7 +82,7 @@ export function showModal({
         // @ts-expect-error: outline is runtime-supported
         outline: { color: rgb(60, 0, 0), width: 2 },
       }),
-      area({ scale: vec2(1.3) }),
+      area({ scale: vec2(1.3), cursor: Cursor.Pointer }),
       pos(centerX, centerY + 40),
       anchor('center'),
       fixed(),
@@ -88,19 +90,30 @@ export function showModal({
       scale(1),
       z(101),
       outline(2, rgb(255, 60, 60)),
-      'modal',
+      Tag.Modal,
     ])
   }
 
   button.onClick(() => {
-    destroyAll('modal')
+    destroyAll(Tag.Modal)
     onContinue()
   })
 
   button.onKeyPress((key) => {
-    if (['enter', 'space'].includes(key) && get('modal').length > 0) {
-      destroyAll('modal')
+    if (['enter', 'space'].includes(key) && get(Tag.Modal).length > 0) {
+      destroyAll(Tag.Modal)
       onContinue()
     }
+  })
+
+  const buttonScale = button.scale
+
+  button.onHover(() => {
+    button.scaleBy(1.2)
+  })
+
+  button.onHoverEnd(() => {
+    button.scaleTo(buttonScale)
+    setCursor(Cursor.Default)
   })
 }

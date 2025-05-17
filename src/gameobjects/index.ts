@@ -1,3 +1,4 @@
+export * from './button'
 export * from './floor'
 export * from './health'
 export * from './human'

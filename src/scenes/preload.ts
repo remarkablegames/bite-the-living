@@ -1,5 +1,4 @@
 import { Animation, Scene, Sound, Sprite } from '../constants'
-import { startLevel } from '../levels'
 
 scene(Scene.Preload, async () => {
   const sprites1 = [
@@ -50,6 +49,7 @@ scene(Scene.Preload, async () => {
   loadSound(Sound.Grunt, 'sounds/grunt.ogg')
   loadSound(Sound.Hit, 'sounds/hit.mp3')
   loadSound(Sound.Rasp, 'sounds/rasp.ogg')
+  loadSound(Sound.Score, 'sounds/score.mp3')
   loadSound(Sound.Snarl, 'sounds/snarl.ogg')
 
   await loadSpriteAtlas('tilesets/interior.png', {
@@ -75,5 +75,5 @@ scene(Scene.Preload, async () => {
     },
   })
 
-  startLevel()
+  go(Scene.Menu)
 })

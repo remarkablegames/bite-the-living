@@ -7,7 +7,7 @@ import { getLevel } from '../levels'
 scene(Scene.Game, () => {
   music.stop()
   music.play()
-  setCursor(Cursor.Default)
+  setCursor(Cursor.Crosshair)
 
   const { map, title } = getLevel()
 

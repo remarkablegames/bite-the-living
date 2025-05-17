@@ -1,4 +1,5 @@
 import './game'
+import './menu'
 import './preload'
 
 import { Scene } from '../constants'
