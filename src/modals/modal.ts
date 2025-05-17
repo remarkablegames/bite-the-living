@@ -11,13 +11,12 @@ export function addModal({
   modalWidth = 300,
   onContinue = () => {},
 }) {
-  const centerX = width() / 2
-  const centerY = height() / 2
+  const { x, y } = center()
   const margin = 40
 
   add([
     rect(modalWidth, modalHeight, { radius: 2 }),
-    pos(centerX, centerY),
+    pos(x, y),
     anchor('center'),
     fixed(),
     color(5, 5, 5),
@@ -30,7 +29,7 @@ export function addModal({
     add([
       sprite(image),
       scale(0.2),
-      pos(centerX, centerY - 30),
+      pos(x, y - 30),
       anchor('center'),
       fixed(),
       Tag.Modal,
@@ -42,7 +41,7 @@ export function addModal({
         // @ts-expect-error: outline is runtime-supported
         outline: { color: rgb(80, 0, 0), width: 2 },
       }),
-      pos(centerX, centerY - margin),
+      pos(x, y - margin),
       anchor('center'),
       fixed(),
       color(230, 230, 230),
@@ -57,7 +56,7 @@ export function addModal({
       sprite(buttonSprite),
       area({ cursor: Cursor.Pointer }),
       scale(0.07),
-      pos(centerX, centerY + margin),
+      pos(x, y + margin),
       anchor('center'),
       fixed(),
       Tag.Modal,
@@ -70,7 +69,7 @@ export function addModal({
         outline: { color: rgb(60, 0, 0), width: 2 },
       }),
       area({ scale: vec2(1.3), cursor: Cursor.Pointer }),
-      pos(centerX, centerY + margin),
+      pos(x, y + margin),
       anchor('center'),
       fixed(),
       color(200, 0, 0),

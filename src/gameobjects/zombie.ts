@@ -52,7 +52,7 @@ export function addZombie(position: Vec2) {
 
   zombie.onHoverEnd(() => {
     mouseState.isHoveringZombie = false
-    setCursor(Cursor.Crosshair)
+    setCursor(Cursor.Default)
   })
 
   const updateEvent = zombie.onUpdate(() => {
