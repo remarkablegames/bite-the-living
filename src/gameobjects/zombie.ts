@@ -53,6 +53,9 @@ export function addZombie(position: Vec2) {
     ;[hoverEvent, updateEvent, moveEvent].forEach((event) => event.cancel())
     playSound(Sound.Explode)
 
+    // allow other game objects to pass through
+    zombie.area.scale = vec2(0)
+
     zombie.play(Animation.Death, {
       onEnd: () => {
         zombie.destroy()

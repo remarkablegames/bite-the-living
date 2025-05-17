@@ -4,7 +4,7 @@ import { Tag } from '../constants'
 import type { Human, Zombie } from '../types'
 
 export function isAlive(gameObject: GameObj<HealthComp>): boolean {
-  return Boolean(gameObject?.hp() > 0)
+  return Boolean(typeof gameObject?.hp === 'function' && gameObject.hp() > 0)
 }
 
 export function getHumans() {
