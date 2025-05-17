@@ -41,8 +41,8 @@ scene(Scene.Preload, async () => {
     })
   })
 
-  loadSprite('humansDefeated', 'assets/humans_defeated.png')
-  loadSprite('continueButton', 'assets/continue.png')
+  loadSprite(Sprite.Win, 'sprites/ui/humans_defeated.png')
+  loadSprite(Sprite.Continue, 'sprites/ui/continue.png')
 
   loadSound(Sound.Exhale, 'sounds/exhale.ogg')
   loadSound(Sound.Explode, 'sounds/explode.ogg')

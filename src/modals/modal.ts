@@ -1,20 +1,20 @@
 import type { AreaComp, GameObj, ScaleComp } from 'kaplay'
 
-import { Cursor, Tag } from '../constants'
+import { Cursor } from '../constants'
 
 export function addModal({
   buttonSprite = '',
   buttonText = 'Continue',
-  image = '',
+  imageSprite = '',
   message = '',
   modalHeight = 160,
   modalWidth = 300,
-  onContinue = () => {},
+  onClick = () => {},
 }) {
   const { x, y } = center()
   const margin = 40
 
-  add([
+  const modal = add([
     rect(modalWidth, modalHeight, { radius: 2 }),
     pos(x, y),
     anchor('center'),
@@ -22,17 +22,15 @@ export function addModal({
     color(5, 5, 5),
     outline(4, rgb(180, 30, 30)),
     opacity(0.95),
-    Tag.Modal,
   ])
 
-  if (image) {
+  if (imageSprite) {
     add([
-      sprite(image),
+      sprite(imageSprite),
       scale(0.2),
       pos(x, y - 30),
       anchor('center'),
       fixed(),
-      Tag.Modal,
     ])
   } else if (message) {
     add([
@@ -45,7 +43,6 @@ export function addModal({
       anchor('center'),
       fixed(),
       color(230, 230, 230),
-      Tag.Modal,
     ])
   }
 
@@ -59,7 +56,6 @@ export function addModal({
       pos(x, y + margin),
       anchor('center'),
       fixed(),
-      Tag.Modal,
     ])
   } else {
     button = add([
@@ -75,20 +71,12 @@ export function addModal({
       color(200, 0, 0),
       scale(1),
       outline(2, rgb(255, 60, 60)),
-      Tag.Modal,
     ])
   }
 
   button.onClick(() => {
-    destroyAll(Tag.Modal)
-    onContinue()
-  })
-
-  button.onKeyPress((key) => {
-    if (['enter', 'space'].includes(key) && get(Tag.Modal).length > 0) {
-      destroyAll(Tag.Modal)
-      onContinue()
-    }
+    modal.destroy()
+    onClick()
   })
 
   const buttonScale = button.scale
@@ -101,4 +89,6 @@ export function addModal({
     button.scaleTo(buttonScale)
     setCursor(Cursor.Default)
   })
+
+  return modal
 }

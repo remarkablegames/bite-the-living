@@ -1,8 +1,14 @@
 export enum Sprite {
+  // tilesets
   Floor = 'Floor',
   Table = 'Table',
   Watercooler = 'Watercooler',
 
+  // UI
+  Win = 'Win',
+  Continue = 'Continue',
+
+  // characters
   Human1 = 'Human1',
   Zombie1 = 'Zombie1',
   Zombie2 = 'Zombie2',
