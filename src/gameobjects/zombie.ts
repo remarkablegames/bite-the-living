@@ -1,6 +1,14 @@
 import type { Vec2 } from 'kaplay'
 
-import { Animation, Position, Sound, Sprite, State, Tag } from '../constants'
+import {
+  Animation,
+  Cursor,
+  Position,
+  Sound,
+  Sprite,
+  State,
+  Tag,
+} from '../constants'
 import { isAlive, isWin, playSound, trueOrFalse } from '../helpers'
 import { mouseState, zombieState } from '../states'
 import { addHealth } from '.'
@@ -33,12 +41,12 @@ export function addZombie(position: Vec2) {
 
   const hoverEvent = zombie.onHoverUpdate(() => {
     mouseState.isHoveringZombie = true
-    setCursor('pointer')
+    setCursor(Cursor.Hover)
   })
 
   zombie.onHoverEnd(() => {
     mouseState.isHoveringZombie = false
-    setCursor('default')
+    setCursor(Cursor.Default)
   })
 
   const updateEvent = zombie.onUpdate(() => {

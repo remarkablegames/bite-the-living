@@ -1,4 +1,4 @@
-import { Scene, Size, Sprite } from '../constants'
+import { Cursor, Scene, Size, Sprite } from '../constants'
 import { addCollision, addMouse, addWinLose } from '../events'
 import { addFloor, addHuman, addStatic, addZombie } from '../gameobjects'
 import { getTileVec2, music } from '../helpers'
@@ -7,6 +7,7 @@ import { getLevel } from '../levels'
 scene(Scene.Game, () => {
   music.stop()
   music.play()
+  setCursor(Cursor.Default)
 
   const { map, title } = getLevel()
 

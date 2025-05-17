@@ -97,7 +97,9 @@ export function addMouse() {
       return
     }
 
-    const collisions = selection.getCollisions()
+    const collisions = selection
+      .getCollisions()
+      .filter(({ target }) => target.is(Tag.Zombie))
 
     if (collisions.length) {
       playSound(Sound.Grunt)

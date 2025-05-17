@@ -1,4 +1,5 @@
 export * from './animation'
+export * from './cursor'
 export * from './localStorage'
 export * from './position'
 export * from './scene'
