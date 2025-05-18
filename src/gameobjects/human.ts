@@ -1,20 +1,13 @@
 import type { Vec2 } from 'kaplay'
 
-import { Animation, Sound, Sprite, State, Tag } from '../constants'
-import {
-  disableCollision,
-  getClosestZombie,
-  playSound,
-  shouldHumanMove,
-  trueOrFalse,
-} from '../helpers'
-import { addHealth, addZombie } from '.'
+import { Sprite, State, Tag } from '../constants'
+import { addHumanState } from '../events'
+import { trueOrFalse } from '../helpers'
+import { addHealth } from '.'
 
-export function addHuman(position: Vec2) {
-  const speed = randi(20, 50)
-
+export function addHuman(position: Vec2, { registerState = true } = {}) {
   const human = add([
-    sprite(Sprite.Human1),
+    sprite(Sprite.Human1, { flipX: trueOrFalse() }),
     pos(position),
     anchor('center'),
     health(10, 10),
@@ -22,65 +15,14 @@ export function addHuman(position: Vec2) {
     body({ mass: 5 }),
     state(State.Idle, Object.values(State)),
     Tag.Human,
+    { speed: randi(20, 50) },
   ])
 
   addHealth(human)
-  human.flipX = trueOrFalse()
 
-  human.onStateEnter(State.Idle, () => {
-    human.play(Animation.Idle)
-  })
-
-  const idleEvent = human.onStateUpdate(State.Idle, () => {
-    if (shouldHumanMove(human)) {
-      human.enterState(State.Move)
-    }
-  })
-
-  human.onStateEnter(State.Move, () => {
-    human.play(Animation.Run)
-  })
-
-  const lastZombie = {
-    direction: vec2(),
-    time: 0,
+  if (registerState) {
+    addHumanState(human)
   }
-
-  const moveEvent = human.onStateUpdate(State.Move, () => {
-    if (shouldHumanMove(human)) {
-      // prevent human left/right glitch
-      if (time() - lastZombie.time > 1) {
-        const zombie = getClosestZombie(human)
-        const direction = zombie.pos.sub(human.pos).unit()
-        human.flipX = direction.x < 0
-        lastZombie.direction = direction
-        lastZombie.time = time()
-      }
-      human.move(lastZombie.direction.scale(-speed))
-    } else {
-      human.enterState(State.Idle)
-    }
-  })
-
-  const hitEvent = human.onStateEnter(State.Hit, () => {
-    human.play(Animation.Hit, {
-      onEnd: () => human.enterState(State.Idle),
-    })
-  })
-
-  human.onDeath(() => {
-    ;[idleEvent, moveEvent, hitEvent].forEach((event) => event.cancel())
-    disableCollision(human)
-    playSound(Sound.Explode)
-
-    human.play(Animation.Death, {
-      onEnd: () => {
-        human.destroy()
-        playSound(Sound.Exhale, { volume: 0.7 })
-        addZombie(human.pos)
-      },
-    })
-  })
 
   return human
 }

@@ -13,6 +13,7 @@ export enum Sprite {
 
   // characters
   Human1 = 'Human1',
+  Human2 = 'Human2',
   Zombie1 = 'Zombie1',
   Zombie2 = 'Zombie2',
   Zombie3 = 'Zombie3',

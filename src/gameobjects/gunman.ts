@@ -6,6 +6,7 @@ import { addHuman } from '.'
 
 export function addGunman(position: Vec2) {
   const human = addHuman(position)
+  human.use(sprite(Sprite.Human1))
 
   const pistol = human.add([
     sprite(Sprite.Pistol),
