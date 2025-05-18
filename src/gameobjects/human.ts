@@ -28,7 +28,7 @@ export function addHuman(position: Vec2) {
   human.flipX = trueOrFalse()
 
   human.onStateEnter(State.Idle, () => {
-    human.play(Animation.Idle, { loop: true })
+    human.play(Animation.Idle)
   })
 
   const idleEvent = human.onStateUpdate(State.Idle, () => {
@@ -38,7 +38,7 @@ export function addHuman(position: Vec2) {
   })
 
   human.onStateEnter(State.Move, () => {
-    human.play(Animation.Run, { loop: true })
+    human.play(Animation.Run)
   })
 
   const lastZombie = {

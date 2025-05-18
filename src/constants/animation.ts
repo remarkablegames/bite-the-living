@@ -5,4 +5,5 @@ export enum Animation {
   Idle = 'Idle',
   Knocked = 'Knocked',
   Run = 'Run',
+  Shoot = 'Shoot',
 }

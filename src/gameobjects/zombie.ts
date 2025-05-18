@@ -43,7 +43,7 @@ export function addZombie(position: Vec2) {
 
   zombie.fadeIn(0.2)
   zombie.flipX = trueOrFalse()
-  zombie.play(Animation.Idle, { loop: true })
+  zombie.play(Animation.Idle)
 
   const hoverEvent = zombie.onHoverUpdate(() => {
     mouseState.isHoveringZombie = true
@@ -76,11 +76,11 @@ export function addZombie(position: Vec2) {
   })
 
   zombie.onStateEnter(State.Idle, () => {
-    zombie.play(Animation.Idle, { loop: true })
+    zombie.play(Animation.Idle)
   })
 
   zombie.onStateEnter(State.Move, () => {
-    zombie.play(Animation.Run, { loop: true })
+    zombie.play(Animation.Run)
   })
 
   const moveEvent = zombie.onStateUpdate(State.Move, () => {

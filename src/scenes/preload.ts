@@ -1,6 +1,15 @@
 import { Animation, Scene, Sound, Sprite } from '../constants'
 
 scene(Scene.Preload, async () => {
+  loadSprite(Sprite.Pistol, 'sprites/weapons/pistol.png', {
+    sliceX: 1,
+    sliceY: 5,
+    anims: {
+      [Animation.Idle]: 5,
+      [Animation.Shoot]: { from: 0, to: 5 },
+    },
+  })
+
   const sprites1 = [
     [Sprite.Zombie1, 'sprites/zombies/zombie1.png'],
     [Sprite.Zombie2, 'sprites/zombies/zombie2.png'],
@@ -11,9 +20,9 @@ scene(Scene.Preload, async () => {
       sliceX: 8,
       sliceY: 6,
       anims: {
-        [Animation.Idle]: { from: 0, to: 5 },
-        [Animation.Run]: { from: 8, to: 15 },
-        [Animation.Knocked]: { from: 16, to: 21 },
+        [Animation.Idle]: { from: 0, to: 5, loop: true },
+        [Animation.Run]: { from: 8, to: 15, loop: true },
+        [Animation.Knocked]: { from: 16, to: 21, loop: true },
         [Animation.Hit]: { from: 24, to: 26 },
         [Animation.Death]: { from: 40, to: 47 },
         [Animation.Death2]: { from: 32, to: 39 },
@@ -32,9 +41,9 @@ scene(Scene.Preload, async () => {
       sliceX: 8,
       sliceY: 5,
       anims: {
-        [Animation.Idle]: { from: 0, to: 5 },
-        [Animation.Run]: { from: 8, to: 15 },
-        [Animation.Knocked]: { from: 16, to: 21 },
+        [Animation.Idle]: { from: 0, to: 5, loop: true },
+        [Animation.Run]: { from: 8, to: 15, loop: true },
+        [Animation.Knocked]: { from: 16, to: 21, loop: true },
         [Animation.Hit]: { from: 24, to: 26 },
         [Animation.Death]: { from: 32, to: 39 },
       },
