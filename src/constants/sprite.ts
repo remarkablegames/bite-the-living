@@ -7,6 +7,8 @@ export enum Sprite {
   // UI
   Win = 'Win',
   Continue = 'Continue',
+  Title = 'Title',
+  Start = 'Start',
 
   // characters
   Human1 = 'Human1',
