@@ -1,4 +1,5 @@
 export * from './gameobject'
+export * from './localStorage'
 export * from './music'
 export * from './position'
 export * from './random'

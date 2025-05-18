@@ -1,4 +1,11 @@
-import { LocalStorage, Scene } from '../constants'
+import { Scene } from '../constants'
+import {
+  gameState,
+  resetGameState,
+  resetZombieState,
+  saveGameState,
+  saveZombieState,
+} from '../states'
 
 const levels = [
   // 0
@@ -112,7 +119,7 @@ const levels = [
 ]
 
 function getLevelNumber(): number {
-  return getData(LocalStorage.Level, 0) || 0
+  return gameState.level
 }
 
 export function getLevel() {
@@ -124,12 +131,15 @@ export function startLevel() {
 }
 
 export function nextLevel() {
-  let level = getLevelNumber() + 1
+  gameState.level++
 
-  if (level < 0 || level >= levels.length) {
-    level = 0
+  if (gameState.level < 0 || gameState.level >= levels.length) {
+    resetGameState()
+    resetZombieState()
+  } else {
+    saveGameState()
+    saveZombieState()
   }
 
-  setData(LocalStorage.Level, level)
   startLevel()
 }

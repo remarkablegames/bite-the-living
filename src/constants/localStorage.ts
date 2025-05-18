@@ -1,3 +1,4 @@
 export enum LocalStorage {
-  Level = 'Level',
+  Game = 'remarkablegames.bite-the-living.game',
+  Zombie = 'remarkablegames.bite-the-living.zombie',
 }
