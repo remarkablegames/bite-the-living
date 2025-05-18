@@ -5,14 +5,15 @@ import { getClosestZombie } from '../helpers'
 import { addHuman } from '.'
 
 export function addGunman(position: Vec2) {
-  const human = addHuman(position)
-  human.use(sprite(Sprite.Human1))
+  const human = addHuman(position, { registerState: false })
+  human.use(sprite(Sprite.Human2))
+  human.play(Animation.Idle)
 
   const pistol = human.add([
     sprite(Sprite.Pistol),
     anchor('center'),
     rotate(),
-    pos(5, 5),
+    pos(5, 6),
   ])
 
   pistol.onUpdate(() => {

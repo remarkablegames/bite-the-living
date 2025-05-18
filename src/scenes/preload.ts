@@ -50,6 +50,21 @@ scene(Scene.Preload, async () => {
     })
   })
 
+  const sprites3 = [
+    [Sprite.Human2, 'sprites/humans/human2.png'],
+    [Sprite.Human3, 'sprites/humans/human3.png'],
+  ]
+
+  sprites3.forEach(([name, source]) => {
+    loadSprite(name, source, {
+      sliceX: 6,
+      sliceY: 1,
+      anims: {
+        [Animation.Idle]: { from: 0, to: 5, loop: true },
+      },
+    })
+  })
+
   loadSprite(Sprite.Continue, 'sprites/ui/continue.png')
   loadSprite(Sprite.Frame, 'sprites/ui/menu_frame.png')
   loadSprite(Sprite.Start, 'sprites/ui/start.png')

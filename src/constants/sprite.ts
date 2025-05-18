@@ -11,9 +11,12 @@ export enum Sprite {
   Start = 'Start',
   Frame = 'Frame',
 
-  // characters
+  // humans
   Human1 = 'Human1',
   Human2 = 'Human2',
+  Human3 = 'Human3',
+
+  // zombies
   Zombie1 = 'Zombie1',
   Zombie2 = 'Zombie2',
   Zombie3 = 'Zombie3',
