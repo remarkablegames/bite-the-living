@@ -2,11 +2,11 @@ import { Animation, Scene, Sound, Sprite } from '../constants'
 
 scene(Scene.Preload, async () => {
   loadSprite(Sprite.Pistol, 'sprites/weapons/pistol.png', {
-    sliceX: 1,
-    sliceY: 5,
+    sliceX: 5,
+    sliceY: 1,
     anims: {
-      [Animation.Idle]: 5,
-      [Animation.Shoot]: { from: 0, to: 5 },
+      [Animation.Idle]: 4,
+      [Animation.Shoot]: { from: 0, to: 4 },
     },
   })
 
