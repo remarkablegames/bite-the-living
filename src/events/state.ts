@@ -64,3 +64,19 @@ export function addHumanState(human: Human) {
     })
   })
 }
+
+export function addGunmanState(human: Human) {
+  human.onDeath(() => {
+    disableCollision(human)
+    playSound(Sound.Explode)
+
+    const seconds = 1
+    human.fadeOut(seconds)
+
+    wait(seconds, () => {
+      addZombie(human.pos)
+      playSound(Sound.Exhale, { volume: 0.7 })
+      human.destroy()
+    })
+  })
+}

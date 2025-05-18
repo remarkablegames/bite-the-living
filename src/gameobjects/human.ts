@@ -13,6 +13,7 @@ export function addHuman(position: Vec2, { registerState = true } = {}) {
     health(10, 10),
     area({ shape: new Rect(vec2(0, 3), 13, 24) }),
     body({ mass: 5 }),
+    opacity(), // used by Gunman
     state(State.Idle, Object.values(State)),
     Tag.Human,
     { speed: randi(20, 50) },
