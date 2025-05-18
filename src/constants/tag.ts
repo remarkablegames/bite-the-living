@@ -1,4 +1,5 @@
 export enum Tag {
+  Gun = 'Gun',
   Human = 'Human',
   Modal = 'Modal',
   Reward = 'Reward',

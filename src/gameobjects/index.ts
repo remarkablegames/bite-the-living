@@ -1,5 +1,6 @@
 export * from './button'
 export * from './floor'
+export * from './gun'
 export * from './gunman'
 export * from './health'
 export * from './human'

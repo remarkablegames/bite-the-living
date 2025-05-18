@@ -1,4 +1,4 @@
-import { Animation, Sound, State } from '../constants'
+import { Animation, Sound, State, Tag } from '../constants'
 import { addZombie } from '../gameobjects'
 import {
   disableCollision,
@@ -68,12 +68,10 @@ export function addHumanState(human: Human) {
 export function addGunmanState(human: Human) {
   human.onDeath(() => {
     disableCollision(human)
+    human.get(Tag.Gun)[0]?.destroy()
     playSound(Sound.Explode)
 
-    const seconds = 1
-    human.fadeOut(seconds)
-
-    wait(seconds, () => {
+    human.fadeOut(1).then(() => {
       addZombie(human.pos)
       playSound(Sound.Exhale, { volume: 0.7 })
       human.destroy()
