@@ -9,6 +9,7 @@ export enum Sprite {
   Continue = 'Continue',
   Title = 'Title',
   Start = 'Start',
+  Frame = 'Frame',
 
   // characters
   Human1 = 'Human1',

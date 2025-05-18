@@ -13,11 +13,19 @@ scene(Scene.Menu, () => {
   }
 
   add([
-    rect(400, 300, { radius: 8 }),
+    rect(300, 300),
     pos(center()),
     anchor('center'),
-    color(10, 10, 10),
-    outline(4, rgb(180, 30, 30)),
+    color(0, 0, 0),
+    z(-2),
+    fixed(),
+  ])
+
+  add([
+    sprite(Sprite.Frame),
+    pos(center()),
+    anchor('center'),
+    scale(0.33),
     z(-1),
     fixed(),
   ])
