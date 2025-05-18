@@ -21,7 +21,7 @@ export function addCollision() {
     // @ts-expect-error Types of parameters are incompatible.
     (human: Human, zombie: Zombie) => {
       if (isAlive(human) && isAlive(zombie)) {
-        human.hurt(zombie.damage)
+        human.hurt(zombie.damage / 100)
       }
     },
   )

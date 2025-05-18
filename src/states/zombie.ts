@@ -5,9 +5,9 @@ class ZombieState {
   health = 10
   maxHealth = 10
   mass = 5
-  speed = 100
-  selfDamage = 0.01
-  attackDamage = 0.03
+  speed = 80
+  selfDamage = 1
+  attackDamage = 2
   heal = 2
 }
 

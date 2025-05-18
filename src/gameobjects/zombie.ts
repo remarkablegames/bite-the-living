@@ -60,7 +60,7 @@ export function addZombie(position: Vec2) {
       return updateEvent.cancel()
     }
     zombie.opacity = zombie.is(Tag.Selected) ? 0.5 : 1
-    zombie.hurt(zombieState.selfDamage)
+    zombie.hurt(zombieState.selfDamage / 100)
   })
 
   zombie.onDeath(() => {
