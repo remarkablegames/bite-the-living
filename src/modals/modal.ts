@@ -4,7 +4,7 @@ import { Cursor, Sound, Sprite, Tag } from '../constants'
 import { getRewards, playSound } from '../helpers'
 
 const WIDTH = 300
-const HEIGHT = 250
+const HEIGHT = 300
 const MARGIN = 20
 const PADDING = 10
 
@@ -14,13 +14,21 @@ export function addModal({ onClick = () => {} }) {
     pos(center()),
     anchor('center'),
     color(5, 5, 5),
-    outline(4, rgb(180, 30, 30)),
+    fixed(),
+  ])
+
+  add([
+    sprite(Sprite.Frame),
+    pos(center()),
+    anchor('center'),
+    scale(0.33),
+    z(1),
     fixed(),
   ])
 
   modal.add([
     sprite(Sprite.Win, { width: 175 }),
-    pos(0, -MARGIN * 2.5),
+    pos(0, -MARGIN * 3.5),
     anchor('center'),
   ])
 
@@ -66,7 +74,7 @@ export function addModal({ onClick = () => {} }) {
     sprite(Sprite.Continue, { width: 100 }),
     area(),
     scale(),
-    pos(0, MARGIN * 3 + PADDING * 1.5),
+    pos(0, MARGIN * 3.5 + PADDING * 1.5),
     anchor('center'),
   ])
 
