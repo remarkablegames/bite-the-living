@@ -1,4 +1,4 @@
-import { Scene, Sound, Sprite } from '../constants'
+import { Cursor, Scene, Sound, Sprite } from '../constants'
 import { playSound } from '../helpers'
 import { startLevel } from '../levels'
 import { gameState } from '../states'
@@ -17,7 +17,6 @@ scene(Scene.Menu, () => {
     pos(center()),
     anchor('center'),
     color(0, 0, 0),
-    z(-2),
     fixed(),
   ])
 
@@ -26,7 +25,6 @@ scene(Scene.Menu, () => {
     pos(center()),
     anchor('center'),
     scale(0.33),
-    z(-1),
     fixed(),
   ])
 
@@ -49,10 +47,12 @@ scene(Scene.Menu, () => {
 
   startButton.onHover(() => {
     startButton.scale = vec2(0.12)
+    setCursor(Cursor.Pointer)
   })
 
   startButton.onHoverEnd(() => {
     startButton.scale = vec2(0.1)
+    setCursor(Cursor.Default)
   })
 
   startButton.onClick(() => {

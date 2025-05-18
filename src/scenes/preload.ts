@@ -50,11 +50,11 @@ scene(Scene.Preload, async () => {
     })
   })
 
-  loadSprite(Sprite.Win, 'sprites/ui/humans_defeated.png')
   loadSprite(Sprite.Continue, 'sprites/ui/continue.png')
-  loadSprite(Sprite.Title, 'sprites/ui/bite_the_living.png')
+  loadSprite(Sprite.Frame, 'sprites/ui/menu_frame.png')
   loadSprite(Sprite.Start, 'sprites/ui/start.png')
-  loadSprite(Sprite.Frame, 'sprites/ui/start_menu_frame.png')
+  loadSprite(Sprite.Title, 'sprites/ui/title.png')
+  loadSprite(Sprite.Win, 'sprites/ui/humans_defeated.png')
 
   loadSound(Sound.Exhale, 'sounds/exhale.ogg')
   loadSound(Sound.Explode, 'sounds/explode.ogg')
