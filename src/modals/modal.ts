@@ -1,8 +1,7 @@
 import type { GameObj, OpacityComp } from 'kaplay'
 
 import { Cursor, Sound, Sprite, Tag } from '../constants'
-import { playSound } from '../helpers'
-import { zombieState } from '../states'
+import { getRewards, playSound } from '../helpers'
 
 const WIDTH = 300
 const HEIGHT = 250
@@ -25,18 +24,7 @@ export function addModal({ onClick = () => {} }) {
     anchor('center'),
   ])
 
-  const rewards = [
-    { label: '+5 speed', callback: () => (zombieState.speed += 5) },
-    {
-      label: '+5 health',
-      callback: () => {
-        zombieState.health += 5
-        zombieState.maxHealth += 5
-      },
-    },
-  ]
-
-  rewards.forEach(({ label, callback }, index) => {
+  getRewards().forEach(({ label, callback }, index) => {
     const reward = modal.add([
       text(`☐ ${label}`, { font: 'Monospace', size: 14 }),
       pos(0, MARGIN * index + PADDING),
