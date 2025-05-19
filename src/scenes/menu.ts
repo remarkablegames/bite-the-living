@@ -9,7 +9,10 @@ scene(Scene.Menu, () => {
   const titleMargin = 30
 
   if (import.meta.env.DEV) {
-    gameState.level = Number(new URLSearchParams(location.search).get('level'))
+    const level = new URLSearchParams(location.search).get('level')
+    if (level) {
+      gameState.level = parseInt(level)
+    }
   }
 
   add([

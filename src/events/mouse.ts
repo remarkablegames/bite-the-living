@@ -4,8 +4,8 @@ import { getSelected, hasSelected, isAlive, isWin, playSound } from '../helpers'
 import { mouseState } from '../states'
 
 const CAMERA_SCROLL = 1.5
-const RATIO_LOW = 0.05
-const RATIO_HIGH = 0.95
+const RATIO_LOW = 0.1
+const RATIO_HIGH = 1 - RATIO_LOW
 
 export function addMouse() {
   onUpdate(() => {
