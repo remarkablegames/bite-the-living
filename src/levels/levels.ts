@@ -117,7 +117,29 @@ const levels = [
     ],
   },
 
-  //5
+  // 5
+  {
+    title: {
+      text: "Don't get shot",
+      pos: pos(32, 8),
+    },
+    map: [
+      '..................',
+      '.                .',
+      '.                .',
+      '.                .',
+      '.                .',
+      '.                .',
+      '.  ZC      G     .',
+      '.                .',
+      '.                .',
+      '.                .',
+      '.                .',
+      '..................',
+    ],
+  },
+
+  // 6
   {
     title: {
       text: 'A-maze yourself!',
@@ -148,7 +170,7 @@ const levels = [
     ],
   },
 
-  //6
+  // 7
   {
     title: {
       text: 'What army?',
@@ -180,7 +202,7 @@ const levels = [
     ],
   },
 
-  //7
+  // 8
   {
     title: {
       text: 'They love doughnuts',
