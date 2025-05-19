@@ -1,7 +1,9 @@
 import { Tag } from '../constants'
-import { getClosestZombie } from '../helpers'
+import { getClosestZombie, isAlive } from '../helpers'
 import type { Human } from '../types'
+import { addSplash } from '.'
 
+const DAMAGE = 2
 const SPEED = 400
 
 export function addBullet(human: Human) {
@@ -17,8 +19,26 @@ export function addBullet(human: Human) {
     anchor('center'),
     color(BLACK),
     Tag.Bullet,
-    { direction },
+    {
+      damage: DAMAGE,
+      direction,
+    },
   ])
+
+  // allow friendly fire but wait so gunman does not take damage
+  wait(0.01, () => {
+    bullet.onCollide(
+      Tag.Human,
+      // @ts-expect-error Types of parameters are incompatible.
+      (human: Human) => {
+        if (isAlive(human)) {
+          addSplash(bullet.pos, bullet.direction)
+          bullet.destroy()
+          human.hurt(bullet.damage)
+        }
+      },
+    )
+  })
 
   return bullet
 }

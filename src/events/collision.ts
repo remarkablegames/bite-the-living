@@ -35,7 +35,7 @@ export function addCollision() {
       if (isAlive(zombie)) {
         addSplash(bullet.pos, bullet.direction)
         bullet.destroy()
-        zombie.hurt(2)
+        zombie.hurt(bullet.damage)
       }
     },
   )

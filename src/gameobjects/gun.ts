@@ -1,5 +1,5 @@
 import { Animation, Sprite, Tag } from '../constants'
-import { getClosestZombie } from '../helpers'
+import { getClosestZombie, isAlive } from '../helpers'
 import type { Human } from '../types'
 import { addBullet } from '.'
 
@@ -17,6 +17,11 @@ export function addGun(human: Human) {
 
   gun.onUpdate(() => {
     const zombie = getClosestZombie(human)
+
+    if (!isAlive(zombie) || !isAlive(human)) {
+      return
+    }
+
     const direction = zombie.pos.sub(human.pos).unit()
     gun.angle = direction.angle()
 
