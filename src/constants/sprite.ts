@@ -23,5 +23,6 @@ export enum Sprite {
   Zombie4 = 'Zombie4',
 
   // weapons
+  Particle = 'Particle',
   Pistol = 'Pistol',
 }
