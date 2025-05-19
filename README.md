@@ -23,7 +23,11 @@ Play the game on:
 
 ### Sound
 
+- [080886_Bullet](https://pixabay.com/sound-effects/080886-bullet-39738/)
+- [080998_Bullet Hit](https://pixabay.com/sound-effects/080998-bullet-hit-39870/)
+- [086553_Bullet Hit](https://pixabay.com/sound-effects/086553-bullet-hit-39853/)
 - [Zombie sound](https://pixabay.com/sound-effects/zombie-sound-224167/)
+- [bulletshot impact (Sound effect)](https://pixabay.com/sound-effects/bulletshot-impact-sound-effect-230462/)
 - [platzender Kopf](https://pixabay.com/sound-effects/platzender-kopf-107522/)
 
 ### Music

@@ -36,6 +36,7 @@ export function addCollision() {
         addSplash(bullet.pos, bullet.direction)
         bullet.destroy()
         zombie.hurt(bullet.damage)
+        playSound(Sound.ShotBody)
       }
     },
   )
@@ -47,6 +48,7 @@ export function addCollision() {
     (bullet: Bullet) => {
       addSplash(bullet.pos, bullet.direction)
       bullet.destroy()
+      playSound(Sound.ShotMetal)
     },
   )
 }

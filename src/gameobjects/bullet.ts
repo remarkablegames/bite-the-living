@@ -1,5 +1,5 @@
-import { Tag } from '../constants'
-import { getClosestZombie, isAlive } from '../helpers'
+import { Sound, Tag } from '../constants'
+import { getClosestZombie, isAlive, playSound } from '../helpers'
 import type { Human } from '../types'
 import { addSplash } from '.'
 
@@ -9,6 +9,7 @@ const SPEED = 400
 export function addBullet(human: Human) {
   const zombie = getClosestZombie(human)
   const direction = zombie.pos.sub(human.pos).unit()
+  playSound(Sound.Gunshot)
 
   const bullet = add([
     pos(human.pos),
@@ -35,6 +36,7 @@ export function addBullet(human: Human) {
           addSplash(bullet.pos, bullet.direction)
           bullet.destroy()
           human.hurt(bullet.damage)
+          playSound(Sound.ShotBody)
         }
       },
     )
