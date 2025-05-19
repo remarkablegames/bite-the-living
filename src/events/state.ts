@@ -1,10 +1,10 @@
 import { Animation, Sound, State, Tag } from '../constants'
-import { addZombie } from '../gameobjects'
 import {
   disableCollision,
   getClosestZombie,
   playSound,
   shouldHumanMove,
+  spawnZombie,
 } from '../helpers'
 import type { Human } from '../types'
 
@@ -56,11 +56,7 @@ export function addHumanState(human: Human) {
     playSound(Sound.Explode)
 
     human.play(Animation.Death, {
-      onEnd: () => {
-        addZombie(human.pos)
-        playSound(Sound.Exhale, { volume: 0.7 })
-        human.destroy()
-      },
+      onEnd: () => spawnZombie(human),
     })
   })
 }
@@ -71,10 +67,6 @@ export function addGunmanState(human: Human) {
     human.get(Tag.Gun)[0]?.destroy()
     playSound(Sound.Explode)
 
-    human.fadeOut(1).then(() => {
-      addZombie(human.pos)
-      playSound(Sound.Exhale, { volume: 0.7 })
-      human.destroy()
-    })
+    human.fadeOut(1).then(() => spawnZombie(human))
   })
 }

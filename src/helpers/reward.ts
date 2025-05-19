@@ -1,4 +1,4 @@
-import { zombieState } from '../states'
+import { gameState, zombieState } from '../states'
 
 const rewards = [
   {
@@ -34,10 +34,19 @@ const rewards = [
 ]
 
 export function getRewards() {
+  if (!gameState.level) {
+    return [
+      {
+        label: 'Spawn from the dead',
+        callback() {},
+      },
+    ]
+  }
+
   const result = []
   const copy = rewards.slice()
 
-  for (let i = 0; i < 2; i++) {
+  while (result.length < 2) {
     result.push(copy.splice(randi(copy.length), 1)[0])
   }
 

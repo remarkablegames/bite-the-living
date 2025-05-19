@@ -1,6 +1,9 @@
 import type { AreaComp, GameObj, HealthComp } from 'kaplay'
 
-import { Tag } from '../constants'
+import { Sound, Tag } from '../constants'
+import { addZombie } from '../gameobjects'
+import { playSound } from '../helpers'
+import { gameState } from '../states'
 import type { Human, Zombie } from '../types'
 
 export function isAlive(gameObject: GameObj<HealthComp>): boolean {
@@ -47,4 +50,13 @@ export function getClosestZombie(human: Human): Zombie {
 export function shouldHumanMove(human: Human): boolean {
   const zombie = getClosestZombie(human)
   return Boolean(zombie && human.pos.dist(zombie.pos) < 100)
+}
+
+export function spawnZombie(human: Human) {
+  human.destroy()
+
+  if (gameState.level) {
+    playSound(Sound.Exhale, { volume: 0.7 })
+    addZombie(human.pos)
+  }
 }
