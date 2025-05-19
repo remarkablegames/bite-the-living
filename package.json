@@ -16,7 +16,7 @@
   },
   "homepage": "https://remarkablegames.org/bite-the-living/",
   "dependencies": {
-    "kaplay": "3001.0.17"
+    "kaplay": "3001.0.18"
   },
   "devDependencies": {
     "@commitlint/cli": "19.8.1",
