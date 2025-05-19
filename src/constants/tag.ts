@@ -5,5 +5,6 @@ export enum Tag {
   Modal = 'Modal',
   Reward = 'Reward',
   Selected = 'Selected',
+  Static = 'Static',
   Zombie = 'Zombie',
 }

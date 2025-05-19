@@ -30,10 +30,7 @@ export function addSplash(position: Vec2, direction: Vec2) {
   ])
 
   splash.emit(10)
-
-  splash.onEnd(() => {
-    splash.destroy()
-  })
+  splash.onEnd(() => splash.destroy())
 
   return splash
 }

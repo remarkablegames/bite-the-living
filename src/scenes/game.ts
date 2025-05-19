@@ -1,4 +1,4 @@
-import { Cursor, Scene, Size, Sprite } from '../constants'
+import { Cursor, Scene, Size, Sprite, Tag } from '../constants'
 import { addCollision, addMouse, addWinLose } from '../events'
 import {
   addFloor,
@@ -38,27 +38,24 @@ scene(Scene.Game, () => {
         area(),
         body({ isStatic: true }),
         opacity(0),
+        Tag.Static,
       ],
 
       // table
-      T: (pos) => {
+      T: (pos) =>
         addStatic({
           sprite: Sprite.Table,
           pos,
           shape: new Rect(vec2(2, 2), 30, 30),
-        })
-        return addFloor()
-      },
+        }),
 
       // watercooler
-      W: (pos) => {
+      W: (pos) =>
         addStatic({
           sprite: Sprite.Watercooler,
           pos,
           shape: new Rect(vec2(9, 1), 15, 30),
-        })
-        return addFloor()
-      },
+        }),
 
       // human
       H: (pos) => {

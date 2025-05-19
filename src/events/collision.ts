@@ -1,6 +1,7 @@
 import { Sound, State, Tag } from '../constants'
+import { addSplash } from '../gameobjects'
 import { isAlive, playSound } from '../helpers'
-import type { Human, Zombie } from '../types'
+import type { Bullet, Human, Zombie } from '../types'
 
 export function addCollision() {
   onCollide(
@@ -23,6 +24,29 @@ export function addCollision() {
       if (isAlive(human) && isAlive(zombie)) {
         human.hurt(zombie.damage / 100)
       }
+    },
+  )
+
+  onCollide(
+    Tag.Bullet,
+    Tag.Zombie,
+    // @ts-expect-error Types of parameters are incompatible.
+    (bullet: Bullet, zombie: Zombie) => {
+      if (isAlive(zombie)) {
+        addSplash(bullet.pos, bullet.direction)
+        bullet.destroy()
+        zombie.hurt(2)
+      }
+    },
+  )
+
+  onCollide(
+    Tag.Bullet,
+    Tag.Static,
+    // @ts-expect-error Types of parameters are incompatible.
+    (bullet: Bullet) => {
+      addSplash(bullet.pos, bullet.direction)
+      bullet.destroy()
     },
   )
 }

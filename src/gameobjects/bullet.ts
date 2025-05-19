@@ -1,7 +1,6 @@
 import { Tag } from '../constants'
-import { getClosestZombie, isAlive } from '../helpers'
-import type { Human, Zombie } from '../types'
-import { addSplash } from '.'
+import { getClosestZombie } from '../helpers'
+import type { Human } from '../types'
 
 const SPEED = 400
 
@@ -18,18 +17,8 @@ export function addBullet(human: Human) {
     anchor('center'),
     color(BLACK),
     Tag.Bullet,
+    { direction },
   ])
-
-  bullet.onCollide(
-    Tag.Zombie,
-    // @ts-expect-error Types of parameters are incompatible.
-    (zombie: Zombie) => {
-      if (isAlive(zombie)) {
-        zombie.hurt(2)
-        addSplash(bullet.pos, direction)
-      }
-    },
-  )
 
   return bullet
 }
