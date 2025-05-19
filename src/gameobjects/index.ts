@@ -1,3 +1,4 @@
+export * from './bullet'
 export * from './button'
 export * from './floor'
 export * from './gun'
