@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="https://github.com/remarkablegames/bite-the-living/blob/master/public/logo.png" alt="Bite the Living">
+  <img src="https://github.com/remarkablegames/bite-the-living/blob/master/public/logo.png" alt="Bite the Living" width="300">
 </p>
 
 # Bite the Living
