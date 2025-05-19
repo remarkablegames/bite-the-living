@@ -19,6 +19,8 @@ import {
 import { mouseState, zombieState } from '../states'
 import { addHealth } from '.'
 
+const MASS = 5
+
 export function addZombie(position: Vec2) {
   const zombie = add([
     sprite(Sprite.Zombie2),
@@ -26,7 +28,7 @@ export function addZombie(position: Vec2) {
     anchor('center'),
     health(zombieState.health, zombieState.maxHealth),
     area({ shape: new Rect(vec2(0, 4), 13, 25) }),
-    body({ mass: zombieState.mass }),
+    body({ mass: MASS }),
     opacity(1),
     state(State.Idle, Object.values(State)),
     Tag.Zombie,

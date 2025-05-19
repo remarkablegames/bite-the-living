@@ -2,31 +2,33 @@ import { zombieState } from '../states'
 
 const rewards = [
   {
-    label: '+10% speed',
+    label: '+5% speed',
     callback() {
-      zombieState.speed = Math.ceil(zombieState.speed * 1.1)
+      zombieState.speed = Math.floor(zombieState.speed * 1.05)
     },
   },
 
   {
     label: '+10% health',
     callback() {
-      zombieState.health = Math.ceil(zombieState.health * 1.1)
-      zombieState.maxHealth = Math.ceil(zombieState.maxHealth * 1.1)
+      zombieState.health = Math.floor(zombieState.health * 1.1)
+      zombieState.maxHealth = Math.floor(zombieState.maxHealth * 1.1)
     },
   },
 
   {
     label: '+10% damage',
     callback() {
-      zombieState.attackDamage = Math.ceil(zombieState.attackDamage * 1.1)
+      zombieState.attackDamage = Number(
+        (zombieState.attackDamage * 1.1).toFixed(1),
+      )
     },
   },
 
   {
     label: '+10% heal',
     callback() {
-      zombieState.heal = Math.ceil(zombieState.heal * 1.1)
+      zombieState.heal = Number((zombieState.heal * 1.1).toFixed(1))
     },
   },
 ]

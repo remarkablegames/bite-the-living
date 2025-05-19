@@ -4,7 +4,6 @@ import { getLocalStorage, setLocalStorage } from '../helpers'
 class ZombieState {
   health = 10
   maxHealth = 10
-  mass = 5
   speed = 80
   selfDamage = 1
   attackDamage = 2

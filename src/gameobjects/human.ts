@@ -5,6 +5,8 @@ import { addHumanState } from '../events'
 import { trueOrFalse } from '../helpers'
 import { addHealth } from '.'
 
+const MASS = 5
+
 export function addHuman(position: Vec2, { registerState = true } = {}) {
   const human = add([
     sprite(Sprite.Human1, { flipX: trueOrFalse() }),
@@ -12,7 +14,7 @@ export function addHuman(position: Vec2, { registerState = true } = {}) {
     anchor('center'),
     health(10, 10),
     area({ shape: new Rect(vec2(0, 3), 13, 24) }),
-    body({ mass: 5 }),
+    body({ mass: MASS }),
     opacity(), // used by Gunman
     state(State.Idle, Object.values(State)),
     Tag.Human,
