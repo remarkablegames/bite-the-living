@@ -1,4 +1,4 @@
-import type { AreaComp, GameObj, HealthComp } from 'kaplay'
+import type { AreaComp, GameObj, HealthComp, Vec2 } from 'kaplay'
 
 import { Sound, Tag } from '../constants'
 import { addZombie } from '../gameobjects'
@@ -60,11 +60,9 @@ export function shouldFireGun(human: Human): boolean {
   return false
 }
 
-export function spawnZombie(human: Human) {
-  human.destroy()
-
+export function spawnZombie(position: Vec2) {
   if (gameState.level) {
     playSound(Sound.Exhale, { volume: 0.7 })
-    addZombie(human.pos)
+    addZombie(position, { fadeIn: 0.5 })
   }
 }

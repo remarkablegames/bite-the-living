@@ -19,9 +19,10 @@ import {
 import { mouseState, zombieState } from '../states'
 import { addHealth } from '.'
 
+const SELECTED_COLOR = rgb(248, 131, 121) // Coral Pink
 const MASS = 5
 
-export function addZombie(position: Vec2) {
+export function addZombie(position: Vec2, { fadeIn = 0.2 } = {}) {
   const zombie = add([
     sprite(Sprite.Zombie2, { flipX: trueOrFalse() }),
     pos(position),
@@ -43,7 +44,7 @@ export function addZombie(position: Vec2) {
 
   addHealth(zombie)
 
-  zombie.fadeIn(0.2)
+  zombie.fadeIn(fadeIn)
   zombie.play(Animation.Idle)
 
   const hoverEvent = zombie.onHoverUpdate(() => {
@@ -60,7 +61,13 @@ export function addZombie(position: Vec2) {
     if (isWin() || !isAlive(zombie)) {
       return updateEvent.cancel()
     }
-    zombie.opacity = zombie.is(Tag.Selected) ? 0.5 : 1
+
+    if (zombie.is(Tag.Selected)) {
+      zombie.use(color(SELECTED_COLOR))
+    } else {
+      zombie.unuse('color')
+    }
+
     zombie.hurt(zombieState.selfDamage / 100)
   })
 
