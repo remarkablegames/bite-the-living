@@ -13,7 +13,6 @@ const rewards = [
     label: '+10% health',
     callback() {
       zombieState.health = Math.floor(zombieState.health * 1.1)
-      zombieState.maxHealth = Math.floor(zombieState.maxHealth * 1.1)
     },
   },
 
@@ -27,16 +26,16 @@ const rewards = [
   },
 
   {
-    label: '+10% heal',
+    label: '+20% heal',
     callback() {
-      zombieState.heal = Number((zombieState.heal * 1.1).toFixed(1))
+      zombieState.heal = Number((zombieState.heal * 1.2).toFixed(1))
     },
   },
 
   {
-    label: '+20% line of sight',
+    label: '+30% line of sight',
     callback() {
-      zombieState.humanDistance = Math.floor(zombieState.humanDistance * 1.2)
+      zombieState.humanDistance = Math.floor(zombieState.humanDistance * 1.3)
     },
   },
 ]
@@ -63,7 +62,7 @@ export function getRewards() {
   const result = []
   const copy = rewards.slice()
 
-  while (result.length < 2) {
+  for (let i = 0; i < 2; i++) {
     result.push(copy.splice(randi(copy.length), 1)[0])
   }
 

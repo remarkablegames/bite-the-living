@@ -28,7 +28,7 @@ export function addZombie(position: Vec2, { fadeIn = 0.2 } = {}) {
     sprite(Sprite.Zombie2, { flipX: trueOrFalse() }),
     pos(position),
     anchor('center'),
-    health(zombieState.health, zombieState.maxHealth),
+    health(zombieState.health, zombieState.health),
     area({ shape: new Rect(vec2(0, 4), 13, 25) }),
     body({ mass: MASS }),
     opacity(1),

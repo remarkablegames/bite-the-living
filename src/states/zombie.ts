@@ -6,7 +6,6 @@ class ZombieState {
   heal = 2
   health = 10
   humanDistance = 50
-  maxHealth = 10
   selfDamage = 1
   speed = 80
 }
