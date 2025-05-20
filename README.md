@@ -16,6 +16,8 @@ Play the game on:
 - [remarkablegames](https://remarkablegames.org/bite-the-living)
 - [itch.io](https://remarkablegames.itch.io/bite-the-living)
 
+Read the [blog post](https://remarkablegames.org/posts/bite-the-living/).
+
 ## Credits
 
 ### Art
