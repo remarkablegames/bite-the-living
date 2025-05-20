@@ -125,7 +125,7 @@ export function addMouse() {
       play(Sound.Rasp)
 
       zombies.forEach((zombie) => {
-        zombie.moveToPosition = { x: position.x, y: position.y }
+        zombie.moveToPosition = position
         zombie.enterState(State.Move)
       })
     }

@@ -11,6 +11,7 @@ import {
 } from '../constants'
 import {
   disableCollision,
+  getClosestHuman,
   isAlive,
   isWin,
   playSound,
@@ -35,10 +36,8 @@ export function addZombie(position: Vec2, { fadeIn = 0.2 } = {}) {
     Tag.Zombie,
     {
       damage: zombieState.attackDamage,
-      moveToPosition: {
-        x: Position.OutOfBounds,
-        y: Position.OutOfBounds,
-      },
+      humanDistance: zombieState.humanDistance,
+      moveToPosition: vec2(Position.OutOfBounds, Position.OutOfBounds),
       speed: zombieState.speed,
     },
   ])
@@ -73,7 +72,9 @@ export function addZombie(position: Vec2, { fadeIn = 0.2 } = {}) {
   })
 
   zombie.onDeath(() => {
-    ;[hoverEvent, updateEvent, moveEvent].forEach((event) => event.cancel())
+    ;[hoverEvent, updateEvent, idleEvent, moveEvent].forEach((event) =>
+      event.cancel(),
+    )
     disableCollision(zombie)
     playSound(Sound.Explode)
 
@@ -86,6 +87,19 @@ export function addZombie(position: Vec2, { fadeIn = 0.2 } = {}) {
 
   zombie.onStateEnter(State.Idle, () => {
     zombie.play(Animation.Idle)
+  })
+
+  const idleEvent = zombie.onStateUpdate(State.Idle, () => {
+    const human = getClosestHuman(zombie)
+
+    if (!human || !zombie) {
+      return
+    }
+
+    if (zombie.pos.dist(human.pos) < zombie.humanDistance) {
+      zombie.moveToPosition = human.pos
+      zombie.enterState(State.Move)
+    }
   })
 
   zombie.onStateEnter(State.Move, () => {
@@ -101,10 +115,7 @@ export function addZombie(position: Vec2, { fadeIn = 0.2 } = {}) {
       zombie.moveToPosition.x === zombie.pos.x &&
       zombie.moveToPosition.y === zombie.pos.y
     ) {
-      zombie.moveToPosition = {
-        x: Position.OutOfBounds,
-        y: Position.OutOfBounds,
-      }
+      zombie.moveToPosition = vec2(Position.OutOfBounds, Position.OutOfBounds)
       return zombie.enterState(State.Idle)
     }
 

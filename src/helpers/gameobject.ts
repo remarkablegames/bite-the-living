@@ -14,7 +14,7 @@ export function disableCollision(gameObject: GameObj<AreaComp>) {
   gameObject.area.scale = vec2(0)
 }
 
-export function getHumans() {
+function getHumans() {
   return get(Tag.Human) as Human[]
 }
 
@@ -22,7 +22,7 @@ export function getSelected() {
   return get(Tag.Selected) as Zombie[]
 }
 
-export function getZombies() {
+function getZombies() {
   return get(Tag.Zombie) as Zombie[]
 }
 
@@ -36,6 +36,15 @@ export function hasSelected(): boolean {
 
 export function hasZombies(): boolean {
   return getZombies().length > 0
+}
+
+export function getClosestHuman(zombie: Zombie): Human {
+  const humans = getHumans()
+  const distances = humans.reduce((dist: number[], human) => {
+    dist.push(zombie.pos.dist(human.pos))
+    return dist
+  }, [])
+  return humans[distances.indexOf(Math.min(...distances))]
 }
 
 export function getClosestZombie(human: Human): Zombie {
