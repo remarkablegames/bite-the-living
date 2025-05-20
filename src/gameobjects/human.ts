@@ -18,7 +18,7 @@ export function addHuman(position: Vec2, { registerState = true } = {}) {
     opacity(), // used by Gunman
     state(State.Idle, Object.values(State)),
     Tag.Human,
-    { speed: randi(20, 50) },
+    { speed: randi(20, 50), zombieDistance: 100 },
   ])
 
   addHealth(human)

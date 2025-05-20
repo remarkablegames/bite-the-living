@@ -23,7 +23,7 @@ const MASS = 5
 
 export function addZombie(position: Vec2) {
   const zombie = add([
-    sprite(Sprite.Zombie2),
+    sprite(Sprite.Zombie2, { flipX: trueOrFalse() }),
     pos(position),
     anchor('center'),
     health(zombieState.health, zombieState.maxHealth),
@@ -44,7 +44,6 @@ export function addZombie(position: Vec2) {
   addHealth(zombie)
 
   zombie.fadeIn(0.2)
-  zombie.flipX = trueOrFalse()
   zombie.play(Animation.Idle)
 
   const hoverEvent = zombie.onHoverUpdate(() => {

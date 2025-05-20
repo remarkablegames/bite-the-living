@@ -6,13 +6,13 @@ import { addSplash } from '.'
 const DAMAGE = 2
 const SPEED = 400
 
-export function addBullet(human: Human) {
-  const zombie = getClosestZombie(human)
-  const direction = zombie.pos.sub(human.pos).unit()
+export function addBullet(gunman: Human) {
+  const zombie = getClosestZombie(gunman)
+  const direction = zombie.pos.sub(gunman.pos).unit()
   playSound(Sound.Gunshot)
 
   const bullet = add([
-    pos(human.pos),
+    pos(gunman.pos),
     move(direction, SPEED),
     circle(2),
     area(),
@@ -26,21 +26,19 @@ export function addBullet(human: Human) {
     },
   ])
 
-  // allow friendly fire but wait so gunman does not take damage
-  wait(0.01, () => {
-    bullet.onCollide(
-      Tag.Human,
-      // @ts-expect-error Types of parameters are incompatible.
-      (human: Human) => {
-        if (isAlive(human)) {
-          addSplash(bullet.pos, bullet.direction)
-          bullet.destroy()
-          human.hurt(bullet.damage)
-          playSound(Sound.ShotBody)
-        }
-      },
-    )
-  })
+  // allow friendly fire
+  bullet.onCollide(
+    Tag.Human,
+    // @ts-expect-error Types of parameters are incompatible.
+    (human: Human) => {
+      if (gunman !== human && isAlive(human)) {
+        addSplash(bullet.pos, bullet.direction)
+        bullet.destroy()
+        human.hurt(bullet.damage)
+        playSound(Sound.ShotBody)
+      }
+    },
+  )
 
   return bullet
 }
