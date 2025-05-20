@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.0.1](https://github.com/remarkablegames/bite-the-living/compare/v1.0.0...v1.0.1) (2025-05-20)
+
+
+### Bug Fixes
+
+* **helpers:** fix rewards ([12e7612](https://github.com/remarkablegames/bite-the-living/commit/12e76123009dffc79caa96bbf91a3f20afff8521))
+
 ## 1.0.0 (2025-05-20)
 
 
