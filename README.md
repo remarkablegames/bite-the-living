@@ -21,6 +21,10 @@ Play the game on:
 
 - [Zombie Apocalypse AssetPack](https://pixelrogueknight.itch.io/zombie-apocalypse-assetpack)
 
+### Music
+
+- [Free Horror Music Pack](https://void1gaming.itch.io/free-horror-music-pack)
+
 ### Sound
 
 - [080886_Bullet](https://pixabay.com/sound-effects/080886-bullet-39738/)
@@ -29,10 +33,6 @@ Play the game on:
 - [Zombie sound](https://pixabay.com/sound-effects/zombie-sound-224167/)
 - [bulletshot impact (Sound effect)](https://pixabay.com/sound-effects/bulletshot-impact-sound-effect-230462/)
 - [platzender Kopf](https://pixabay.com/sound-effects/platzender-kopf-107522/)
-
-### Music
-
-- [Free Horror Music Pack](https://void1gaming.itch.io/free-horror-music-pack)
 
 ### Development
 
