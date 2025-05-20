@@ -56,14 +56,9 @@ export function getClosestZombie(human: Human): Zombie {
   return zombies[distances.indexOf(Math.min(...distances))]
 }
 
-export function shouldHumanMove(human: Human): boolean {
+export function shouldHumanAct(human: Human): boolean {
   const zombie = getClosestZombie(human)
-  return Boolean(zombie && human.pos.dist(zombie.pos) < human.zombieDistance)
-}
-
-export function shouldFireGun(human: Human): boolean {
-  const zombie = getClosestZombie(human)
-  if (isAlive(zombie) && isAlive(human)) {
+  if (zombie && human) {
     return Boolean(zombie && human.pos.dist(zombie.pos) < human.zombieDistance)
   }
   return false

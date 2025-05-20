@@ -249,12 +249,12 @@ const levels = [
   },
 ]
 
-function getLevelNumber(): number {
-  return gameState.level
+export function getLastLevelNumber(): number {
+  return levels.length
 }
 
 export function getLevel() {
-  return levels[getLevelNumber()]
+  return levels[gameState.level]
 }
 
 export function startLevel() {
@@ -264,7 +264,7 @@ export function startLevel() {
 export function nextLevel() {
   gameState.level++
 
-  if (gameState.level < 0 || gameState.level >= levels.length) {
+  if (gameState.level < 0 || gameState.level >= getLastLevelNumber()) {
     resetGameState()
     resetZombieState()
   } else {

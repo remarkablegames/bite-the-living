@@ -3,7 +3,7 @@ import {
   disableCollision,
   getClosestZombie,
   playSound,
-  shouldHumanMove,
+  shouldHumanAct,
   spawnZombie,
 } from '../helpers'
 import type { Human } from '../types'
@@ -14,7 +14,7 @@ export function addHumanState(human: Human) {
   })
 
   const idleEvent = human.onStateUpdate(State.Idle, () => {
-    if (shouldHumanMove(human)) {
+    if (shouldHumanAct(human)) {
       human.enterState(State.Move)
     }
   })
@@ -29,7 +29,7 @@ export function addHumanState(human: Human) {
   }
 
   const moveEvent = human.onStateUpdate(State.Move, () => {
-    if (shouldHumanMove(human)) {
+    if (shouldHumanAct(human)) {
       // prevent human left/right glitch
       if (time() - lastZombie.time > 1) {
         const zombie = getClosestZombie(human)

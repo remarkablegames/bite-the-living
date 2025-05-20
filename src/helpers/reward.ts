@@ -1,3 +1,4 @@
+import { getLastLevelNumber } from '../levels'
 import { gameState, zombieState } from '../states'
 
 const rewards = [
@@ -45,6 +46,15 @@ export function getRewards() {
     return [
       {
         label: 'Spawn from the dead',
+        callback() {},
+      },
+    ]
+  }
+
+  if (gameState.level === getLastLevelNumber() - 1) {
+    return [
+      {
+        label: 'Restart from the dead',
         callback() {},
       },
     ]

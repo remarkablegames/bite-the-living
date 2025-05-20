@@ -1,5 +1,5 @@
 import { Animation, Sprite, Tag } from '../constants'
-import { getClosestZombie, shouldFireGun } from '../helpers'
+import { getClosestZombie, shouldHumanAct } from '../helpers'
 import type { Human } from '../types'
 import { addBullet } from '.'
 
@@ -20,7 +20,7 @@ export function addGun(human: Human) {
   gun.play(Animation.Idle)
 
   gun.onUpdate(() => {
-    if (!shouldFireGun(human)) {
+    if (!shouldHumanAct(human)) {
       return
     }
 
