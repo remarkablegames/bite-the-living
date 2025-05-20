@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="https://github.com/remarkablegames/bite-the-living/blob/master/public/logo.png" alt="Bite the Living" width="300">
+  <img src="https://github.com/remarkablegames/bite-the-living/blob/master/public/logo.png?raw=true" alt="Bite the Living" width="300">
 </p>
 
 # Bite the Living
@@ -7,7 +7,7 @@
 ![release](https://img.shields.io/github/v/release/remarkablegames/bite-the-living)
 [![build](https://github.com/remarkablegames/bite-the-living/actions/workflows/build.yml/badge.svg)](https://github.com/remarkablegames/bite-the-living/actions/workflows/build.yml)
 
-🧟 Bite the Living!
+🧟 Control zombies and attack humans!
 
 This game was made for [Pixel Game Jam 2025](https://itch.io/jam/-pixel-game-jam-2025), which the theme was **From the Dead**.
 
