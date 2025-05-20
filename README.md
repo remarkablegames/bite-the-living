@@ -14,6 +14,7 @@ This game was made for [Pixel Game Jam 2025](https://itch.io/jam/-pixel-game-jam
 Play the game on:
 
 - [remarkablegames](https://remarkablegames.org/bite-the-living)
+- [itch.io](https://remarkablegames.itch.io/bite-the-living)
 
 ## Credits
 
