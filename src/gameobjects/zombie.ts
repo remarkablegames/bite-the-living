@@ -39,6 +39,7 @@ export function addZombie(position: Vec2, { fadeIn = 0.2 } = {}) {
         x: Position.OutOfBounds,
         y: Position.OutOfBounds,
       },
+      speed: zombieState.speed,
     },
   ])
 
@@ -116,7 +117,7 @@ export function addZombie(position: Vec2, { fadeIn = 0.2 } = {}) {
     zombie.moveTo(
       zombie.moveToPosition.x,
       zombie.moveToPosition.y,
-      zombieState.speed,
+      zombie.speed,
     )
   })
 

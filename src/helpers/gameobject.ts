@@ -1,6 +1,6 @@
-import type { AreaComp, GameObj, HealthComp, Vec2 } from 'kaplay'
+import type { AreaComp, GameObj, HealthComp } from 'kaplay'
 
-import { Sound, Tag } from '../constants'
+import { Sound, Sprite, Tag } from '../constants'
 import { addZombie } from '../gameobjects'
 import { playSound } from '../helpers'
 import { gameState } from '../states'
@@ -60,9 +60,14 @@ export function shouldFireGun(human: Human): boolean {
   return false
 }
 
-export function spawnZombie(position: Vec2) {
+export function spawnZombie(human: Human) {
   if (gameState.level) {
     playSound(Sound.Exhale, { volume: 0.7 })
-    addZombie(position, { fadeIn: 0.5 })
+    const zombie = addZombie(human.pos, { fadeIn: 0.5 })
+
+    if (human.is(Tag.Gunman)) {
+      zombie.use(sprite(Sprite.Zombie4))
+      zombie.speed *= 1.5
+    }
   }
 }

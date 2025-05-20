@@ -58,7 +58,7 @@ export function addHumanState(human: Human) {
     human.play(Animation.Death, {
       onEnd: () => human.destroy(),
     })
-    spawnZombie(human.pos)
+    spawnZombie(human)
   })
 }
 
@@ -69,6 +69,6 @@ export function addGunmanState(human: Human) {
     playSound(Sound.Explode)
 
     human.fadeOut(1).then(() => human.destroy())
-    spawnZombie(human.pos)
+    spawnZombie(human)
   })
 }

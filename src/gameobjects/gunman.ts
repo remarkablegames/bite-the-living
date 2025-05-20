@@ -1,6 +1,6 @@
 import type { Vec2 } from 'kaplay'
 
-import { Animation, Sprite } from '../constants'
+import { Animation, Sprite, Tag } from '../constants'
 import { addGunmanState } from '../events'
 import { addGun, addHuman } from '.'
 
@@ -10,6 +10,7 @@ export function addGunman(position: Vec2) {
   })
 
   human.use(sprite(Sprite.Human2))
+  human.tag(Tag.Gunman)
   human.play(Animation.Idle)
 
   addGunmanState(human)
