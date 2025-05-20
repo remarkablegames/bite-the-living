@@ -31,6 +31,13 @@ const rewards = [
       zombieState.heal = Number((zombieState.heal * 1.1).toFixed(1))
     },
   },
+
+  {
+    label: '+20% line of sight',
+    callback() {
+      zombieState.humanDistance = Math.floor(zombieState.humanDistance * 1.2)
+    },
+  },
 ]
 
 export function getRewards() {
