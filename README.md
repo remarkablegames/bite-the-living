@@ -4,7 +4,7 @@
 
 # Bite the Living
 
-![release](https://img.shields.io/github/v/release/remarkablegames/bite-the-living)
+[![release](https://img.shields.io/github/v/release/remarkablegames/bite-the-living)](https://github.com/remarkablegames/bite-the-living/releases)
 [![build](https://github.com/remarkablegames/bite-the-living/actions/workflows/build.yml/badge.svg)](https://github.com/remarkablegames/bite-the-living/actions/workflows/build.yml)
 
 🧟 Control zombies and attack humans!
@@ -13,8 +13,8 @@ This game was made for [Pixel Game Jam 2025](https://itch.io/jam/-pixel-game-jam
 
 Play the game on:
 
-- [remarkablegames](https://remarkablegames.org/bite-the-living)
 - [itch.io](https://remarkablegames.itch.io/bite-the-living)
+- [remarkablegames](https://remarkablegames.org/bite-the-living)
 
 Read the [blog post](https://remarkablegames.org/posts/bite-the-living/).
 
