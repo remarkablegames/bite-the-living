@@ -1,4 +1,1 @@
-export enum LocalStorage {
-  Game = 'remarkablegames.bite-the-living.game',
-  Zombie = 'remarkablegames.bite-the-living.zombie',
-}
+export const LocalStorageKey = 'org.remarkablegames.bite-the-living'

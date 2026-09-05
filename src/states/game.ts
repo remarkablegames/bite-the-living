@@ -1,4 +1,3 @@
-import { LocalStorage } from '../constants'
 import { getLocalStorage, setLocalStorage } from '../helpers'
 
 class GameState {
@@ -6,10 +5,10 @@ class GameState {
 }
 
 export let gameState = new GameState()
-Object.assign(gameState, getLocalStorage(LocalStorage.Game))
+Object.assign(gameState, getLocalStorage('game'))
 
 export function saveGameState() {
-  setLocalStorage(LocalStorage.Game, gameState)
+  setLocalStorage('game', gameState)
 }
 
 export function resetGameState() {

@@ -1,4 +1,3 @@
-import { LocalStorage } from '../constants'
 import { getLocalStorage, setLocalStorage } from '../helpers'
 
 class ZombieState {
@@ -11,10 +10,10 @@ class ZombieState {
 }
 
 export let zombieState = new ZombieState()
-Object.assign(zombieState, getLocalStorage(LocalStorage.Zombie))
+Object.assign(zombieState, getLocalStorage('zombie'))
 
 export function saveZombieState() {
-  setLocalStorage(LocalStorage.Zombie, zombieState)
+  setLocalStorage('zombie', zombieState)
 }
 
 export function resetZombieState() {
