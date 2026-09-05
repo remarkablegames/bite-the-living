@@ -22,7 +22,7 @@ Read the [blog post](https://remarkablegames.org/posts/bite-the-living/).
 
 - Left-click and drag to select one or multiple zombies.
 - Right-click to move the selected zombies.
-- Defeat all the humans before the zombies expire.​
+- Defeat all the humans before the zombies expire.
 
 > [!NOTE]
 > Play with a mouse in fullscreen mode. The game is tested on Chrome and may not work well in other browsers.
@@ -104,4 +104,12 @@ Your game is ready to be deployed!
 
 Builds the game and packages it into a Zip file in the `dist` folder.
 
-Your game can be uploaded to your server, [Itch.io](https://itch.io/), [Newgrounds](https://www.newgrounds.com/), etc.
+Your game can be uploaded to your server, [itch.io](https://itch.io/), etc.
+
+## Testing
+
+During development, use querystring `?level=<number>` to jump to a zero-indexed level:
+
+```
+http://localhost:5173/?level=0
+```
