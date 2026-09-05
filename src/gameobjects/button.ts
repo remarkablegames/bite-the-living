@@ -4,7 +4,7 @@ export function addButton(
   buttonText: string,
   {
     height = 0,
-    onClick = () => {},
+    onClick = () => undefined,
     position = center(),
     size = 14,
     textColor = BLACK,

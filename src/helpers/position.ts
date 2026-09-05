@@ -1,4 +1,4 @@
-import { Vec2 } from 'kaplay'
+import type { Vec2 } from 'kaplay'
 
 import { Size } from '../constants'
 

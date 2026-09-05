@@ -2,10 +2,15 @@ import type { AudioPlay } from 'kaplay'
 
 import { Sound } from '../constants'
 
-const sounds: Record<string, AudioPlay> = {}
+const sounds: Partial<Record<string, AudioPlay>> = {}
 
 export function playSound(name: Sound, { volume = 1 } = {}) {
-  const sound = sounds[name] || (sounds[name] = play(name, { paused: true }))
+  let sound = sounds[name]
+  if (!sound) {
+    sound = play(name, { paused: true })
+    sounds[name] = sound
+  }
+
   sound.stop()
   sound.volume = volume
   sound.play()

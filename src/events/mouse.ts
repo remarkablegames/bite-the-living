@@ -43,7 +43,9 @@ export function addMouse() {
     mouseState.pressStartPosition = toWorld(mousePos())
 
     if (!mouseState.isHoveringZombie) {
-      getSelected().forEach((zombie) => zombie.untag(Tag.Selected))
+      getSelected().forEach((zombie) => {
+        zombie.untag(Tag.Selected)
+      })
     }
   })
 
@@ -68,6 +70,7 @@ export function addMouse() {
     } = mouseState
     const { x: mouseX, y: mouseY } = toWorld(mousePos())
 
+    // eslint-disable-next-line @typescript-eslint/no-unsafe-enum-comparison
     if (startX === Position.OutOfBounds && startY === Position.OutOfBounds) {
       return
     }

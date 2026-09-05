@@ -1,6 +1,6 @@
 import { Animation, Scene, Sound, Sprite } from '../constants'
 
-scene(Scene.Preload, async () => {
+scene(Scene.Preload, () => {
   loadSprite(Sprite.Particle, 'sprites/weapons/particle.png')
 
   loadSprite(Sprite.Pistol, 'sprites/weapons/pistol.png', {
@@ -83,7 +83,7 @@ scene(Scene.Preload, async () => {
   loadSound(Sound.ShotBody, 'sounds/shot_body.ogg')
   loadSound(Sound.ShotMetal, 'sounds/shot_metal.ogg')
 
-  await loadSpriteAtlas('tilesets/interior.png', {
+  loadSpriteAtlas('tilesets/interior.png', {
     [Sprite.Floor]: {
       x: 224,
       y: 32,
@@ -104,7 +104,7 @@ scene(Scene.Preload, async () => {
       width: 32,
       height: 32,
     },
+  }).then(() => {
+    go(Scene.Menu)
   })
-
-  go(Scene.Menu)
 })

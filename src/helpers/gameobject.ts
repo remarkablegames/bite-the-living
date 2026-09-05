@@ -7,7 +7,7 @@ import { gameState } from '../states'
 import type { Human, Zombie } from '../types'
 
 export function isAlive(gameObject: GameObj<HealthComp>): boolean {
-  return Boolean(typeof gameObject?.hp === 'function' && gameObject.hp() > 0)
+  return typeof gameObject.hp === 'function' && gameObject.hp() > 0
 }
 
 export function disableCollision(gameObject: GameObj<AreaComp>) {
@@ -38,8 +38,12 @@ export function hasZombies(): boolean {
   return getZombies().length > 0
 }
 
-export function getClosestHuman(zombie: Zombie): Human {
+export function getClosestHuman(zombie: Zombie): Human | undefined {
   const humans = getHumans()
+  if (!humans.length) {
+    return
+  }
+
   const distances = humans.reduce((dist: number[], human) => {
     dist.push(zombie.pos.dist(human.pos))
     return dist
@@ -47,8 +51,12 @@ export function getClosestHuman(zombie: Zombie): Human {
   return humans[distances.indexOf(Math.min(...distances))]
 }
 
-export function getClosestZombie(human: Human): Zombie {
+export function getClosestZombie(human: Human): Zombie | undefined {
   const zombies = getZombies()
+  if (!zombies.length) {
+    return
+  }
+
   const distances = zombies.reduce((dist: number[], zombie) => {
     dist.push(human.pos.dist(zombie.pos))
     return dist
@@ -58,10 +66,7 @@ export function getClosestZombie(human: Human): Zombie {
 
 export function shouldHumanAct(human: Human): boolean {
   const zombie = getClosestZombie(human)
-  if (zombie && human) {
-    return Boolean(zombie && human.pos.dist(zombie.pos) < human.zombieDistance)
-  }
-  return false
+  return Boolean(zombie && human.pos.dist(zombie.pos) < human.zombieDistance)
 }
 
 export function spawnZombie(human: Human) {

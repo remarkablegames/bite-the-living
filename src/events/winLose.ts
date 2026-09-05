@@ -15,7 +15,8 @@ export function addWinLose() {
     }
 
     if (isLose()) {
-      return startLevel()
+      startLevel()
+      return
     }
   })
 }

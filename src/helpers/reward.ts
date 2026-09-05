@@ -4,21 +4,21 @@ import { gameState, zombieState } from '../states'
 const rewards = [
   {
     label: '+5% speed',
-    callback() {
+    callback: () => {
       zombieState.speed = Math.floor(zombieState.speed * 1.05)
     },
   },
 
   {
     label: '+10% health',
-    callback() {
+    callback: () => {
       zombieState.health = Math.floor(zombieState.health * 1.1)
     },
   },
 
   {
     label: '+10% damage',
-    callback() {
+    callback: () => {
       zombieState.attackDamage = Number(
         (zombieState.attackDamage * 1.1).toFixed(1),
       )
@@ -27,14 +27,14 @@ const rewards = [
 
   {
     label: '+20% heal',
-    callback() {
+    callback: () => {
       zombieState.heal = Number((zombieState.heal * 1.2).toFixed(1))
     },
   },
 
   {
     label: '+30% line of sight',
-    callback() {
+    callback: () => {
       zombieState.humanDistance = Math.floor(zombieState.humanDistance * 1.3)
     },
   },
@@ -45,7 +45,7 @@ export function getRewards() {
     return [
       {
         label: 'Spawn from the dead',
-        callback() {},
+        callback: () => undefined,
       },
     ]
   }
@@ -54,7 +54,7 @@ export function getRewards() {
     return [
       {
         label: 'Restart from the dead',
-        callback() {},
+        callback: () => undefined,
       },
     ]
   }

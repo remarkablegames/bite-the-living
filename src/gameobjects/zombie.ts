@@ -59,7 +59,8 @@ export function addZombie(position: Vec2, { fadeIn = 0.2 } = {}) {
 
   const updateEvent = zombie.onUpdate(() => {
     if (isWin() || !isAlive(zombie)) {
-      return updateEvent.cancel()
+      updateEvent.cancel()
+      return
     }
 
     if (zombie.is(Tag.Selected)) {
@@ -72,9 +73,9 @@ export function addZombie(position: Vec2, { fadeIn = 0.2 } = {}) {
   })
 
   zombie.onDeath(() => {
-    ;[hoverEvent, updateEvent, idleEvent, moveEvent].forEach((event) =>
-      event.cancel(),
-    )
+    ;[hoverEvent, updateEvent, idleEvent, moveEvent].forEach((event) => {
+      event.cancel()
+    })
     disableCollision(zombie)
     playSound(Sound.Explode)
 
@@ -92,7 +93,7 @@ export function addZombie(position: Vec2, { fadeIn = 0.2 } = {}) {
   const idleEvent = zombie.onStateUpdate(State.Idle, () => {
     const human = getClosestHuman(zombie)
 
-    if (!human || !zombie) {
+    if (!human) {
       return
     }
 
@@ -116,7 +117,8 @@ export function addZombie(position: Vec2, { fadeIn = 0.2 } = {}) {
       zombie.moveToPosition.y === zombie.pos.y
     ) {
       zombie.moveToPosition = vec2(Position.OutOfBounds, Position.OutOfBounds)
-      return zombie.enterState(State.Idle)
+      zombie.enterState(State.Idle)
+      return
     }
 
     const direction = zombie.pos

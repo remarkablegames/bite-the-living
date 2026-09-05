@@ -1,4 +1,4 @@
-import type { GameObj, OpacityComp } from 'kaplay'
+import type { GameObj, OpacityComp, TextComp } from 'kaplay'
 
 import { Cursor, Sound, Sprite, Tag } from '../constants'
 import { getRewards, playSound } from '../helpers'
@@ -8,7 +8,11 @@ const HEIGHT = 300
 const MARGIN = 20
 const PADDING = 10
 
-export function addModal({ onClick = () => {} }) {
+type Reward = GameObj<TextComp | OpacityComp | { callback: () => void }>
+
+export function addModal({
+  onClick = () => undefined,
+}: { onClick?: () => void } = {}) {
   const modal = add([
     rect(WIDTH, HEIGHT, { radius: 2 }),
     pos(center()),
@@ -46,7 +50,7 @@ export function addModal({ onClick = () => {} }) {
 
     reward.onClick(() => {
       playSound(Sound.Score)
-      modal.get(Tag.Reward).forEach((reward) => {
+      ;(modal.get(Tag.Reward) as Reward[]).forEach((reward) => {
         reward.text = reward.text.replace('☑', '☐')
         reward.untag(Tag.Selected)
       })
@@ -79,8 +83,8 @@ export function addModal({ onClick = () => {} }) {
   ])
 
   button.onClick(() => {
-    const reward = modal.get(Tag.Selected)[0]
-    if (typeof reward?.callback === 'function') {
+    const reward = modal.get(Tag.Selected)[0] as Reward | undefined
+    if (reward?.callback) {
       reward.callback()
     }
     onClick()

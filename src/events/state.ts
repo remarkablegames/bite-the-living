@@ -33,6 +33,9 @@ export function addHumanState(human: Human) {
       // prevent human left/right glitch
       if (time() - lastZombie.time > 1) {
         const zombie = getClosestZombie(human)
+        if (!zombie) {
+          return
+        }
         const direction = zombie.pos.sub(human.pos).unit()
         human.flipX = direction.x < 0
         lastZombie.direction = direction
@@ -46,17 +49,23 @@ export function addHumanState(human: Human) {
 
   const hitEvent = human.onStateEnter(State.Hit, () => {
     human.play(Animation.Hit, {
-      onEnd: () => human.enterState(State.Idle),
+      onEnd: () => {
+        human.enterState(State.Idle)
+      },
     })
   })
 
   human.onDeath(() => {
-    ;[idleEvent, moveEvent, hitEvent].forEach((event) => event.cancel())
+    ;[idleEvent, moveEvent, hitEvent].forEach((event) => {
+      event.cancel()
+    })
     disableCollision(human)
     playSound(Sound.Explode)
 
     human.play(Animation.Death, {
-      onEnd: () => human.destroy(),
+      onEnd: () => {
+        human.destroy()
+      },
     })
     spawnZombie(human)
   })
@@ -68,7 +77,9 @@ export function addGunmanState(human: Human) {
     human.get(Tag.Gun)[0]?.destroy()
     playSound(Sound.Explode)
 
-    human.fadeOut(1).then(() => human.destroy())
+    human.fadeOut(1).then(() => {
+      human.destroy()
+    })
     spawnZombie(human)
   })
 }

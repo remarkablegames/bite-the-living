@@ -1,11 +1,12 @@
-import type { SpriteData, Vec2 } from 'kaplay'
+import type { Vec2 } from 'kaplay'
 
 import { Sprite } from '../constants'
 
-let particleSpriteData: SpriteData
-
 export function addSplash(position: Vec2, direction: Vec2) {
-  particleSpriteData = particleSpriteData || getSprite(Sprite.Particle)!.data!
+  const spriteData = getSprite(Sprite.Particle)?.data
+  if (!spriteData) {
+    return
+  }
 
   const splash = add([
     pos(position),
@@ -17,8 +18,8 @@ export function addSplash(position: Vec2, direction: Vec2) {
         colors: [WHITE],
         opacities: [1.0, 0.0],
         angle: [0, 360],
-        texture: particleSpriteData.tex,
-        quads: [particleSpriteData.frames[0]],
+        texture: spriteData.tex,
+        quads: [spriteData.frames[0]],
       },
       {
         lifetime: 0.75,
@@ -30,7 +31,9 @@ export function addSplash(position: Vec2, direction: Vec2) {
   ])
 
   splash.emit(10)
-  splash.onEnd(() => splash.destroy())
+  splash.onEnd(() => {
+    splash.destroy()
+  })
 
   return splash
 }

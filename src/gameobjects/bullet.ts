@@ -8,6 +8,9 @@ const SPEED = 400
 
 export function addBullet(gunman: Human) {
   const zombie = getClosestZombie(gunman)
+  if (!zombie) {
+    return
+  }
   const direction = zombie.pos.sub(gunman.pos).unit()
   playSound(Sound.Gunshot)
 

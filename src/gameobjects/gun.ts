@@ -25,6 +25,9 @@ export function addGun(human: Human) {
     }
 
     const zombie = getClosestZombie(human)
+    if (!zombie) {
+      return
+    }
     const direction = zombie.pos.sub(human.pos).unit()
     gun.angle = direction.angle()
 

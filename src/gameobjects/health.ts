@@ -19,7 +19,10 @@ export function addHealth(
   ])
 
   function updateHealth() {
-    health.width = (gameObject.hp() / gameObject.maxHP()!) * WIDTH
+    const maxHP = gameObject.maxHP()
+    if (maxHP) {
+      health.width = (gameObject.hp() / maxHP) * WIDTH
+    }
   }
 
   gameObject.onHurt(updateHealth)
