@@ -3,10 +3,11 @@ import { playSound } from '../helpers'
 import { startLevel } from '../levels'
 import { gameState } from '../states'
 
+const START_MARGIN_Y = 80
+const TITLE_MARGIN_Y = 30
+
 scene(Scene.Menu, () => {
   const { x, y } = center()
-  const startMargin = 80
-  const titleMargin = 30
 
   if (import.meta.env.DEV) {
     const level = new URLSearchParams(location.search).get('level')
@@ -15,13 +16,7 @@ scene(Scene.Menu, () => {
     }
   }
 
-  add([
-    rect(300, 300),
-    pos(center()),
-    anchor('center'),
-    color(0, 0, 0),
-    fixed(),
-  ])
+  add([rect(300, 300), pos(center()), anchor('center'), color(BLACK), fixed()])
 
   add([
     sprite(Sprite.Frame),
@@ -33,7 +28,7 @@ scene(Scene.Menu, () => {
 
   const title = add([
     sprite(Sprite.Title),
-    pos(x, y - titleMargin),
+    pos(x, y - TITLE_MARGIN_Y),
     anchor('center'),
     scale(0.2),
     fixed(),
@@ -41,7 +36,7 @@ scene(Scene.Menu, () => {
 
   const startButton = add([
     sprite(Sprite.Start),
-    pos(x, y + startMargin),
+    pos(x, y + START_MARGIN_Y),
     anchor('center'),
     area(),
     scale(0.1),
@@ -63,7 +58,7 @@ scene(Scene.Menu, () => {
     startLevel()
   })
 
-  onUpdate(() => {
+  title.onUpdate(() => {
     const pulse = Math.sin(time() * 4) * 0.005
     title.scale = vec2(0.2 + pulse)
   })
