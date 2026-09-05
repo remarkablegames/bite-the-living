@@ -1,7 +1,6 @@
 {
   "name": "bite-the-living",
   "version": "1.0.1",
-  "description": "A template for building Kaplay games.",
   "author": "Mark <mark@remarkablemark.org>",
   "scripts": {
     "build": "npm run clean && vite build",
