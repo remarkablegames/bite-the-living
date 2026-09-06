@@ -7,7 +7,7 @@
 [![release](https://img.shields.io/github/v/release/remarkablegames/bite-the-living)](https://github.com/remarkablegames/bite-the-living/releases)
 [![build](https://github.com/remarkablegames/bite-the-living/actions/workflows/build.yml/badge.svg)](https://github.com/remarkablegames/bite-the-living/actions/workflows/build.yml)
 
-🧟 Control zombies and attack humans!
+🧟 **Bite the Living** is a real-time-strategy game where you control zombies and attack humans.
 
 This game was made for [Pixel Game Jam 2025](https://itch.io/jam/-pixel-game-jam-2025), which the theme was **From the Dead**.
 
