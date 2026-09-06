@@ -1,6 +1,6 @@
 {
   "name": "bite-the-living",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "author": "Mark <mark@remarkablemark.org>",
   "scripts": {
     "build": "npm run clean && vite build",
