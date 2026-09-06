@@ -15,7 +15,10 @@ import {
   isAlive,
   isWin,
   playSound,
+  registerEntity,
   trueOrFalse,
+  unregisterEntity,
+  updateEntityPosition,
 } from '../helpers'
 import { mouseState, zombieState } from '../states'
 import { addHealth } from '.'
@@ -42,6 +45,7 @@ export function addZombie(position: Vec2, { fadeIn = 0.2 } = {}) {
     },
   ])
 
+  registerEntity(zombie, position.x, position.y)
   addHealth(zombie)
 
   zombie.fadeIn(fadeIn)
@@ -74,11 +78,27 @@ export function addZombie(position: Vec2, { fadeIn = 0.2 } = {}) {
     zombie.hurt(zombieState.selfDamage / 100)
   })
 
+  let lastPos = position.clone()
+  zombie.onUpdate(() => {
+    const currentPos = zombie.pos
+    if (currentPos.x !== lastPos.x || currentPos.y !== lastPos.y) {
+      updateEntityPosition(
+        zombie,
+        lastPos.x,
+        lastPos.y,
+        currentPos.x,
+        currentPos.y,
+      )
+      lastPos = currentPos.clone()
+    }
+  })
+
   zombie.onDeath(() => {
     ;[hoverEvent, updateEvent, idleEvent, moveEvent].forEach((event) => {
       event.cancel()
     })
     disableCollision(zombie)
+    unregisterEntity(zombie, zombie.pos.x, zombie.pos.y)
     playSound(Sound.Explode)
 
     zombie.play(Animation.Death, {

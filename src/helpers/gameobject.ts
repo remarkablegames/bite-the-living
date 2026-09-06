@@ -2,7 +2,7 @@ import type { AreaComp, GameObj, HealthComp } from 'kaplay'
 
 import { Sound, Sprite, Tag } from '../constants'
 import { addZombie } from '../gameobjects'
-import { playSound } from '../helpers'
+import { getNearbyEntities, playSound } from '../helpers'
 import { gameState } from '../states'
 import type { Human, Zombie } from '../types'
 
@@ -39,29 +39,51 @@ export function hasZombies(): boolean {
 }
 
 export function getClosestHuman(zombie: Zombie): Human | undefined {
-  const humans = getHumans()
+  const nearby = getNearbyEntities(zombie.pos.x, zombie.pos.y, 2)
+  const humans = nearby.filter((entity: GameObj) =>
+    entity.is(Tag.Human),
+  ) as Human[]
+
   if (!humans.length) {
     return
   }
 
-  const distances = humans.reduce((dist: number[], human) => {
-    dist.push(zombie.pos.dist(human.pos))
-    return dist
-  }, [])
-  return humans[distances.indexOf(Math.min(...distances))]
+  let closest: Human | undefined
+  let minDistance = Infinity
+
+  for (const human of humans) {
+    const distance = zombie.pos.dist(human.pos)
+    if (distance < minDistance) {
+      minDistance = distance
+      closest = human
+    }
+  }
+
+  return closest
 }
 
 export function getClosestZombie(human: Human): Zombie | undefined {
-  const zombies = getZombies()
+  const nearby = getNearbyEntities(human.pos.x, human.pos.y, 2)
+  const zombies = nearby.filter((entity: GameObj) =>
+    entity.is(Tag.Zombie),
+  ) as Zombie[]
+
   if (!zombies.length) {
     return
   }
 
-  const distances = zombies.reduce((dist: number[], zombie) => {
-    dist.push(human.pos.dist(zombie.pos))
-    return dist
-  }, [])
-  return zombies[distances.indexOf(Math.min(...distances))]
+  let closest: Zombie | undefined
+  let minDistance = Infinity
+
+  for (const zombie of zombies) {
+    const distance = human.pos.dist(zombie.pos)
+    if (distance < minDistance) {
+      minDistance = distance
+      closest = zombie
+    }
+  }
+
+  return closest
 }
 
 export function shouldHumanAct(human: Human): boolean {

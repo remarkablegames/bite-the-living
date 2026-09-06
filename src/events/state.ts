@@ -5,6 +5,7 @@ import {
   playSound,
   shouldHumanAct,
   spawnZombie,
+  unregisterEntity,
 } from '../helpers'
 import type { Human } from '../types'
 
@@ -60,6 +61,7 @@ export function addHumanState(human: Human) {
       event.cancel()
     })
     disableCollision(human)
+    unregisterEntity(human, human.pos.x, human.pos.y)
     playSound(Sound.Explode)
 
     human.play(Animation.Death, {
@@ -74,6 +76,7 @@ export function addHumanState(human: Human) {
 export function addGunmanState(human: Human) {
   human.onDeath(() => {
     disableCollision(human)
+    unregisterEntity(human, human.pos.x, human.pos.y)
     human.get(Tag.Gun)[0]?.destroy()
     playSound(Sound.Explode)
 

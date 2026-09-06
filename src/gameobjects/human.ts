@@ -2,7 +2,7 @@ import type { Vec2 } from 'kaplay'
 
 import { Sprite, State, Tag } from '../constants'
 import { addHumanState } from '../events'
-import { trueOrFalse } from '../helpers'
+import { registerEntity, trueOrFalse, updateEntityPosition } from '../helpers'
 import { addHealth } from '.'
 
 const MASS = 5
@@ -22,6 +22,22 @@ export function addHuman(position: Vec2, { registerState = true } = {}) {
   ])
 
   addHealth(human)
+  registerEntity(human, position.x, position.y)
+
+  let lastPos = position.clone()
+  human.onUpdate(() => {
+    const currentPos = human.pos
+    if (currentPos.x !== lastPos.x || currentPos.y !== lastPos.y) {
+      updateEntityPosition(
+        human,
+        lastPos.x,
+        lastPos.y,
+        currentPos.x,
+        currentPos.y,
+      )
+      lastPos = currentPos.clone()
+    }
+  })
 
   if (registerState) {
     addHumanState(human)
