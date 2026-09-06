@@ -1,5 +1,18 @@
 # Changelog
 
+## [1.1.0](https://github.com/remarkablegames/bite-the-living/compare/v1.0.2...v1.1.0) (2026-09-06)
+
+
+### Features
+
+* add spawned zombie to selected group ([32bdb43](https://github.com/remarkablegames/bite-the-living/commit/32bdb431ee57c42efdf300041fd01318d079eabb))
+* deselect other zombies when hovered zombie is left-clicked ([fd11b89](https://github.com/remarkablegames/bite-the-living/commit/fd11b89d1595129b80c9f59bef94262319112625))
+
+
+### Performance Improvements
+
+* optimize distance checks with spatial grid partitioning ([cf0a029](https://github.com/remarkablegames/bite-the-living/commit/cf0a0297ff2faf1045aa3ca8fe1f54c57825968e))
+
 ## [1.0.2](https://github.com/remarkablegames/bite-the-living/compare/v1.0.1...v1.0.2) (2026-09-06)
 
 ### Miscellaneous Chores
