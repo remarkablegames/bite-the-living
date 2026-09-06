@@ -34,7 +34,6 @@ Read the [blog post](https://remarkablegames.org/posts/bite-the-living/).
 - **Upgrade system** - Choose permanent upgrades between levels (speed, health, damage, healing, line of sight)
 - **Progressive difficulty** - 10 levels with increasing challenges
 - **Smooth camera controls** - Edge-of-screen camera scrolling for large levels
-- **Responsive controls** - Fast-paced gameplay with intuitive mouse controls
 
 ## Credits
 
