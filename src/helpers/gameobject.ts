@@ -73,6 +73,7 @@ export function spawnZombie(human: Human) {
   if (gameState.level) {
     playSound(Sound.Exhale, { volume: 0.7 })
     const zombie = addZombie(human.pos, { fadeIn: 0.5 })
+    zombie.tag(Tag.Selected)
 
     if (human.is(Tag.Gunman)) {
       zombie.use(sprite(Sprite.Zombie4))
