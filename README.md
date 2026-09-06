@@ -20,12 +20,21 @@ Read the [blog post](https://remarkablegames.org/posts/bite-the-living/).
 
 ## How to Play
 
-- Left-click and drag to select one or multiple zombies.
-- Right-click to move the selected zombies.
-- Defeat all the humans before the zombies expire.
+- Left-click and drag to select one or multiple zombies
+- Right-click to move the selected zombies
+- Defeat all the humans before the zombies expire
 
 > [!NOTE]
 > Play with a mouse in fullscreen mode. The game is tested on Chrome and may not work well in other browsers.
+
+## Features
+
+- **Strategic zombie control** - Select individual zombies or groups with click-and-drag
+- **Enemy variety** - Face regular humans and armed gunmen
+- **Upgrade system** - Choose permanent upgrades between levels (speed, health, damage, healing, line of sight)
+- **Progressive difficulty** - 10 levels with increasing challenges
+- **Smooth camera controls** - Edge-of-screen camera scrolling for large levels
+- **Responsive controls** - Fast-paced gameplay with intuitive mouse controls
 
 ## Credits
 
