@@ -42,7 +42,12 @@ export function addMouse() {
 
     mouseState.pressStartPosition = toWorld(mousePos())
 
-    if (!mouseState.isHoveringZombie) {
+    if (mouseState.isHoveringZombie && mouseState.hoveredZombie) {
+      getSelected().forEach((zombie) => {
+        zombie.untag(Tag.Selected)
+      })
+      mouseState.hoveredZombie.tag(Tag.Selected)
+    } else {
       getSelected().forEach((zombie) => {
         zombie.untag(Tag.Selected)
       })

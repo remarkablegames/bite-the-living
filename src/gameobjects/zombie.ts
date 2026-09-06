@@ -49,11 +49,13 @@ export function addZombie(position: Vec2, { fadeIn = 0.2 } = {}) {
 
   const hoverEvent = zombie.onHoverUpdate(() => {
     mouseState.isHoveringZombie = true
+    mouseState.hoveredZombie = zombie
     setCursor(Cursor.Pointer)
   })
 
   zombie.onHoverEnd(() => {
     mouseState.isHoveringZombie = false
+    mouseState.hoveredZombie = null
     setCursor(Cursor.Default)
   })
 
