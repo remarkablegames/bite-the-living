@@ -30,11 +30,11 @@ Read the [blog post](https://remarkablegames.org/posts/bite-the-living/).
 
 ## Features
 
-- **Strategic zombie control** - Select individual zombies or groups with click-and-drag
-- **Enemy variety** - Face regular humans and armed gunmen
-- **Upgrade system** - Choose permanent upgrades between levels (speed, health, damage, healing, line of sight)
-- **Progressive difficulty** - 10 levels with increasing challenges
-- **Smooth camera controls** - Edge-of-screen camera scrolling for large levels
+- **Strategic zombie control**: Select individual zombies or groups with click-and-drag
+- **Enemy variety**: Face regular humans and armed gunmen
+- **Upgrade system**: Choose permanent upgrades between levels (speed, health, damage, healing, line of sight)
+- **Progressive difficulty**: 10 levels with increasing challenges
+- **Smooth camera controls**: Edge-of-screen camera scrolling for large levels
 
 ## Credits
 
